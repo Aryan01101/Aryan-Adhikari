@@ -295,11 +295,18 @@ nav.scrolled {
 .section-title {
     text-align: center;
     font-size: 3rem;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--gray);
+    margin-bottom: 3rem;
 }
 
 .chat-container {
@@ -344,6 +351,26 @@ nav.scrolled {
 .message.assistant {
     background: rgba(100, 116, 139, 0.2);
     align-self: flex-start;
+}
+
+.suggestion-list {
+    margin-top: 1rem;
+    padding-left: 1.5rem;
+    list-style: none;
+}
+
+.suggestion-list li {
+    margin: 0.5rem 0;
+    color: var(--secondary);
+    position: relative;
+    padding-left: 0.5rem;
+}
+
+.suggestion-list li::before {
+    content: "→";
+    position: absolute;
+    left: -1rem;
+    color: var(--primary);
 }
 
 @keyframes slideIn {

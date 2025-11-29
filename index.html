@@ -42,6 +42,7 @@
             </button>
             <ul class="nav-links" id="nav-links">
                 <li><a href="#home">Home</a></li>
+                <li><a href="#ai-assistant">AI Assistant</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#about">About</a></li>
@@ -70,6 +71,33 @@
                     </svg>
                     Resume
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Assistant Section -->
+    <section id="ai-assistant" class="ai-section">
+        <h2 class="section-title">Ask About My Qualifications</h2>
+        <p class="section-subtitle">Chat with my AI assistant to learn how my skills match your needs</p>
+        <div class="chat-container">
+            <div class="chat-header">
+                <h3>Career Fit Assistant</h3>
+                <p>Ask me about Aryan's experience, skills, or job fit</p>
+            </div>
+            <div class="chat-messages" id="chat-messages">
+                <div class="message assistant">
+                    <p>Hi! I'm here to help you understand how Aryan's skills and experience might fit your role. You can ask me things like:</p>
+                    <ul class="suggestion-list">
+                        <li>"Is Aryan suitable for a software engineering role?"</li>
+                        <li>"What are his ML/AI capabilities?"</li>
+                        <li>"Tell me about his full-stack experience"</li>
+                        <li>"What projects has he worked on?"</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="chat-input-container">
+                <input type="text" id="chat-input" class="chat-input" placeholder="Ask about skills, experience, or job fit...">
+                <button id="send-btn" class="send-btn">Send</button>
             </div>
         </div>
     </section>
