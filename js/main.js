@@ -8,6 +8,23 @@
             }
         });
 
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -25,9 +42,12 @@
             });
         });
 
-        // Generate particles
+        // Generate particles (fewer on mobile for performance)
         const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 50; i++) {
+        const isMobile = window.innerWidth <= 768;
+        const particleCount = isMobile ? 20 : 50;
+
+        for (let i = 0; i < particleCount; i++) {
             const particle = document.createElement('div');
             particle.className = 'particle';
             particle.style.left = Math.random() * 100 + '%';
@@ -36,43 +56,44 @@
             particlesContainer.appendChild(particle);
         }
 
-        // Basic chat functionality (placeholder)
-        const chatInput = document.getElementById('chat-input');
-        const sendBtn = document.getElementById('send-btn');
-        const chatMessages = document.getElementById('chat-messages');
+        // Contact form handling
+        const contactForm = document.querySelector('.contact-form');
+        const formStatus = document.getElementById('form-status');
 
-        function sendMessage() {
-            const message = chatInput.value.trim();
-            if (!message) return;
-
-            // Add user message
-            const userMsg = document.createElement('div');
-            userMsg.className = 'message user';
-            userMsg.textContent = message;
-            chatMessages.appendChild(userMsg);
-
-            // Clear input
-            chatInput.value = '';
-
-            // Simulate AI response (replace with actual API call)
-            setTimeout(() => {
-                const aiMsg = document.createElement('div');
-                aiMsg.className = 'message assistant';
-                aiMsg.textContent = 'This is where the AI response will appear. Connect this to your Claude API proxy to enable real conversations about your qualifications.';
-                chatMessages.appendChild(aiMsg);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }, 1000);
-
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        sendBtn.addEventListener('click', sendMessage);
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendMessage();
-        });
-
-        // Form submission (placeholder)
-        document.querySelector('.contact-form').addEventListener('submit', (e) => {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            alert('Form submission functionality to be implemented');
+
+            const formData = new FormData(contactForm);
+            const button = contactForm.querySelector('button[type="submit"]');
+            const originalText = button.textContent;
+
+            // Disable button and show loading state
+            button.textContent = 'Sending...';
+            button.disabled = true;
+            formStatus.className = 'form-status';
+            formStatus.style.display = 'none';
+
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    formStatus.className = 'form-status success';
+                    formStatus.textContent = 'Thank you for your message! I\'ll get back to you soon.';
+                    contactForm.reset();
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                formStatus.className = 'form-status error';
+                formStatus.textContent = 'Oops! Something went wrong. Please try again or email me directly.';
+            } finally {
+                button.textContent = originalText;
+                button.disabled = false;
+            }
         });
