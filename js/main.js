@@ -300,16 +300,19 @@ const comprehensiveKnowledge = {
             company: "Jacaranda Flame Consulting",
             role: "Software Engineer Intern (Team Lead)",
             duration: "November 2024 - February 2025",
-            location: "Sydney, Australia",
+            location: "Sydney, Australia (Hybrid)",
             type: "Internship",
             achievements: [
-                "Led cross-functional team of 5 developing ML-based data validation system",
+                "Led cross-functional team of 5 developing ML-based data validation system for HealthShare's Practitioner Database",
                 "Achieved 84% accuracy processing 100K+ healthcare records",
                 "Reduced manual validation workload by 65%",
-                "Conducted daily stand-ups and weekly client meetings",
-                "Implemented K-means, Isolation Forest, Neural Networks, and One-Class SVM"
+                "Orchestrated daily stand-ups using Agile/Scrum methodologies",
+                "Conducted weekly client meetings with HealthShare stakeholders",
+                "Implemented K-means, Isolation Forest, Neural Networks, and One-Class SVM",
+                "Built RESTful APIs for system integration and data access",
+                "Created automated data pipeline with comprehensive testing framework"
             ],
-            technologies: ["Python", "scikit-learn", "PostgreSQL", "Git", "Agile/Scrum"]
+            technologies: ["Python", "scikit-learn", "NumPy", "pandas", "PostgreSQL", "Git", "Agile/Scrum", "RESTful APIs", "ML Algorithms"]
         },
         {
             company: "Scape",
@@ -320,9 +323,10 @@ const comprehensiveKnowledge = {
             achievements: [
                 "Coordinated events for 250+ international student residents",
                 "Achieved 200% increase in event engagement",
+                "Created inclusive community atmosphere for diverse student population",
                 "Built strong community connections among international students"
             ],
-            technologies: ["Event Coordination", "Community Building", "Leadership"]
+            technologies: ["Event Coordination", "Community Building", "Leadership", "Cross-Cultural Communication"]
         },
         {
             company: "CodeCamp Australia",
@@ -333,9 +337,11 @@ const comprehensiveKnowledge = {
             achievements: [
                 "Taught programming fundamentals to 50+ students aged 7-13",
                 "Designed hands-on, project-based learning activities",
-                "Made programming accessible and fun for young learners"
+                "Developed age-appropriate curriculum materials",
+                "Made programming accessible and fun for young learners",
+                "Fostered computational thinking skills in children"
             ],
-            technologies: ["Python", "Teaching", "Curriculum Design"]
+            technologies: ["Python", "Teaching", "Curriculum Design", "Pedagogy", "Educational Technology"]
         },
         {
             company: "Practera (Learn Grow Become)",
@@ -344,11 +350,13 @@ const comprehensiveKnowledge = {
             location: "Australia (Remote)",
             type: "Internship",
             achievements: [
-                "Assisted 10+ Australian SMBs in technology integration",
-                "Improved operational efficiency by 30%",
-                "Developed automation solutions with Python, JavaScript, SQL"
+                "Assisted 10+ Australian SMBs in integrating modern technology solutions",
+                "Improved operational efficiency by 30% across client portfolio",
+                "Developed custom automation solutions using Python, JavaScript, and SQL",
+                "Built inventory management systems for multiple clients",
+                "Created analytics dashboards for business intelligence"
             ],
-            technologies: ["Python", "JavaScript", "SQL", "Automation", "Business Analytics"]
+            technologies: ["Python", "JavaScript", "SQL", "Automation Solutions", "Business Analytics", "Inventory Systems"]
         },
         {
             company: "Practera (Mette Is Baking)",
@@ -357,11 +365,41 @@ const comprehensiveKnowledge = {
             location: "Australia (Remote)",
             type: "Internship",
             achievements: [
-                "Provided business assistance across operational fields",
-                "Delivered technology solutions for business optimization",
-                "Collaborated in interdisciplinary team"
+                "Provided comprehensive business assistance across operational fields",
+                "Delivered financial support analysis and recommendations",
+                "Implemented technology solutions to optimize business plans",
+                "Worked in diverse team with interdisciplinary collaboration",
+                "Delivered measurable improvements in business efficiency"
             ],
-            technologies: ["Business Consulting", "Technology Integration", "Gantt Project Management"]
+            technologies: ["Business Consulting", "Technology Integration", "Gantt Project Management", "Financial Analysis", "Strategic Planning"]
+        },
+        {
+            company: "Biotech Mentorship Program",
+            role: "Technical Mentor",
+            duration: "September 2023",
+            location: "Sydney, Australia",
+            type: "Mentorship",
+            achievements: [
+                "Mentored team of 6 high school students in computational biology research project",
+                "Guided project timeline and milestones",
+                "Provided technical expertise in programming and data analysis",
+                "Students secured top-3 placement in regional competition"
+            ],
+            technologies: ["Computational Biology", "Mentoring", "Python", "Data Analysis", "Research Methodology"]
+        },
+        {
+            company: "Tata Consultancy Services",
+            role: "Data Visualisation Job Simulation",
+            duration: "June 2023 - July 2023",
+            location: "Virtual (Forage)",
+            type: "Virtual Experience",
+            achievements: [
+                "Created visual representations and dashboards using Microsoft Power BI",
+                "Selected appropriate visualization types based on data characteristics",
+                "Communicated insights and analysis findings through visual storytelling",
+                "Translated complex data patterns into understandable business narratives"
+            ],
+            technologies: ["Microsoft Power BI", "Data Visualization", "Business Intelligence", "Data Storytelling"]
         }
     ],
 
@@ -374,13 +412,83 @@ const comprehensiveKnowledge = {
     })),
 
     certifications: [
-        "Java (Basic) - HackerRank (2025)",
-        "Problem Solving (Basic) - HackerRank (2023)",
-        "Python (Basic) - HackerRank (2022)",
-        "Python Data Structures - University of Michigan/Coursera (2022)",
-        "Introduction to Git and GitHub - Google (2023)",
-        "Data Visualisation - Tata Consultancy Services (2023)",
-        "AWS Cloud Practitioner - In Progress (2026)"
+        {
+            name: "Java (Basic)",
+            issuer: "HackerRank",
+            date: "December 2025",
+            credentialId: "5A81C82ECD28",
+            skills: ["Java fundamentals", "Object-oriented programming", "Java data structures", "Problem-solving"]
+        },
+        {
+            name: "Problem Solving (Basic)",
+            issuer: "HackerRank",
+            date: "January 2023",
+            credentialId: "720A2EE01064",
+            skills: ["Algorithmic problem-solving", "Data structures", "Algorithm complexity", "Logical thinking"]
+        },
+        {
+            name: "Python (Basic)",
+            issuer: "HackerRank",
+            date: "July 2022",
+            credentialId: "775757B1ED27",
+            skills: ["Python fundamentals", "Python data structures", "Basic algorithms"]
+        },
+        {
+            name: "Python Data Structures",
+            issuer: "University of Michigan (Coursera)",
+            date: "August 2022",
+            credentialId: "VSHWGLAM4J4P",
+            skills: ["Python lists, dictionaries, tuples", "Data structure manipulation", "File handling"]
+        },
+        {
+            name: "Programming for Everybody (Getting Started with Python)",
+            issuer: "University of Michigan (Coursera)",
+            date: "August 2022",
+            credentialId: null,
+            skills: ["Python programming fundamentals", "Python syntax", "Basic programming concepts"]
+        },
+        {
+            name: "Learn to Program: The Fundamentals",
+            issuer: "University of Toronto",
+            date: "January 2022",
+            credentialId: null,
+            skills: ["Programming fundamentals", "Computational thinking", "Problem-solving"]
+        },
+        {
+            name: "Introduction to Git and GitHub",
+            issuer: "Google",
+            date: "August 2023",
+            credentialId: "PW7EP5EYSZ9D",
+            skills: ["Git version control", "GitHub", "Collaborative development", "Version control workflows"]
+        },
+        {
+            name: "Data Visualisation: Empowering Business with Effective Insights",
+            issuer: "Tata Consultancy Services",
+            date: "July 2023",
+            credentialId: "jePS7E3H7bszZdQuq",
+            skills: ["Microsoft Power BI", "Data visualization", "Business intelligence", "Data storytelling"]
+        },
+        {
+            name: "Cultural Competence & Inclusion",
+            issuer: null,
+            date: "Completed",
+            credentialId: null,
+            skills: ["Cross-cultural communication", "Inclusive practices"]
+        },
+        {
+            name: "Teamwork Foundations",
+            issuer: null,
+            date: "Completed",
+            credentialId: null,
+            skills: ["Collaborative work", "Team dynamics"]
+        },
+        {
+            name: "AWS Cloud Practitioner",
+            issuer: "Amazon Web Services",
+            date: "In Progress - Expected January 2026",
+            credentialId: null,
+            skills: ["AWS Cloud fundamentals", "Cloud computing", "AWS services", "Cloud architecture"]
+        }
     ],
 
     research: [
@@ -702,8 +810,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Certification questions
         if (/(certification|certificate|certified|credential)/.test(msg)) {
-            const certList = comprehensiveKnowledge.certifications.slice(0, 5).join('\n• ');
-            return `Aryan has multiple professional certifications including:\n\n• ${certList}\n\n...and more. He's also currently working towards AWS Cloud Practitioner certification.`;
+            const certList = comprehensiveKnowledge.certifications.slice(0, 6).map(c =>
+                `${c.name} - ${c.issuer || 'Completed'}${c.date ? ` (${c.date})` : ''}`
+            ).join('\n• ');
+            return `Aryan has ${comprehensiveKnowledge.certifications.length} professional certifications including:\n\n• ${certList}\n\n...and more. He's currently working towards AWS Cloud Practitioner certification (Expected January 2026).`;
         }
 
         // Job suitability questions
