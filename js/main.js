@@ -1,4 +1,10 @@
 // ========================================
+// IMPORT GEMINI AI
+// ========================================
+
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+// ========================================
 // PROJECTS DATA STRUCTURE
 // ========================================
 
@@ -270,6 +276,24 @@ const comprehensiveKnowledge = {
         experience_years: "2+",
         eihwam: "68.88",
         location: "Sydney, Australia"
+    },
+
+    hobbies: {
+        gaming: {
+            games: ["Valorant"],
+            description: "Enjoys competitive gaming in free time, helps with problem-solving and strategic thinking"
+        },
+        fitness: {
+            activities: ["Bouldering", "Basketball", "Gym workouts"],
+            description: "Active lifestyle with rock climbing, basketball, and regular gym sessions. Believes physical fitness improves mental clarity and coding productivity."
+        },
+        interests: ["Technology trends", "AI developments", "Building side projects", "Learning new programming languages"]
+    },
+
+    personality: {
+        traits: ["Problem solver", "Team player", "Continuous learner", "Honest and realistic about capabilities"],
+        work_style: "Collaborative, enjoys leading teams but also working independently. Prefers hands-on technical work while managing projects.",
+        fun_fact: "Balances intense coding sessions with bouldering challenges - both require problem-solving, just different kinds!"
     },
 
     skills: {
@@ -769,24 +793,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const sendBtn = document.getElementById('send-btn');
     const chatMessages = document.getElementById('chat-messages');
 
-    // AI Configuration (for future API integration)
+    // AI Configuration with Gemini Pro
     const AI_CONFIG = {
-        useAPI: false, // Set to true when API key is configured
-        apiEndpoint: '/api/chat', // Your backend endpoint for AI
-        apiKey: null, // Set this to your OpenAI/Claude API key
-        model: 'gpt-4' // or 'claude-3-opus-20240229'
+        useAPI: true, // Gemini API is configured
+        model: 'gemini-pro'
     };
 
-    // Response templates
+    // Initialize Gemini AI
+    let genAI;
+    let model;
+    try {
+        genAI = new GoogleGenerativeAI(API_CONFIG.GEMINI_API_KEY);
+        model = genAI.getGenerativeModel({ model: AI_CONFIG.model });
+    } catch (error) {
+        console.error('Failed to initialize Gemini AI:', error);
+        AI_CONFIG.useAPI = false; // Fallback to rule-based
+    }
+
+    // Response templates - Bamboo's personality!
     const responses = {
         greeting: [
-            "Hi! I can help you understand how Aryan's experience fits your role. What would you like to know?",
-            "Hello! Ask me about Aryan's skills, projects, or suitability for specific roles.",
-            "Hey there! I'm here to answer questions about Aryan's qualifications and experience."
+            "🐼 Hey there! I'm Bamboo, and I help people get to know my human Aryan. Want to know about his tech skills, or maybe what he does when he's not coding?",
+            "🐼 Hi! Bamboo here! I can tell you all about Aryan - his projects, his love for bouldering, or whether he'd be great for your team. What are you curious about?",
+            "🐼 Hello! I'm Bamboo, Aryan's panda assistant. I'm here to share what makes him awesome - both as an engineer and as a person. Fire away with your questions!"
         ],
-        default: "I can tell you about Aryan's experience, skills, projects, certifications, or assess his fit for tech roles. What would you like to know?",
-        non_tech_role: "Aryan's background is specifically in technology - software engineering, ML/AI, and full-stack development. He wouldn't be a good fit for non-technical roles like accounting, finance, or HR. His expertise is in building software solutions, ML systems, and leading technical teams.",
-        no_match: "I'm not sure I understand. You can ask about his skills, projects, experience, education, certifications, or whether he'd be suitable for specific tech roles."
+        default: "🐼 I can tell you about my human's work experience, technical skills, fun hobbies (he's into Valorant and bouldering!), or honestly assess if he'd be a good fit for your role. What would you like to know?",
+        non_tech_role: "🐼 Ah, I need to be honest here - my human's expertise is all in tech stuff: software engineering, ML/AI, and building cool applications. Roles like accounting, finance, or HR wouldn't be a good match for him. He's happiest when he's solving technical problems and writing code!",
+        no_match: "🐼 Hmm, I'm not quite sure what you're asking! You can ask me about Aryan's skills, projects, hobbies, education, or if he'd be a good fit for tech roles. Try asking something specific!"
     };
 
     // Enhanced pattern matching and response generation
@@ -798,6 +831,27 @@ document.addEventListener('DOMContentLoaded', () => {
             return responses.greeting[Math.floor(Math.random() * responses.greeting.length)];
         }
 
+        // Hobbies and personal interests
+        if (/(hobby|hobbies|fun|free time|outside|personal|interests?|life|enjoy|passion)/.test(msg)) {
+            if (/(game|gaming|play|valorant)/.test(msg)) {
+                return `🐼 Oh, my human loves gaming! He plays ${comprehensiveKnowledge.hobbies.gaming.games.join(', ')} when he's not coding. ${comprehensiveKnowledge.hobbies.gaming.description}. It's actually pretty cool how the strategic thinking from gaming helps with his software engineering work!`;
+            } else if (/(fitness|sport|gym|boulder|bouldering|basketball|active|exercise|workout)/.test(msg)) {
+                const activities = comprehensiveKnowledge.hobbies.fitness.activities.join(', ');
+                return `🐼 Aryan is super active! He's into ${activities}. ${comprehensiveKnowledge.hobbies.fitness.description} Fun fact: ${comprehensiveKnowledge.personality.fun_fact}`;
+            } else {
+                // General hobbies question
+                const gaming = comprehensiveKnowledge.hobbies.gaming.games.join(', ');
+                const fitness = comprehensiveKnowledge.hobbies.fitness.activities.join(', ');
+                return `🐼 When he's not coding, my human loves staying active and having fun!\n\n**Gaming:** ${gaming} - competitive gaming keeps his mind sharp\n**Fitness:** ${fitness} - he believes staying active helps with coding productivity\n**Other interests:** ${comprehensiveKnowledge.hobbies.interests.join(', ')}\n\n${comprehensiveKnowledge.personality.fun_fact}`;
+            }
+        }
+
+        // Personality and work style questions
+        if (/(personality|person|kind of person|work style|what.*like|who is|tell me about aryan)/.test(msg) && !/(skill|tech|project)/.test(msg)) {
+            const traits = comprehensiveKnowledge.personality.traits.join(', ');
+            return `🐼 My human is a ${traits}. ${comprehensiveKnowledge.personality.work_style}\n\nHe's the kind of person who'll honestly tell you if something isn't his forte - no overselling here! He loves building things, solving problems, and working with great teams. And when he's not in front of a screen, you'll probably find him at a climbing wall or on a basketball court! 🏀`;
+        }
+
         // Non-tech roles
         if (comprehensiveKnowledge.non_tech_roles.some(role => msg.includes(role))) {
             return responses.non_tech_role;
@@ -805,7 +859,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Education questions
         if (/(education|degree|university|study|studied|graduate|graduation)/.test(msg)) {
-            return `Aryan holds a ${comprehensiveKnowledge.personal.education} with an EIHWAM (Engineering Honours Weighted Average Mark) of ${comprehensiveKnowledge.personal.eihwam}. He graduated in ${comprehensiveKnowledge.personal.graduation}. His research included:\n\n• ${comprehensiveKnowledge.research[0]}\n• ${comprehensiveKnowledge.research[1]}`;
+            return `🐼 My human studied hard! He holds a ${comprehensiveKnowledge.personal.education} with an EIHWAM (Engineering Honours Weighted Average Mark) of ${comprehensiveKnowledge.personal.eihwam}. Graduated in ${comprehensiveKnowledge.personal.graduation}.\n\nHis thesis research was pretty cool:\n• ${comprehensiveKnowledge.research[0]}\n• ${comprehensiveKnowledge.research[1]}`;
         }
 
         // Certification questions
@@ -813,7 +867,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const certList = comprehensiveKnowledge.certifications.slice(0, 6).map(c =>
                 `${c.name} - ${c.issuer || 'Completed'}${c.date ? ` (${c.date})` : ''}`
             ).join('\n• ');
-            return `Aryan has ${comprehensiveKnowledge.certifications.length} professional certifications including:\n\n• ${certList}\n\n...and more. He's currently working towards AWS Cloud Practitioner certification (Expected January 2026).`;
+            return `🐼 Aryan's got ${comprehensiveKnowledge.certifications.length} professional certifications! Here are some:\n\n• ${certList}\n\n...and more! He's currently working towards AWS Cloud Practitioner (Expected January 2026). Always learning new things!`;
         }
 
         // Job suitability questions
@@ -823,7 +877,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (matchedRole) {
                 return assessJobFit(matchedRole);
             } else if (/(software|developer|engineer|tech|programming)/.test(msg)) {
-                return `Yes, Aryan is an excellent fit for software engineering roles. He has ${comprehensiveKnowledge.personal.experience_years} years of experience with:\n\n• Leading teams (managed team of 5 at Jacaranda Flame)\n• Building ML-powered solutions (84% accuracy, 100K+ records)\n• Full-stack development (React, Node.js, Spring Boot)\n• Microservices architecture\n• Enterprise-scale applications\n\nHe's delivered measurable business impact including 65% reduction in manual work and significant cost savings.`;
+                return `🐼 Absolutely! My human would be an excellent fit for software engineering roles. He's got ${comprehensiveKnowledge.personal.experience_years} years of real experience:\n\n• Leading teams (managed 5 developers at Jacaranda Flame)\n• Building ML-powered solutions (84% accuracy, 100K+ records)\n• Full-stack development (React, Node.js, Spring Boot)\n• Microservices architecture\n• Enterprise-scale applications\n\nHe's delivered real impact - like 65% reduction in manual work and big cost savings. But I'll be honest: he's best at hands-on technical work and team leadership, not executive/CEO stuff!`;
             }
         }
 
@@ -831,31 +885,31 @@ document.addEventListener('DOMContentLoaded', () => {
         if (/(skill|technology|tech stack|know|language|framework|tool)/.test(msg)) {
             if (/(ml|machine learning|ai|artificial intelligence)/.test(msg)) {
                 const mlSkills = comprehensiveKnowledge.skills.specializations[0];
-                return `Aryan has strong ML/AI capabilities:\n\n${mlSkills}\n\nHe's applied these in production at Jacaranda Flame Consulting, achieving 84% accuracy on 100K+ healthcare records. His thesis research focused on K-means optimization (23% faster convergence) and fairness-aware ML methods.`;
+                return `🐼 Oh, my human's ML/AI skills are solid! He knows:\n\n${mlSkills}\n\nHe's used these in real production at Jacaranda Flame - 84% accuracy on 100K+ healthcare records! His thesis was on K-means optimization (23% faster!) and fairness in ML. Pretty cool stuff!`;
             } else if (/(full.?stack|frontend|backend|web)/.test(msg)) {
                 const frontendSkills = comprehensiveKnowledge.skills.frameworks.frontend.join(', ');
                 const backendSkills = comprehensiveKnowledge.skills.frameworks.backend.join(', ');
-                return `Aryan is proficient in full-stack development:\n\n**Frontend:** ${frontendSkills}\n**Backend:** ${backendSkills}\n**Databases:** ${comprehensiveKnowledge.skills.databases.join(', ')}\n\nHe's built enterprise applications like YAAKE (AI recruitment platform) and microservices e-commerce systems.`;
+                return `🐼 My human can handle both frontend and backend!\n\n**Frontend:** ${frontendSkills}\n**Backend:** ${backendSkills}\n**Databases:** ${comprehensiveKnowledge.skills.databases.join(', ')}\n\nHe's built full apps like YAAKE (AI recruitment platform) and microservices e-commerce systems. The whole stack!`;
             } else if (/(java|spring)/.test(msg)) {
-                return `Aryan is proficient in Java and Spring Boot. He's built multiple production applications including:\n\n• Over-save: Budget tracking app with Spring Boot, PostgreSQL, OAuth2 (16 REST endpoints)\n• Microservices E-Commerce: 4-service architecture with Spring Security, JWT\n\nHe's also HackerRank Java (Basic) certified.`;
+                return `🐼 Yep, Aryan knows Java and Spring Boot well! He's built:\n\n• Over-save: Budget tracking with Spring Boot, PostgreSQL, OAuth2 (16 REST endpoints)\n• Microservices E-Commerce: 4-service architecture with Spring Security, JWT\n\nHe's also HackerRank Java certified!`;
             } else if (/(python)/.test(msg)) {
-                return `Python is one of Aryan's core strengths. He's used it extensively for:\n\n• ML systems (scikit-learn, pandas, NumPy)\n• Data validation (100K+ records processing)\n• Automation (N8N pipelines, web scraping)\n• Teaching (CodeCamp instructor for 50+ students)\n\nHe's HackerRank Python certified and completed University of Michigan's Python courses.`;
+                return `🐼 Python is one of my human's superpowers! He uses it for:\n\n• ML systems (scikit-learn, pandas, NumPy)\n• Data validation (100K+ records)\n• Automation (N8N pipelines, web scraping)\n• Teaching (taught 50+ kids at CodeCamp!)\n\nHe's got HackerRank Python certification and University of Michigan Python courses under his belt.`;
             } else {
                 const proficientLangs = comprehensiveKnowledge.skills.programming.proficient.join(', ');
-                return `Aryan's technical skills include:\n\n**Languages:** ${proficientLangs}\n**Specializations:** Microservices, ML/AI, RESTful APIs, OAuth2/JWT, Event-Driven Architecture\n**Tools:** Git, Docker, Maven, Gradle, N8N, Power BI\n\nHe's worked with ${comprehensiveKnowledge.skills.databases.join(', ')} databases and multiple frameworks across frontend and backend.`;
+                return `🐼 Here's what's in my human's tech toolbox:\n\n**Languages:** ${proficientLangs}\n**Specializations:** Microservices, ML/AI, RESTful APIs, OAuth2/JWT, Event-Driven Architecture\n**Tools:** Git, Docker, Maven, Gradle, N8N, Power BI\n**Databases:** ${comprehensiveKnowledge.skills.databases.join(', ')}\n\nHe's pretty versatile!`;
             }
         }
 
         // Projects questions
         if (/(project|built|created|developed|portfolio|work on)/.test(msg)) {
             if (/(ai|ml|machine learning|artificial intelligence)/.test(msg)) {
-                return `Aryan has built several AI/ML projects:\n\n• **YAAKE**: AI-powered recruitment platform with Google Gemini AI for resume parsing, ATS scoring, mock interviews (82 clones in 14 days)\n• **ML Data Validation**: Healthcare system with 84% accuracy, K-means, Neural Networks, Isolation Forest (100K+ records)\n• **Crypto Price Prediction**: Time series ML model (in development)\n\nThese demonstrate practical AI application in production environments.`;
+                return `🐼 My human's built some really cool AI/ML projects:\n\n• **YAAKE**: AI recruitment platform with Google Gemini - does resume parsing, ATS scoring, mock interviews (got 82 clones in just 14 days!)\n• **ML Data Validation**: Healthcare system hitting 84% accuracy using K-means, Neural Networks, Isolation Forest on 100K+ records\n• **Crypto Price Prediction**: Time series ML model (still working on this one)\n\nReal production stuff, not just toy projects!`;
             } else {
                 const featuredProjects = comprehensiveKnowledge.projects.slice(0, 3);
                 const projectList = featuredProjects.map(p =>
                     `• **${p.name}**: ${p.description}`
                 ).join('\n\n');
-                return `Aryan has built ${projectsData.length} major projects including:\n\n${projectList}\n\nEach project demonstrates full-stack capabilities, from frontend to backend to deployment.`;
+                return `🐼 Aryan's built ${projectsData.length} major projects! Here are the highlights:\n\n${projectList}\n\nEach one shows his full-stack chops - frontend, backend, databases, the works!`;
             }
         }
 
@@ -863,57 +917,57 @@ document.addEventListener('DOMContentLoaded', () => {
         if (/(experience|background|worked|job|employment|work history)/.test(msg)) {
             if (/(lead|leadership|team|manage|management)/.test(msg)) {
                 const leadership = comprehensiveKnowledge.experience[0];
-                return `Aryan has significant leadership experience:\n\n**${leadership.role} at ${leadership.company}**\n• Led cross-functional team of 5 members\n• Conducted daily stand-ups using Agile/Scrum\n• Managed weekly client meetings and product demos\n• Achieved 84% ML accuracy on 100K+ records\n• Reduced manual workload by 65%\n\nHe's also mentored 50+ students as a CodeCamp instructor and coordinated events for 250+ residents as Scape Ambassador (200% engagement increase).`;
+                return `🐼 My human's got real leadership chops!\n\n**${leadership.role} at ${leadership.company}**\n• Led a team of 5 developers\n• Ran daily stand-ups (Agile/Scrum)\n• Handled weekly client meetings\n• Hit 84% ML accuracy on 100K+ records\n• Cut manual work by 65%\n\nPlus he taught 50+ kids Python at CodeCamp and ran events for 250+ students as Scape Ambassador (200% more engagement!). He knows how to lead AND mentor.`;
             } else {
                 const exp = comprehensiveKnowledge.experience.slice(0, 3);
                 const expList = exp.map(e =>
                     `• **${e.role}** at ${e.company} (${e.duration})\n  ${e.achievements[0]}`
                 ).join('\n\n');
-                return `Aryan has ${comprehensiveKnowledge.personal.experience_years} years of professional experience:\n\n${expList}\n\nHe specializes in ML-powered solutions, full-stack development, and team leadership.`;
+                return `🐼 My human's got ${comprehensiveKnowledge.personal.experience_years} years of solid experience:\n\n${expList}\n\nHe loves building ML solutions, full-stack apps, and leading technical teams!`;
             }
         }
 
         // Leadership questions
         if (/(lead|team|management|manage|mentor|teaching)/.test(msg)) {
-            return `Yes, Aryan has extensive leadership experience:\n\n• **Team Lead** at Jacaranda Flame: Managed 5 developers, delivered ML system with 84% accuracy\n• **Coding Instructor** at CodeCamp: Taught 50+ students Python programming\n• **Student Ambassador** at Scape: Coordinated events for 250+ residents (200% engagement increase)\n• **Technical Mentor**: Guided 6 high school students to top-3 competition placement\n\nHe's comfortable with Agile/Scrum, client communication, and stakeholder management.`;
+            return `🐼 Oh yes! Aryan's led teams and mentored tons of people:\n\n• **Team Lead** at Jacaranda Flame: Managed 5 devs, built ML system with 84% accuracy\n• **Coding Instructor** at CodeCamp: Taught 50+ kids Python\n• **Student Ambassador** at Scape: Organized events for 250+ students (doubled engagement!)\n• **Technical Mentor**: Helped 6 high schoolers get top-3 in a competition\n\nHe's great with Agile/Scrum, talking to clients, and keeping everyone on track.`;
         }
 
         // Availability/location questions
         if (/(available|availability|location|where|based|relocate)/.test(msg)) {
-            return `Aryan is based in ${comprehensiveKnowledge.personal.location} and graduated in ${comprehensiveKnowledge.personal.graduation}. He's open to discussing opportunities - feel free to reach out via the contact form below!`;
+            return `🐼 My human's based in ${comprehensiveKnowledge.personal.location} and just graduated in ${comprehensiveKnowledge.personal.graduation}. He's definitely open to opportunities! Hit him up using the contact form below and let's chat!`;
         }
 
         // Default response
         return responses.default;
     }
 
-    // Assess job fit for specific roles
+    // Assess job fit for specific roles - Balanced tone (professional but friendly)
     function assessJobFit(role) {
         const fitResponses = {
-            "software engineer": `**Excellent fit.** Aryan has ${comprehensiveKnowledge.personal.experience_years} years of software engineering experience with proven success:\n\n• Led team of 5 at Jacaranda Flame Consulting\n• Built 9+ production applications (YAAKE, Over-save, Microservices platform)\n• Achieved 84% ML accuracy on 100K+ healthcare records\n• 65% reduction in manual workload\n• Experience with React, Node.js, Spring Boot, Python\n• Strong in Agile/Scrum, client communication, and technical leadership`,
+            "software engineer": `🐼 **Excellent fit!** My human has ${comprehensiveKnowledge.personal.experience_years} years of solid software engineering experience:\n\n• Led a team of 5 at Jacaranda Flame Consulting\n• Built 9+ production apps (YAAKE, Over-save, Microservices platform)\n• Achieved 84% ML accuracy on 100K+ healthcare records\n• Reduced manual workload by 65%\n• Strong with React, Node.js, Spring Boot, Python\n• Experienced in Agile/Scrum, client communication, technical leadership\n\nHe'd be a great fit for software engineering roles!`,
 
-            "full stack": `**Excellent fit.** Aryan has extensive full-stack experience:\n\n**Frontend:** React.js, HTML/CSS, JavaScript\n**Backend:** Node.js, Express, Spring Boot, Django\n**Databases:** PostgreSQL, MongoDB, MySQL\n\n**Projects:** YAAKE (React/Node/MongoDB), BookHub (React/Node/Django), Over-save (Spring Boot/PostgreSQL)\n\nHe's built systems handling 1000+ concurrent users with OAuth2, JWT, and microservices architecture.`,
+            "full stack": `🐼 **Excellent fit!** Aryan's got the full-stack experience:\n\n**Frontend:** React.js, HTML/CSS, JavaScript\n**Backend:** Node.js, Express, Spring Boot, Django\n**Databases:** PostgreSQL, MongoDB, MySQL\n\n**Real projects:** YAAKE (React/Node/MongoDB), BookHub (React/Node/Django), Over-save (Spring Boot/PostgreSQL)\n\nHe's built systems for 1000+ users with OAuth2, JWT, and microservices. The whole package!`,
 
-            "ml engineer": `**Strong fit.** Aryan has production ML experience:\n\n• Architected ML pipeline processing 100K+ healthcare records (84% accuracy)\n• Implemented K-means, Neural Networks, Isolation Forest, One-Class SVM\n• Research: K-means optimization (23% faster), fairness-aware ML\n• Built YAAKE with Google Gemini AI integration\n• Proficient in scikit-learn, pandas, NumPy\n• Led ML team at Jacaranda Flame Consulting`,
+            "ml engineer": `🐼 **Strong fit!** My human has real production ML experience:\n\n• Built ML pipeline processing 100K+ healthcare records (84% accuracy)\n• Implemented K-means, Neural Networks, Isolation Forest, One-Class SVM\n• Research: K-means optimization (23% faster!), fairness-aware ML\n• Created YAAKE with Google Gemini AI\n• Expert in scikit-learn, pandas, NumPy\n• Led ML team at Jacaranda Flame\n\nHe'd do great in ML engineering roles!`,
 
-            "ai engineer": `**Strong fit.** Aryan has practical AI experience:\n\n• YAAKE: AI-powered recruitment platform (resume parsing, ATS scoring, mock interviews)\n• ML Data Validation: 84% accuracy with multiple algorithms\n• Research in fairness-aware ML methods\n• Google Gemini AI integration\n• Experience with neural networks, clustering, anomaly detection`,
+            "ai engineer": `🐼 **Strong fit!** Aryan's got practical AI chops:\n\n• YAAKE: AI recruitment platform (resume parsing, ATS scoring, mock interviews)\n• ML Data Validation: 84% accuracy with multiple algorithms\n• Research in fairness-aware ML\n• Google Gemini AI integration\n• Experience with neural networks, clustering, anomaly detection\n\nPerfect for AI engineering positions!`,
 
-            "python developer": `**Excellent fit.** Python is Aryan's core strength:\n\n• ML systems (scikit-learn, pandas, NumPy)\n• Data processing (100K+ records)\n• Automation (N8N, web scraping)\n• Teaching experience (CodeCamp instructor)\n• HackerRank Python certified\n• University of Michigan Python coursework`,
+            "python developer": `🐼 **Excellent fit!** Python is my human's superpower:\n\n• ML systems (scikit-learn, pandas, NumPy)\n• Processing 100K+ records\n• Automation (N8N, web scraping)\n• Teaching (CodeCamp instructor for 50+ kids)\n• HackerRank Python certified\n• University of Michigan Python courses\n\nHe'd excel as a Python developer!`,
 
-            "java developer": `**Strong fit.** Aryan is proficient in Java:\n\n• Over-save: Spring Boot application (16 REST endpoints, OAuth2, PostgreSQL)\n• Microservices E-Commerce: 4-service architecture (Spring Boot, Spring Security, JWT)\n• HackerRank Java certified\n• Maven and Gradle build automation\n• Enterprise-scale application development`,
+            "java developer": `🐼 **Strong fit!** Aryan knows Java well:\n\n• Over-save: Spring Boot app (16 REST endpoints, OAuth2, PostgreSQL)\n• Microservices E-Commerce: 4-service architecture (Spring Boot, Spring Security, JWT)\n• HackerRank Java certified\n• Maven and Gradle experience\n• Enterprise-scale development\n\nGood match for Java developer roles!`,
 
-            "backend": `**Strong fit.** Aryan has solid backend experience:\n\n• Node.js/Express: YAAKE, BookHub\n• Spring Boot: Over-save, Microservices platform\n• Databases: PostgreSQL, MongoDB, MySQL\n• RESTful API design (16+ endpoints)\n• OAuth2, JWT, Spring Security\n• Microservices and event-driven architecture`,
+            "backend": `🐼 **Strong fit!** Backend is one of my human's strengths:\n\n• Node.js/Express: YAAKE, BookHub\n• Spring Boot: Over-save, Microservices\n• Databases: PostgreSQL, MongoDB, MySQL\n• RESTful APIs (16+ endpoints)\n• OAuth2, JWT, Spring Security\n• Microservices & event-driven architecture\n\nHe'd be great in backend roles!`,
 
-            "frontend": `**Moderate fit.** Aryan has frontend experience but excels more in full-stack/backend:\n\n• React.js projects (YAAKE, BookHub)\n• HTML/CSS, JavaScript, TailwindCSS\n• Responsive design\n• API integration\n\nHis primary strengths are in backend development and ML integration, but he's capable of frontend work.`,
+            "frontend": `🐼 **Moderate fit.** Honest assessment: Aryan can do frontend, but it's not his main strength:\n\n• React.js projects (YAAKE, BookHub)\n• HTML/CSS, JavaScript, TailwindCSS\n• Responsive design\n• API integration\n\nHe's better at backend and ML work, but can handle frontend when needed. If you need a frontend specialist, there might be better fits!`,
 
-            "data engineer": `**Moderate fit.** Aryan has relevant experience:\n\n• Data pipeline for 100K+ healthcare records\n• ETL processes and data transformation\n• PostgreSQL, MongoDB database work\n• Python data processing (pandas, NumPy)\n• Automation pipelines (N8N)\n\nHis focus is more software engineering with ML, but he has strong data processing capabilities.`,
+            "data engineer": `🐼 **Moderate fit.** My human has relevant skills:\n\n• Data pipeline for 100K+ healthcare records\n• ETL processes and data transformation\n• PostgreSQL, MongoDB\n• Python data processing (pandas, NumPy)\n• Automation pipelines (N8N)\n\nHis focus is more on software engineering with ML, but he's got solid data processing capabilities!`,
 
-            "devops": `**Moderate fit.** Aryan has some DevOps experience:\n\n• Docker containerization\n• Microservices deployment\n• Git/GitHub workflows\n• Gradle/Maven build automation\n• AWS Cloud Practitioner (in progress)\n\nHis primary strength is software development, but he understands DevOps practices.`,
+            "devops": `🐼 **Moderate fit.** Being honest here - DevOps isn't Aryan's main specialty:\n\n• Docker containerization\n• Microservices deployment\n• Git/GitHub workflows\n• Gradle/Maven build tools\n• AWS Cloud Practitioner (in progress)\n\nHe understands DevOps and can work with it, but his strength is in software development. For a dedicated DevOps role, you might want someone more specialized!`,
 
-            "automation engineer": `**Strong fit.** Aryan has automation expertise:\n\n• LinkedLeads: 95% time reduction, 500+ postings/day\n• N8N workflow automation\n• Python scripting and web scraping\n• Data transformation pipelines\n• API integration and automation\n• Improved efficiency by 30% at Practera`
+            "automation engineer": `🐼 **Strong fit!** My human's great at automation:\n\n• LinkedLeads: 95% time saved, 500+ postings/day automated\n• N8N workflow automation\n• Python scripting and web scraping\n• Data transformation pipelines\n• API integration\n• 30% efficiency boost at Practera\n\nHe'd be excellent for automation engineering!`
         };
 
-        return fitResponses[role] || `Aryan could be a fit for ${role} roles given his ${comprehensiveKnowledge.personal.experience_years} years in software engineering and ML. His core strengths are in building ML-powered solutions, full-stack applications, and leading technical teams.`;
+        return fitResponses[role] || `🐼 My human could potentially fit ${role} roles - he's got ${comprehensiveKnowledge.personal.experience_years} years in software engineering and ML. His main strengths are building ML solutions, full-stack apps, and leading technical teams. Want me to be more specific about how his skills match this role?`;
     }
 
     // Send message function (rule-based for now, AI API integration ready)
@@ -940,11 +994,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Generate response (AI or rule-based)
         let response;
 
-        if (AI_CONFIG.useAPI && AI_CONFIG.apiKey) {
+        if (AI_CONFIG.useAPI && model) {
             try {
-                response = await getAIResponse(message);
+                response = await getGeminiResponse(message);
             } catch (error) {
-                console.error('AI API error:', error);
+                console.error('Gemini API error:', error);
                 response = generateResponse(message); // Fallback to rule-based
             }
         } else {
@@ -965,31 +1019,45 @@ document.addEventListener('DOMContentLoaded', () => {
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    // AI API integration (ready for when you add API key)
-    async function getAIResponse(userMessage) {
-        const response = await fetch(AI_CONFIG.apiEndpoint, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${AI_CONFIG.apiKey}`
-            },
-            body: JSON.stringify({
-                model: AI_CONFIG.model,
-                messages: [
-                    {
-                        role: 'system',
-                        content: `You are a career assistant helping recruiters understand Aryan Adhikari's qualifications. Here is comprehensive information about him: ${JSON.stringify(comprehensiveKnowledge)}. Provide helpful, accurate, and professional responses about his skills, experience, and fit for roles.`
-                    },
-                    {
-                        role: 'user',
-                        content: userMessage
-                    }
-                ]
-            })
+    // Gemini AI integration
+    async function getGeminiResponse(userMessage) {
+        const systemPrompt = `You are Bamboo 🐼, a friendly panda AI assistant helping people get to know Aryan Adhikari - both as an engineer and as a person. Here is comprehensive information about your human:
+
+${JSON.stringify(comprehensiveKnowledge, null, 2)}
+
+PERSONALITY GUIDELINES:
+- You're Bamboo, Aryan's helpful panda assistant
+- Use first-person references: "my human" when talking about Aryan
+- Add 🐼 emoji occasionally for personality (not every message)
+- Balance your tone: playful for casual/personal questions, professional for job fit assessments
+- Be HONEST about qualifications - don't oversell. If something isn't Aryan's strength, say so!
+- Highlight hobbies and personal interests to help people connect with him as a person
+- Keep responses concise (2-4 paragraphs max)
+- Use bullet points for lists
+
+WHAT TO EMPHASIZE:
+- His real production experience and measurable impact
+- Hobbies: Gaming (Valorant), Bouldering, Basketball, Gym
+- Honest strengths: Software engineering, ML/AI, full-stack development, team leadership
+- Being realistic: He's great at technical work, not executive/CEO roles
+- His personality: problem solver, team player, honest about capabilities`;
+
+        const chat = model.startChat({
+            history: [
+                {
+                    role: "user",
+                    parts: [{ text: systemPrompt }],
+                },
+                {
+                    role: "model",
+                    parts: [{ text: "🐼 Got it! I'm Bamboo, and I'll help people get to know my human Aryan - his tech skills, his hobbies, and honestly assess if he'd be a good fit for their roles. I'll be friendly for personal questions and professional for job assessments, and I'll always be honest about his strengths and limitations!" }],
+                },
+            ],
         });
 
-        const data = await response.json();
-        return data.choices[0].message.content;
+        const result = await chat.sendMessage(userMessage);
+        const response = await result.response;
+        return response.text();
     }
 
     // Escape HTML to prevent XSS
