@@ -80,7 +80,25 @@
     <section id="ai-assistant" class="ai-section">
         <h2 class="section-title">Meet Bamboo - My AI Assistant 🐼</h2>
         <p class="section-subtitle">Chat with Bamboo to learn about my experience, skills, and get to know me better!</p>
-        <div class="chat-container">
+
+        <!-- Side-by-side layout wrapper -->
+        <div class="bamboo-chat-wrapper">
+            <!-- Bamboo Character Container (Left Side) -->
+            <div class="bamboo-character-container">
+                <div id="bamboo-character" class="bamboo-character">
+                    <!-- Lottie animation or static image will be loaded here -->
+                    <div id="bamboo-animation-wrapper" class="bamboo-animation-wrapper">
+                        <!-- Fallback panda emoji if no images loaded -->
+                        <span class="bamboo-fallback">🐼</span>
+                    </div>
+                </div>
+                <div class="bamboo-status" id="bamboo-status">
+                    <span class="status-text">Bamboo is ready to chat!</span>
+                </div>
+            </div>
+
+            <!-- Chat Container (Right Side) -->
+            <div class="chat-container">
             <div class="chat-header">
                 <h3>Bamboo 🐼 - Your Friendly Guide</h3>
                 <p>Ask about Aryan's work, hobbies, or if he'd be a good fit for your team</p>
@@ -99,6 +117,7 @@
             <div class="chat-input-container">
                 <input type="text" id="chat-input" class="chat-input" placeholder="Ask Bamboo anything about Aryan...">
                 <button id="send-btn" class="send-btn">Send</button>
+            </div>
             </div>
         </div>
     </section>
@@ -349,6 +368,9 @@
     <footer>
         <p>&copy; 2024 Aryan Adhikari. All rights reserved.</p>
     </footer>
+
+    <!-- Lottie Animation Library (for advanced Bamboo animations) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" integrity="sha512-jEnuDt6jfecCjthQAJ+ed0MTVA++5ZKmlUcmDGBv2vUI/REn6FuIdixLNnQT+vKusE2hhTk2is3cFvv5wA+Sgg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- Google Gemini AI SDK -->
     <script type="importmap">

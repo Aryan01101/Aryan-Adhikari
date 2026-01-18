@@ -1,5 +1,7 @@
 # API Keys and Configuration
-config.js
+js/config.js
+js/config.js.map
+src/config.ts
 .env
 .env.local
 
@@ -20,6 +22,11 @@ npm-debug.log*
 
 # Dependency directories
 node_modules/
+package-lock.json
+
+# Compiled TypeScript output (js/ contains compiled files from src/)
+js/main.js
+js/main.js.map
 
 # Build outputs
 dist/

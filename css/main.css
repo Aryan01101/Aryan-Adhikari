@@ -310,8 +310,7 @@ nav.scrolled {
 }
 
 .chat-container {
-    max-width: 800px;
-    margin: 0 auto;
+    flex: 1; /* Take remaining space */
     background: var(--card-bg);
     border-radius: 20px;
     backdrop-filter: blur(10px);
@@ -1182,4 +1181,301 @@ footer {
         right: 0.5rem;
         font-size: 0.7rem;
     }
+}
+
+/* ========================================
+   BAMBOO CHARACTER ANIMATIONS
+   ======================================== */
+
+/* Side-by-side wrapper for Bamboo and Chat */
+.bamboo-chat-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Bamboo Character Container (Left Side) */
+.bamboo-character-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 0 0 280px; /* Fixed width, doesn't grow or shrink */
+    position: sticky;
+    top: 100px; /* Stick when scrolling */
+    align-self: flex-start;
+}
+
+.bamboo-character {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bamboo-animation-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Fallback emoji styling */
+.bamboo-fallback {
+    font-size: 120px;
+    animation: bamboo-float 3s ease-in-out infinite;
+    display: block;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+}
+
+/* Character image styling (for when static images are loaded) */
+.bamboo-animation-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: opacity 0.3s ease;
+}
+
+/* Bamboo Status Text */
+.bamboo-status {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.bamboo-status .status-text {
+    font-size: 0.9rem;
+    color: #667eea;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 20px;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+/* ========================================
+   BAMBOO ANIMATION STATES
+   ======================================== */
+
+/* Idle/Default Animation */
+@keyframes bamboo-float {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-10px) rotate(2deg);
+    }
+}
+
+@keyframes bamboo-breathe {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Thinking Animation */
+@keyframes bamboo-think {
+    0%, 100% {
+        transform: rotate(-3deg);
+    }
+    50% {
+        transform: rotate(3deg);
+    }
+}
+
+/* Happy/Excited Animation */
+@keyframes bamboo-bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-20px);
+    }
+    60% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Waving Animation */
+@keyframes bamboo-wave {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: rotate(15deg);
+    }
+    20%, 40%, 60%, 80% {
+        transform: rotate(-15deg);
+    }
+}
+
+/* Typing Animation */
+@keyframes bamboo-type {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-5px) scale(1.02);
+    }
+}
+
+/* Professional/Focused Animation */
+@keyframes bamboo-focus {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(2px) scale(0.99);
+    }
+}
+
+/* Pulse Animation for interactions */
+@keyframes bamboo-pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* ========================================
+   BAMBOO STATE CLASSES
+   ======================================== */
+
+/* Apply different animations based on state */
+.bamboo-character.idle .bamboo-animation-wrapper {
+    animation: bamboo-float 3s ease-in-out infinite;
+}
+
+.bamboo-character.thinking .bamboo-animation-wrapper {
+    animation: bamboo-think 1s ease-in-out infinite;
+}
+
+.bamboo-character.happy .bamboo-animation-wrapper {
+    animation: bamboo-bounce 0.8s ease-in-out;
+}
+
+.bamboo-character.waving .bamboo-animation-wrapper {
+    animation: bamboo-wave 1s ease-in-out;
+}
+
+.bamboo-character.typing .bamboo-animation-wrapper {
+    animation: bamboo-type 0.6s ease-in-out infinite;
+}
+
+.bamboo-character.professional .bamboo-animation-wrapper {
+    animation: bamboo-focus 2s ease-in-out infinite;
+}
+
+.bamboo-character.pulse .bamboo-animation-wrapper {
+    animation: bamboo-pulse 0.5s ease;
+}
+
+/* ========================================
+   BAMBOO RESPONSIVE DESIGN
+   ======================================== */
+
+@media screen and (max-width: 768px) {
+    /* Stack vertically on mobile/tablet */
+    .bamboo-chat-wrapper {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 0 0.5rem;
+    }
+
+    .bamboo-character-container {
+        flex: none;
+        width: 100%;
+        max-width: 200px;
+        margin: 0 auto;
+        position: relative;
+        top: auto;
+    }
+
+    .bamboo-character {
+        width: 150px;
+        height: 150px;
+    }
+
+    .bamboo-fallback {
+        font-size: 90px;
+    }
+
+    .bamboo-status .status-text {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    .chat-container {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .bamboo-character {
+        width: 120px;
+        height: 120px;
+    }
+
+    .bamboo-fallback {
+        font-size: 70px;
+    }
+}
+
+/* ========================================
+   BAMBOO INTERACTION EFFECTS
+   ======================================== */
+
+.bamboo-character:hover .bamboo-animation-wrapper {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+/* Sparkle effect for special interactions */
+@keyframes sparkle {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.bamboo-character.sparkle::before {
+    content: '✨';
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    font-size: 24px;
+    animation: sparkle 1s ease-in-out;
+}
+
+.bamboo-character.sparkle::after {
+    content: '✨';
+    position: absolute;
+    bottom: 15%;
+    left: 15%;
+    font-size: 20px;
+    animation: sparkle 1s ease-in-out 0.2s;
+}
+
+/* Status text animations */
+.bamboo-status .status-text.updating {
+    animation: bamboo-pulse 0.8s ease-in-out;
 }
