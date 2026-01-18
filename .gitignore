@@ -1,0 +1,33 @@
+# API Keys and Configuration
+js/config.js
+js/config.js.map
+src/config.ts
+.env
+.env.local
+
+# macOS
+.DS_Store
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directories
+node_modules/
+package-lock.json
+
+# Compiled TypeScript output (js/ contains compiled files from src/)
+js/main.js
+js/main.js.map
+
+# Build outputs
+dist/
+build/
