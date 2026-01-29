@@ -31,3 +31,4 @@ js/main.js.map
 # Build outputs
 dist/
 build/
+public/
