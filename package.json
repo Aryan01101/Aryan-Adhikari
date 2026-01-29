@@ -7,8 +7,9 @@
     "build": "npm run clean && tsc && npm run copy-assets",
     "watch": "tsc --watch",
     "clean": "rm -rf public && mkdir -p public",
-    "copy-assets": "cp index.html public/ && cp -r css public/ && cp -r img public/ && cp CV_Aryan_Adhikari_Final.pdf public/",
-    "serve": "python3 -m http.server 8000"
+    "copy-assets": "cp index.html public/ && cp -r css public/ && cp -r img public/ && cp -r js public/ && cp CV_Aryan_Adhikari_Final.pdf public/",
+    "serve": "python3 -m http.server 8000",
+    "dev": "tsc"
   },
   "keywords": [],
   "author": "",

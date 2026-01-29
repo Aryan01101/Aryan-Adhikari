@@ -1,3 +1,4 @@
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import { API_CONFIG } from './config.js';
 const projectsData = [
     {

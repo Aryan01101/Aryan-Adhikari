@@ -3,6 +3,7 @@
 // IMPORT GEMINI AI AND TYPES
 // ========================================
 
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import { API_CONFIG } from './config.js';
 import type {
     Project,
@@ -12,12 +13,8 @@ import type {
     AnimationState,
     AnimationMode,
     AnimationPaths,
-    GoogleGenerativeAI as GoogleGenerativeAIType,
     GenerativeModel
 } from './types.js';
-
-// Declare GoogleGenerativeAI from CDN
-declare const GoogleGenerativeAI: new (apiKey: string) => GoogleGenerativeAIType;
 
 // ========================================
 // PROJECTS DATA STRUCTURE
