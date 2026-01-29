@@ -1,22 +1,16 @@
-import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
-
+export async function POST(request: Request) {
   try {
-    const body = typeof req.body === "string" ? JSON.parse(req.body) : req.body;
-    const message = body?.message;
+    const { message } = await request.json();
 
     if (!message || typeof message !== "string") {
-      return res.status(400).json({ error: "Missing message" });
+      return Response.json({ error: "Missing message" }, { status: 400 });
     }
 
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
-      return res.status(500).json({ error: "GEMINI_API_KEY not set on server" });
+      return Response.json({ error: "GEMINI_API_KEY not set on server" }, { status: 500 });
     }
 
     const genAI = new GoogleGenerativeAI(apiKey);
@@ -25,8 +19,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const result = await model.generateContent(message);
     const text = result.response.text();
 
-    return res.status(200).json({ text });
+    return Response.json({ text }, { status: 200 });
   } catch (err: any) {
-    return res.status(500).json({ error: err?.message || "Unknown error" });
+    return Response.json({ error: err?.message || "Unknown error" }, { status: 500 });
   }
 }
