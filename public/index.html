@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aryan Adhikari | Software Engineer & AI Enthusiast</title>
+    <meta name="description" content="Software Engineer with 2+ years experience building ML-powered solutions and full-stack applications. Led teams, built AI platforms (YAAKE), microservices architecture, and ML data validation systems with 84% accuracy. Graduate from University of Sydney.">
+    <meta name="keywords" content="Aryan Adhikari, Software Engineer, AI Engineer, Machine Learning, Full Stack Developer, Python, React, Node.js, Spring Boot, University of Sydney, ML Engineer">
+    <meta name="author" content="Aryan Adhikari">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aryan-adhikari.github.io/">
+    <meta property="og:title" content="Aryan Adhikari | Software Engineer & AI Enthusiast">
+    <meta property="og:description" content="Software Engineer specializing in ML-powered solutions and full-stack applications.">
+    <meta property="og:image" content="https://aryan-adhikari.github.io/img/IMG_3974.JPG">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://aryan-adhikari.github.io/">
+    <meta property="twitter:title" content="Aryan Adhikari | Software Engineer & AI Enthusiast">
+    <meta property="twitter:description" content="Software Engineer specializing in ML-powered solutions and full-stack applications.">
+    <meta property="twitter:image" content="https://aryan-adhikari.github.io/img/IMG_3974.JPG">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+    
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">Aryan Adhikari</div>
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#ai-assistant">AI Assistant</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="particles" id="particles"></div>
+        <div class="hero-content">
+            <div class="profile-photo">
+                <img src="img/IMG_3974.JPG" alt="Aryan Adhikari - Software Engineer" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="profile-placeholder">AA</div>
+            </div>
+            <h1>Aryan Adhikari</h1>
+            <p class="hero-subtitle">Software Engineer | AI Enthusiast | Problem Solver</p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary">View Projects</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                <a href="CV_Aryan_Adhikari_Final.pdf" class="btn btn-resume" download aria-label="Download Resume">
+                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
+                        <path d="M12 18l-4-4h2.5V11h3v3H16l-4 4z"/>
+                    </svg>
+                    Resume
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Assistant Section -->
+    <section id="ai-assistant" class="ai-section">
+        <h2 class="section-title">Meet Bamboo - My AI Assistant 🐼</h2>
+        <p class="section-subtitle">Chat with Bamboo to learn about my experience, skills, and get to know me better!</p>
+
+        <!-- Side-by-side layout wrapper -->
+        <div class="bamboo-chat-wrapper">
+            <!-- Bamboo Character Container (Left Side) -->
+            <div class="bamboo-character-container">
+                <div id="bamboo-character" class="bamboo-character">
+                    <!-- Lottie animation or static image will be loaded here -->
+                    <div id="bamboo-animation-wrapper" class="bamboo-animation-wrapper">
+                        <!-- Fallback panda emoji if no images loaded -->
+                        <span class="bamboo-fallback">🐼</span>
+                    </div>
+                </div>
+                <div class="bamboo-status" id="bamboo-status">
+                    <span class="status-text">Bamboo is ready to chat!</span>
+                </div>
+            </div>
+
+            <!-- Chat Container (Right Side) -->
+            <div class="chat-container">
+            <div class="chat-header">
+                <h3>Bamboo 🐼 - Your Friendly Guide</h3>
+                <p>Ask about Aryan's work, hobbies, or if he'd be a good fit for your team</p>
+            </div>
+            <div class="chat-messages" id="chat-messages">
+                <div class="message assistant">
+                    <p>🐼 Hey there! I'm Bamboo, Aryan's AI assistant panda! My human loves building cool tech stuff, and I'm here to help you get to know him - both as an engineer and as a person. You can ask me things like:</p>
+                    <ul class="suggestion-list">
+                        <li>"What does Aryan do for fun?"</li>
+                        <li>"Is he a good fit for a software engineering role?"</li>
+                        <li>"Tell me about his projects"</li>
+                        <li>"What are his hobbies outside of coding?"</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="chat-input-container">
+                <input type="text" id="chat-input" class="chat-input" placeholder="Ask Bamboo anything about Aryan...">
+                <button id="send-btn" class="send-btn">Send</button>
+            </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <h2 class="section-title">Projects</h2>
+        <p class="section-subtitle">Explore my portfolio of full-stack applications, ML systems, and automation solutions</p>
+        <!-- Projects will be dynamically rendered by JavaScript -->
+        <div class="projects-grid"></div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience">
+        <h2 class="section-title">Professional Experience</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>Software Engineer Intern (Team Lead)</h3>
+                    <p class="timeline-company">Jacaranda Flame Consulting | Nov 2024 - Feb 2025</p>
+                    <p class="timeline-description">Led cross-functional team of 5 developing ML-based data validation system for HealthShare's Practitioner Database. Achieved 84% accuracy processing 100K+ healthcare records with K-means clustering, Isolation Forest, Neural Networks, and One-Class SVM. Reduced manual validation workload by 65%. Orchestrated daily stand-ups using Agile/Scrum, conducted weekly client meetings, and delivered comprehensive technical documentation.</p>
+                    <div class="timeline-tags">
+                        <span class="timeline-tag">Python</span>
+                        <span class="timeline-tag">scikit-learn</span>
+                        <span class="timeline-tag">PostgreSQL</span>
+                        <span class="timeline-tag">Machine Learning</span>
+                        <span class="timeline-tag">Team Leadership</span>
+                        <span class="timeline-tag">Agile/Scrum</span>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>Student Ambassador</h3>
+                    <p class="timeline-company">Scape | Aug 2024 - Sep 2025</p>
+                    <p class="timeline-description">Coordinated events for 250+ international student residents at Scape student accommodation. Achieved 200% increase in event engagement through targeted community building initiatives and multicultural programming. Created inclusive community atmosphere for diverse international student population.</p>
+                    <div class="timeline-tags">
+                        <span class="timeline-tag">Event Coordination</span>
+                        <span class="timeline-tag">Leadership</span>
+                        <span class="timeline-tag">Community Building</span>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>Coding Instructor</h3>
+                    <p class="timeline-company">CodeCamp Australia | Apr 2023 - Apr 2024</p>
+                    <p class="timeline-description">Taught programming fundamentals to 50+ students aged 7-13 using Python. Designed hands-on, project-based learning activities and age-appropriate curriculum materials. Made programming accessible and fun for young learners while fostering computational thinking skills.</p>
+                    <div class="timeline-tags">
+                        <span class="timeline-tag">Python</span>
+                        <span class="timeline-tag">Teaching</span>
+                        <span class="timeline-tag">Curriculum Design</span>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>IT System Analyst</h3>
+                    <p class="timeline-company">Practera (Learn Grow Become) | Jun 2023 - Jul 2023</p>
+                    <p class="timeline-description">Assisted 10+ Australian SMBs in integrating modern technology solutions. Developed custom automation solutions using Python, JavaScript, and SQL. Built inventory management systems and analytics dashboards. Improved operational efficiency by 30% across client portfolio.</p>
+                    <div class="timeline-tags">
+                        <span class="timeline-tag">Python</span>
+                        <span class="timeline-tag">JavaScript</span>
+                        <span class="timeline-tag">SQL</span>
+                        <span class="timeline-tag">Automation</span>
+                        <span class="timeline-tag">Business Consulting</span>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>IT Business Consultant</h3>
+                    <p class="timeline-company">Practera (Mette Is Baking) | Apr 2023</p>
+                    <p class="timeline-description">Provided comprehensive business assistance and technology solutions for small business client. Delivered financial support analysis and implemented technology solutions to optimize business operations. Collaborated in diverse team on interdisciplinary solutions combining technology and business strategy.</p>
+                    <div class="timeline-tags">
+                        <span class="timeline-tag">Business Consulting</span>
+                        <span class="timeline-tag">Technology Integration</span>
+                        <span class="timeline-tag">Strategic Planning</span>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>Technical Mentor</h3>
+                    <p class="timeline-company">Biotech Mentorship Program | Sep 2023</p>
+                    <p class="timeline-description">Mentored team of 6 high school students in computational biology research project. Guided project timeline, provided technical expertise in programming and data analysis, and facilitated problem-solving. Students secured top-3 placement in regional competition.</p>
+                    <div class="timeline-tags">
+                        <span class="timeline-tag">Mentoring</span>
+                        <span class="timeline-tag">Computational Biology</span>
+                        <span class="timeline-tag">Project Management</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="certifications">
+        <h2 class="section-title">Certifications & Learning</h2>
+        <p class="section-subtitle">Professional certifications and continuous learning achievements</p>
+        <div class="certifications-grid">
+            <div class="cert-card">
+                <div class="cert-icon">💻</div>
+                <h3>Java (Basic)</h3>
+                <p class="cert-issuer">HackerRank</p>
+                <p class="cert-date">December 2025</p>
+                <p class="cert-id">ID: 5A81C82ECD28</p>
+            </div>
+            <div class="cert-card">
+                <div class="cert-icon">🧩</div>
+                <h3>Problem Solving (Basic)</h3>
+                <p class="cert-issuer">HackerRank</p>
+                <p class="cert-date">January 2023</p>
+                <p class="cert-id">ID: 720A2EE01064</p>
+            </div>
+            <div class="cert-card">
+                <div class="cert-icon">🐍</div>
+                <h3>Python (Basic)</h3>
+                <p class="cert-issuer">HackerRank</p>
+                <p class="cert-date">July 2022</p>
+                <p class="cert-id">ID: 775757B1ED27</p>
+            </div>
+            <div class="cert-card">
+                <div class="cert-icon">📊</div>
+                <h3>Python Data Structures</h3>
+                <p class="cert-issuer">University of Michigan (Coursera)</p>
+                <p class="cert-date">August 2022</p>
+                <p class="cert-id">ID: VSHWGLAM4J4P</p>
+            </div>
+            <div class="cert-card">
+                <div class="cert-icon">🔀</div>
+                <h3>Introduction to Git & GitHub</h3>
+                <p class="cert-issuer">Google</p>
+                <p class="cert-date">August 2023</p>
+                <p class="cert-id">ID: PW7EP5EYSZ9D</p>
+            </div>
+            <div class="cert-card">
+                <div class="cert-icon">📈</div>
+                <h3>Data Visualisation</h3>
+                <p class="cert-issuer">Tata Consultancy Services</p>
+                <p class="cert-date">July 2023</p>
+                <p class="cert-id">ID: jePS7E3H7bszZdQuq</p>
+            </div>
+            <div class="cert-card in-progress">
+                <div class="cert-icon">☁️</div>
+                <h3>AWS Cloud Practitioner</h3>
+                <p class="cert-issuer">Amazon Web Services</p>
+                <p class="cert-date">In Progress - Expected Jan 2026</p>
+                <span class="progress-badge">In Progress</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <p class="about-text">
+                Passionate Software Engineer with 2+ years of experience building ML-powered solutions and full-stack applications.
+                I specialize in developing data validation systems, automation tools, and scalable web platforms
+                that deliver measurable business impact. Currently leading ML initiatives and researching fairness in AI algorithms.
+            </p>
+
+            <!-- Education -->
+            <div class="education-section">
+                <h3 class="subsection-title">Education</h3>
+                <div class="education-card">
+                    <h4>Bachelor of Engineering Honours (Software)</h4>
+                    <p class="education-university">University of Sydney</p>
+                    <p class="education-details">Graduated: November 2025 | EIHWAM: 68.88</p>
+                    <div class="research-section">
+                        <p class="research-title">Dual Thesis Research:</p>
+                        <ul class="research-list">
+                            <li>Comparative Performance Analysis of K-means Clustering Variants - Achieved 23% faster convergence through framework optimization</li>
+                            <li>Fairness-Aware Machine Learning Methods - Investigated bias mitigation in ML algorithms with ethical AI principles</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills -->
+            <h3 class="subsection-title">Technical Skills</h3>
+            <div class="skills-container">
+                <div class="skill-badge">Python</div>
+                <div class="skill-badge">JavaScript</div>
+                <div class="skill-badge">Java</div>
+                <div class="skill-badge">React</div>
+                <div class="skill-badge">Node.js</div>
+                <div class="skill-badge">Spring Boot</div>
+                <div class="skill-badge">PostgreSQL</div>
+                <div class="skill-badge">MongoDB</div>
+                <div class="skill-badge">Machine Learning</div>
+                <div class="skill-badge">scikit-learn</div>
+                <div class="skill-badge">K-means</div>
+                <div class="skill-badge">Neural Networks</div>
+                <div class="skill-badge">Docker</div>
+                <div class="skill-badge">Git</div>
+                <div class="skill-badge">REST APIs</div>
+                <div class="skill-badge">Microservices</div>
+                <div class="skill-badge">OAuth2 & JWT</div>
+                <div class="skill-badge">Agile/Scrum</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-container">
+            <p class="about-text">
+                I'm always interested in new opportunities and collaborations.
+                Feel free to reach out!
+            </p>
+            <form class="contact-form" action="https://formspree.io/f/xgveeekw" method="POST">
+                <input type="text" name="name" class="form-input" placeholder="Your Name" required aria-label="Your Name">
+                <input type="email" name="email" class="form-input" placeholder="Your Email" required aria-label="Your Email">
+                <textarea name="message" class="form-input" placeholder="Your Message" required aria-label="Your Message"></textarea>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+                <div class="form-status" id="form-status"></div>
+            </form>
+            <div class="social-links">
+                <a href="https://github.com/aryan-adhikari" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub Profile">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+                <a href="https://linkedin.com/in/aryan-adhikari" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn Profile">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                    </svg>
+                </a>
+                <a href="https://twitter.com/aryan_adhikari" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Twitter Profile">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Aryan Adhikari. All rights reserved.</p>
+    </footer>
+
+    <!-- Lottie Animation Library (for advanced Bamboo animations) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js" integrity="sha512-jEnuDt6jfecCjthQAJ+ed0MTVA++5ZKmlUcmDGBv2vUI/REn6FuIdixLNnQT+vKusE2hhTk2is3cFvv5wA+Sgg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Google Gemini AI SDK -->
+    <script type="importmap">
+        {
+            "imports": {
+                "@google/generative-ai": "https://esm.run/@google/generative-ai"
+            }
+        }
+    </script>
+    <script src="js/config.js"></script>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
