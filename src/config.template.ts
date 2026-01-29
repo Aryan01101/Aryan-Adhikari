@@ -1,7 +1,8 @@
 // Template configuration file
-// Copy this to config.ts and add your API key
-// Or use environment variables for production deployment
+// Frontend-safe configuration ONLY
+// No secrets here
 
 export const API_CONFIG = {
-    GEMINI_API_KEY: process.env.VITE_GEMINI_API_KEY || process.env.GEMINI_API_KEY || 'YOUR_API_KEY_HERE'
-};
+    USE_GEMINI_API: true
+  };
+  

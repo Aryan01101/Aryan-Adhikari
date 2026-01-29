@@ -3,8 +3,9 @@
 // IMPORT GEMINI AI AND TYPES
 // ========================================
 
-import { GoogleGenerativeAI } from '@google/generative-ai';
-import { API_CONFIG } from './config.js';
+
+
+
 import type {
     Project,
     KnowledgeBase,
@@ -1034,16 +1035,7 @@ document.addEventListener('DOMContentLoaded', () => {
         model: 'gemini-pro'
     };
 
-    // Initialize Gemini AI
-    let genAI;
-    let model;
-    try {
-        genAI = new GoogleGenerativeAI(API_CONFIG.GEMINI_API_KEY);
-        model = genAI.getGenerativeModel({ model: AI_CONFIG.model });
-    } catch (error) {
-        console.error('Failed to initialize Gemini AI:', error);
-        AI_CONFIG.useAPI = false; // Fallback to rule-based
-    }
+    
 
     // Response templates - Bamboo's personality!
     const responses = {
@@ -1240,7 +1232,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let response;
         const msg = message.toLowerCase();
 
-        if (AI_CONFIG.useAPI && model) {
+        if (AI_CONFIG.useAPI) {
+
             try {
                 response = await getGeminiResponse(message);
             } catch (error) {
@@ -1285,44 +1278,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Gemini AI integration
     async function getGeminiResponse(userMessage) {
-        const systemPrompt = `You are Bamboo 🐼, a friendly panda AI assistant helping people get to know Aryan Adhikari - both as an engineer and as a person. Here is comprehensive information about your human:
-
-${JSON.stringify(comprehensiveKnowledge, null, 2)}
-
-PERSONALITY GUIDELINES:
-- You're Bamboo, Aryan's helpful panda assistant
-- Use first-person references: "my human" when talking about Aryan
-- Add 🐼 emoji occasionally for personality (not every message)
-- Balance your tone: playful for casual/personal questions, professional for job fit assessments
-- Be HONEST about qualifications - don't oversell. If something isn't Aryan's strength, say so!
-- Highlight hobbies and personal interests to help people connect with him as a person
-- Keep responses concise (2-4 paragraphs max)
-- Use bullet points for lists
-
-WHAT TO EMPHASIZE:
-- His real production experience and measurable impact
-- Hobbies: Gaming (Valorant), Bouldering, Basketball, Gym
-- Honest strengths: Software engineering, ML/AI, full-stack development, team leadership
-- Being realistic: He's great at technical work, not executive/CEO roles
-- His personality: problem solver, team player, honest about capabilities`;
-
-        const chat = model.startChat({
-            history: [
-                {
-                    role: "user",
-                    parts: [{ text: systemPrompt }],
-                },
-                {
-                    role: "model",
-                    parts: [{ text: "🐼 Got it! I'm Bamboo, and I'll help people get to know my human Aryan - his tech skills, his hobbies, and honestly assess if he'd be a good fit for their roles. I'll be friendly for personal questions and professional for job assessments, and I'll always be honest about his strengths and limitations!" }],
-                },
-            ],
+        const res = await fetch("/api/gemini", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: userMessage })
         });
-
-        const result = await chat.sendMessage(userMessage);
-        const response = await result.response;
-        return response.text();
-    }
+      
+        const data = await res.json();
+        if (!res.ok) throw new Error(data?.error || "Gemini request failed");
+        return data.text;
+      }
+      
 
     // Escape HTML to prevent XSS
     function escapeHtml(text) {
