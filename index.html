@@ -337,13 +337,46 @@
                 I'm always interested in new opportunities and collaborations.
                 Feel free to reach out!
             </p>
-            <form class="contact-form" action="https://formspree.io/f/xgveeekw" method="POST">
-                <input type="text" name="name" class="form-input" placeholder="Your Name" required aria-label="Your Name">
-                <input type="email" name="email" class="form-input" placeholder="Your Email" required aria-label="Your Email">
-                <textarea name="message" class="form-input" placeholder="Your Message" required aria-label="Your Message"></textarea>
-                <button type="submit" class="btn btn-primary">Send Message</button>
-                <div class="form-status" id="form-status"></div>
-            </form>
+            <form class="contact-form"
+      action="https://api.web3forms.com/submit"
+      method="POST">
+
+  <!-- Web3Forms required -->
+  <input type="hidden" name="access_key" value="c8579144-671d-4ac1-bec0-16c62d84e426">
+  <input type="hidden" name="subject" value="New message from aryan-adhikari.github.io">
+  <input type="hidden" name="from_name" value="Portfolio Contact Form">
+
+  <!-- User fields -->
+  <input
+    type="text"
+    name="name"
+    class="form-input"
+    placeholder="Your Name"
+    required
+  >
+
+  <input
+    type="email"
+    name="email"
+    class="form-input"
+    placeholder="Your Email"
+    required
+  >
+
+  <textarea
+    name="message"
+    class="form-input"
+    placeholder="Your Message"
+    required
+  ></textarea>
+
+  <button type="submit" class="btn btn-primary">
+    Send Message
+  </button>
+
+  <div class="form-status" id="form-status" style="display:none;"></div>
+</form>
+
             <div class="social-links">
                 <a href="https://github.com/aryan-adhikari" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub Profile">
                     <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">

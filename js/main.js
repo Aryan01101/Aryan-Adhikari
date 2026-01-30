@@ -821,50 +821,55 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     renderProjects();
     setupProjectExpansion();
+    
+    // CONTACT FORM
     const contactForm = document.querySelector('.contact-form');
     const formStatus = document.getElementById('form-status');
+    
     if (contactForm && formStatus) {
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const formData = new FormData(contactForm);
-            const button = contactForm.querySelector('button[type="submit"]');
-            const originalText = button.textContent;
-            button.innerHTML = `
-                <span class="loading-spinner"></span>
-                Sending...
-            `;
-            button.disabled = true;
-            formStatus.className = 'form-status';
-            formStatus.style.display = 'none';
-            try {
-                const response = await fetch(contactForm.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-                if (response.ok) {
-                    formStatus.className = 'form-status success';
-                    formStatus.textContent = 'Thank you for your message! I\'ll get back to you soon.';
-                    formStatus.style.display = 'block';
-                    contactForm.reset();
-                }
-                else {
-                    throw new Error('Form submission failed');
-                }
-            }
-            catch (error) {
-                formStatus.className = 'form-status error';
-                formStatus.textContent = 'Oops! Something went wrong. Please try again or email me directly.';
-                formStatus.style.display = 'block';
-            }
-            finally {
-                button.textContent = originalText;
-                button.disabled = false;
-            }
-        });
+      contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+    
+        const formData = new FormData(contactForm);
+        const button = contactForm.querySelector('button[type="submit"]');
+        const originalText = button.textContent;
+    
+        button.innerHTML = `<span class="loading-spinner"></span> Sending...`;
+        button.disabled = true;
+        formStatus.style.display = 'none';
+        formStatus.className = 'form-status';
+    
+        try {
+          const response = await fetch(contactForm.action, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+          });
+    
+          const data = await response.json();
+    
+          if (response.ok && data.success) {
+            formStatus.className = 'form-status success';
+            formStatus.textContent = "Thanks for reaching out! I’ll get back to you soon.";
+            formStatus.style.display = 'block';
+            contactForm.reset();
+          } else {
+            throw new Error(data.message || 'Submission failed');
+          }
+        } catch (error) {
+          formStatus.className = 'form-status error';
+          formStatus.textContent = 'Oops! Something went wrong. Please try again or email me directly.';
+          formStatus.style.display = 'block';
+          console.error(error);
+        } finally {
+          button.textContent = originalText;
+          button.disabled = false;
+        }
+      });
     }
+    
+
+    
     const chatInput = document.getElementById('chat-input');
     const sendBtn = document.getElementById('send-btn');
     const chatMessages = document.getElementById('chat-messages');
@@ -872,16 +877,7 @@ document.addEventListener('DOMContentLoaded', () => {
         useAPI: true,
         model: 'gemini-pro'
     };
-    let genAI;
-    let model;
-    try {
-        genAI = new GoogleGenerativeAI(API_CONFIG.GEMINI_API_KEY);
-        model = genAI.getGenerativeModel({ model: AI_CONFIG.model });
-    }
-    catch (error) {
-        console.error('Failed to initialize Gemini AI:', error);
-        AI_CONFIG.useAPI = false;
-    }
+    
     const responses = {
         greeting: [
             "🐼 Hey there! I'm Bamboo, and I help people get to know my human Aryan. Want to know about his tech skills, or maybe what he does when he's not coding?",
