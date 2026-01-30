@@ -823,51 +823,62 @@ document.addEventListener('DOMContentLoaded', () => {
     setupProjectExpansion();
     
     // CONTACT FORM
+    console.log("Contact form JS loaded ✅");
+
     const contactForm = document.querySelector('.contact-form');
-    const formStatus = document.getElementById('form-status');
-    
-    if (contactForm && formStatus) {
-      contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-    
-        const formData = new FormData(contactForm);
-        const button = contactForm.querySelector('button[type="submit"]');
-        const originalText = button.textContent;
-    
-        button.innerHTML = `<span class="loading-spinner"></span> Sending...`;
-        button.disabled = true;
-        formStatus.style.display = 'none';
-        formStatus.className = 'form-status';
-    
-        try {
-          const response = await fetch(contactForm.action, {
-            method: 'POST',
-            body: formData,
-            headers: { 'Accept': 'application/json' }
-          });
-    
-          const data = await response.json();
-    
-          if (response.ok && data.success) {
-            formStatus.className = 'form-status success';
-            formStatus.textContent = "Thanks for reaching out! I’ll get back to you soon.";
-            formStatus.style.display = 'block';
-            contactForm.reset();
-          } else {
-            throw new Error(data.message || 'Submission failed');
-          }
-        } catch (error) {
-          formStatus.className = 'form-status error';
-          formStatus.textContent = 'Oops! Something went wrong. Please try again or email me directly.';
-          formStatus.style.display = 'block';
-          console.error(error);
-        } finally {
-          button.textContent = originalText;
-          button.disabled = false;
-        }
+const formStatus = document.getElementById('form-status');
+
+if (contactForm && formStatus) {
+  // Ensure hidden on load
+  formStatus.style.display = 'none';
+  formStatus.textContent = '';
+  formStatus.className = 'form-status';
+
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(contactForm);
+    const button = contactForm.querySelector('button[type="submit"]');
+    const originalText = button.textContent;
+
+    button.innerHTML = `<span class="loading-spinner"></span> Sending...`;
+    button.disabled = true;
+
+    // reset status
+    formStatus.style.display = 'none';
+    formStatus.textContent = '';
+    formStatus.className = 'form-status';
+
+    try {
+      const response = await fetch(contactForm.action, {
+        method: 'POST',
+        body: formData,
+        headers: { Accept: 'application/json' }
       });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        formStatus.className = 'form-status success';
+        formStatus.textContent = "Thanks for reaching out! I’ll get back to you soon.";
+        formStatus.style.display = 'block';
+        contactForm.reset();
+      } else {
+        // show Web3Forms message
+        throw new Error(data.message || `Submission failed (HTTP ${response.status})`);
+      }
+    } catch (err) {
+      formStatus.className = 'form-status error';
+      formStatus.textContent = `❌ ${err.message}`;
+      formStatus.style.display = 'block';
+      console.error(err);
+    } finally {
+      button.textContent = originalText;
+      button.disabled = false;
     }
-    
+  });
+}
+
 
     
     const chatInput = document.getElementById('chat-input');
