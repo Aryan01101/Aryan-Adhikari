@@ -1,4 +1,4 @@
-# aryan-adhikari.github.io
+# aryan-adhikari
 
 
 # Project

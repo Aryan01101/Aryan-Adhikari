@@ -341,7 +341,7 @@ Test on:
    git push origin main
    ```
 
-2. Your site will be live at: `https://aryan-adhikari.github.io/`
+2. Your site will be live at: `https://aryan-adhikari.vercel.app/`
    (It may take 1-2 minutes to update)
 
 ### Custom Domain (Optional)
@@ -354,7 +354,7 @@ Test on:
 2. Configure DNS records with your domain provider:
    - Type: CNAME
    - Name: www (or @)
-   - Value: aryan-adhikari.github.io
+   - Value: aryan-adhikari.vercel.app
 
 ---
 

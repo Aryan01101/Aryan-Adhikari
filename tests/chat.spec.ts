@@ -8,7 +8,7 @@ import { test, expect, Page } from '@playwright/test';
 // Test both local and production URLs
 const TEST_URLS = {
   local: 'http://localhost:8000',
-  production: 'https://aryan-adhikari.github.io/'
+  production: 'https://aryan-adhikari.vercel.app/'
 };
 
 // Choose which environment to test
