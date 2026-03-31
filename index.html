@@ -35,7 +35,7 @@
     <nav id="navbar">
         <div class="nav-container">
             <div class="logo">Aryan Adhikari</div>
-            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu">
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -57,8 +57,8 @@
         <div class="particles" id="particles"></div>
         <div class="hero-content">
             <div class="profile-photo">
-                <img src="img/IMG_3974.JPG" alt="Aryan Adhikari - Software Engineer" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="profile-placeholder">AA</div>
+                <img src="img/IMG_3974.JPG" alt="Aryan Adhikari - Software Engineer" id="profile-image">
+                <div class="profile-placeholder" id="profile-placeholder">AA</div>
             </div>
             <h1>Aryan Adhikari</h1>
             <p class="hero-subtitle">Software Engineer | AI Enthusiast | Problem Solver</p>
@@ -91,7 +91,7 @@
                 <div class="education-card">
                     <h4>Bachelor of Engineering Honours (Software)</h4>
                     <p class="education-university">University of Sydney</p>
-                    <p class="education-details">Graduated: November 2025 | Second Class Division 1 Honours</p>
+                    <p class="education-details">Graduated: November 2025 | Second Class Division 1 Honours (EIHWAM: 68.88)</p>
                     <div class="research-section">
                         <p class="research-title"> Thesis Research:</p>
                         <ul class="research-list">
@@ -114,9 +114,9 @@
             <div class="bamboo-character-container">
                 <div id="bamboo-character" class="bamboo-character">
                     <!-- Lottie animation or static image will be loaded here -->
-                    <div id="bamboo-animation-wrapper" class="bamboo-animation-wrapper">
+                    <div id="bamboo-animation-wrapper" class="bamboo-animation-wrapper" role="img" aria-label="Bamboo the panda mascot">
                         <!-- Fallback panda emoji if no images loaded -->
-                        <span class="bamboo-fallback">🐼</span>
+                        <span class="bamboo-fallback" aria-hidden="true">🐼</span>
                     </div>
                 </div>
                 <div class="bamboo-status" id="bamboo-status">
@@ -130,7 +130,7 @@
                 <h3>Bamboo 🐼 - Your Friendly Guide</h3>
                 <p>Ask about Aryan's work, hobbies, or if he'd be a good fit for your team</p>
             </div>
-            <div class="chat-messages" id="chat-messages">
+            <div class="chat-messages" id="chat-messages" role="log" aria-live="polite" aria-atomic="false">
                 <div class="message assistant">
                     <p>🐼 Hey there! I'm Bamboo, Aryan's AI assistant panda! My human loves building cool tech stuff, and I'm here to help you get to know him - both as an engineer and as a person. You can ask me things like:</p>
                     <ul class="suggestion-list">
@@ -258,7 +258,7 @@
                 <div class="cert-icon">💻</div>
                 <h3>Java (Basic)</h3>
                 <p class="cert-issuer">HackerRank</p>
-                <p class="cert-date">December 2025</p>
+                <p class="cert-date">December 2024</p>
                 <p class="cert-id">ID: 5A81C82ECD28</p>
             </div>
             <div class="cert-card">
@@ -309,21 +309,45 @@
     
             <!-- Skills -->
             <h3 class="subsection-title">Technical Skills</h3>
+
+            <h4 class="skills-category">Languages</h4>
             <div class="skills-container">
                 <div class="skill-badge">Python</div>
                 <div class="skill-badge">JavaScript</div>
                 <div class="skill-badge">Java</div>
+                <div class="skill-badge">SQL</div>
+                <div class="skill-badge">HTML/CSS</div>
+            </div>
+
+            <h4 class="skills-category">Frontend & Backend</h4>
+            <div class="skills-container">
                 <div class="skill-badge">React</div>
                 <div class="skill-badge">Node.js</div>
+                <div class="skill-badge">Express</div>
                 <div class="skill-badge">Spring Boot</div>
+            </div>
+
+            <h4 class="skills-category">Databases</h4>
+            <div class="skills-container">
                 <div class="skill-badge">PostgreSQL</div>
                 <div class="skill-badge">MongoDB</div>
+                <div class="skill-badge">MySQL</div>
+            </div>
+
+            <h4 class="skills-category">ML/AI & Data Science</h4>
+            <div class="skills-container">
                 <div class="skill-badge">Machine Learning</div>
                 <div class="skill-badge">scikit-learn</div>
+                <div class="skill-badge">pandas & NumPy</div>
                 <div class="skill-badge">K-means</div>
                 <div class="skill-badge">Neural Networks</div>
+                <div class="skill-badge">Google Gemini AI</div>
+            </div>
+
+            <h4 class="skills-category">Tools & Practices</h4>
+            <div class="skills-container">
+                <div class="skill-badge">Git & GitHub</div>
                 <div class="skill-badge">Docker</div>
-                <div class="skill-badge">Git</div>
                 <div class="skill-badge">REST APIs</div>
                 <div class="skill-badge">Microservices</div>
                 <div class="skill-badge">OAuth2 & JWT</div>
@@ -350,27 +374,36 @@
   <input type="hidden" name="from_name" value="Portfolio Contact Form">
 
   <!-- User fields -->
+  <label for="contact-name" class="visually-hidden">Your Name</label>
   <input
     type="text"
+    id="contact-name"
     name="name"
     class="form-input"
     placeholder="Your Name"
     required
+    aria-label="Your Name"
   >
 
+  <label for="contact-email" class="visually-hidden">Your Email</label>
   <input
     type="email"
+    id="contact-email"
     name="email"
     class="form-input"
     placeholder="Your Email"
     required
+    aria-label="Your Email"
   >
 
+  <label for="contact-message" class="visually-hidden">Your Message</label>
   <textarea
+    id="contact-message"
     name="message"
     class="form-input"
     placeholder="Your Message"
     required
+    aria-label="Your Message"
   ></textarea>
 
   <button type="submit" class="btn btn-primary">
