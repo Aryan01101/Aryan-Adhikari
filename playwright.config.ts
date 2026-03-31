@@ -36,7 +36,7 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('/')` */
     baseURL: process.env.TEST_ENV === 'production'
-      ? 'https://aryan-adhikari.github.io/'
+      ? 'https://aryan-adhikari.vercel.app/'
       : 'http://localhost:8000',
 
     /* Collect trace when retrying the failed test */

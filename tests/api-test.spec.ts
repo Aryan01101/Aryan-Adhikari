@@ -6,7 +6,7 @@ import { test, expect } from '@playwright/test';
  */
 
 const BASE_URL = process.env.TEST_ENV === 'production'
-  ? 'https://aryan-adhikari.github.io'
+  ? 'https://aryan-adhikari.vercel.app'
   : 'http://localhost:8000';
 
 test.describe('Gemini API Endpoint Tests', () => {
