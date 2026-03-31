@@ -1,0 +1,30 @@
+# API Keys and Configuration (ONLY src/config.ts with secrets)
+src/config.ts
+.env
+.env.local
+
+# IMPORTANT: js/config.js and js/main.js are NOT ignored
+# They need to be committed for GitHub Pages deployment
+
+# macOS
+.DS_Store
+
+# Editor directories and files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directories
+node_modules/
+package-lock.json
+
+# Build outputs (public/ will be used for Vercel, not GitHub Pages)
+dist/
+build/
