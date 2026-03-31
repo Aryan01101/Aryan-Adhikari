@@ -14,5 +14,3 @@ Hello it's my project to work towards creating a website and deploy it using git
 - 42D9C8
 
 
-# Key Feature:
-- Have a chatgpt cover that would use my portfolio infomration to tell how i can be a good candidate for one of their jobs.
