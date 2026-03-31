@@ -1265,6 +1265,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
+    will-change: transform;
 }
 
 /* Fallback emoji styling */
