@@ -1,9 +1,10 @@
-# API Keys and Configuration
-js/config.js
-js/config.js.map
+# API Keys and Configuration (ONLY src/config.ts with secrets)
 src/config.ts
 .env
 .env.local
+
+# IMPORTANT: js/config.js and js/main.js are NOT ignored
+# They need to be committed for GitHub Pages deployment
 
 # macOS
 .DS_Store
@@ -24,11 +25,6 @@ npm-debug.log*
 node_modules/
 package-lock.json
 
-# Compiled TypeScript output (js/ contains compiled files from src/)
-js/main.js
-js/main.js.map
-
-# Build outputs
+# Build outputs (public/ will be used for Vercel, not GitHub Pages)
 dist/
 build/
-public/
