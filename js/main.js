@@ -667,6 +667,17 @@ class BambooAnimationController {
 let bambooController = null;
 document.addEventListener('DOMContentLoaded', () => {
     bambooController = new BambooAnimationController();
+
+    // Handle profile photo error (moved from inline onerror)
+    const profileImage = document.getElementById('profile-image');
+    const profilePlaceholder = document.getElementById('profile-placeholder');
+    if (profileImage && profilePlaceholder) {
+        profileImage.addEventListener('error', () => {
+            profileImage.style.display = 'none';
+            profilePlaceholder.style.display = 'flex';
+        });
+    }
+
     window.addEventListener('scroll', () => {
         const navbar = document.getElementById('navbar');
         if (window.scrollY > 50) {
@@ -678,15 +689,94 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const navLinks = document.getElementById('nav-links');
-    mobileMenuToggle.addEventListener('click', () => {
-        mobileMenuToggle.classList.toggle('active');
-        navLinks.classList.toggle('active');
-    });
+
+    // Track focusable elements in menu
+    let focusableElements = [];
+    let firstFocusableElement = null;
+    let lastFocusableElement = null;
+
+    function updateFocusableElements() {
+        focusableElements = Array.from(navLinks.querySelectorAll('a[href]'));
+        firstFocusableElement = focusableElements[0];
+        lastFocusableElement = focusableElements[focusableElements.length - 1];
+    }
+
+    function openMobileMenu() {
+        mobileMenuToggle.classList.add('active');
+        navLinks.classList.add('active');
+        mobileMenuToggle.setAttribute('aria-expanded', 'true');
+        updateFocusableElements();
+
+        // Focus first menu item
+        if (firstFocusableElement) {
+            setTimeout(() => firstFocusableElement.focus(), 100);
+        }
+    }
+
+    function closeMobileMenu() {
+        mobileMenuToggle.classList.remove('active');
+        navLinks.classList.remove('active');
+        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+
+        // Return focus to toggle button
+        mobileMenuToggle.focus();
+    }
+
+    function toggleMobileMenu() {
+        const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+        if (isExpanded) {
+            closeMobileMenu();
+        } else {
+            openMobileMenu();
+        }
+    }
+
+    // Toggle menu on button click
+    mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+
+    // Close menu when clicking nav links
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
-            mobileMenuToggle.classList.remove('active');
-            navLinks.classList.remove('active');
+            closeMobileMenu();
         });
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        const isMenuOpen = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+
+        // Escape key closes menu
+        if (e.key === 'Escape' && isMenuOpen) {
+            e.preventDefault();
+            closeMobileMenu();
+        }
+
+        // Tab key trap - keep focus within menu when open
+        if (e.key === 'Tab' && isMenuOpen) {
+            if (e.shiftKey) {
+                // Shift+Tab - backward
+                if (document.activeElement === firstFocusableElement) {
+                    e.preventDefault();
+                    lastFocusableElement.focus();
+                }
+            } else {
+                // Tab - forward
+                if (document.activeElement === lastFocusableElement) {
+                    e.preventDefault();
+                    firstFocusableElement.focus();
+                }
+            }
+        }
+    });
+
+    // Close menu when clicking outside (on mobile)
+    document.addEventListener('click', (e) => {
+        const isMenuOpen = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+        if (isMenuOpen &&
+            !navLinks.contains(e.target) &&
+            !mobileMenuToggle.contains(e.target)) {
+            closeMobileMenu();
+        }
     });
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -822,42 +912,74 @@ document.addEventListener('DOMContentLoaded', () => {
     const contactForm = document.querySelector('.contact-form');
     const formStatus = document.getElementById('form-status');
     if (contactForm && formStatus) {
+        // Ensure hidden on load
+        formStatus.style.display = 'none';
+        formStatus.textContent = '';
+        formStatus.className = 'form-status';
+
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+
             const formData = new FormData(contactForm);
             const button = contactForm.querySelector('button[type="submit"]');
             const originalText = button.textContent;
-            button.innerHTML = `
-                <span class="loading-spinner"></span>
-                Sending...
-            `;
+
+            // Show loading state
+            button.innerHTML = `<span class="loading-spinner"></span> Sending...`;
             button.disabled = true;
-            formStatus.className = 'form-status';
+
+            // Reset status
             formStatus.style.display = 'none';
+            formStatus.textContent = '';
+            formStatus.className = 'form-status';
+
             try {
+                // Add timeout for slow connections (15 seconds)
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 15000);
+
                 const response = await fetch(contactForm.action, {
                     method: 'POST',
                     body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
+                    headers: { Accept: 'application/json' },
+                    signal: controller.signal
                 });
-                if (response.ok) {
+
+                clearTimeout(timeoutId);
+                const data = await response.json();
+
+                if (response.ok && data.success) {
                     formStatus.className = 'form-status success';
-                    formStatus.textContent = 'Thank you for your message! I\'ll get back to you soon.';
+                    formStatus.textContent = "✓ Thanks for reaching out! I'll get back to you soon.";
                     formStatus.style.display = 'block';
+                    formStatus.setAttribute('role', 'status');
+                    formStatus.setAttribute('aria-live', 'polite');
                     contactForm.reset();
+
+                    // Keep success message visible for longer
+                    setTimeout(() => {
+                        formStatus.style.display = 'none';
+                    }, 10000);
+                } else {
+                    throw new Error(data.message || `Submission failed (${response.status})`);
                 }
-                else {
-                    throw new Error('Form submission failed');
-                }
-            }
-            catch (error) {
+            } catch (err) {
                 formStatus.className = 'form-status error';
-                formStatus.textContent = 'Oops! Something went wrong. Please try again or email me directly.';
+                formStatus.setAttribute('role', 'alert');
+                formStatus.setAttribute('aria-live', 'assertive');
+
+                // Provide helpful error messages
+                if (err.name === 'AbortError') {
+                    formStatus.textContent = '⏱ Request timed out. Please check your connection and try again.';
+                } else if (err.message.includes('Failed to fetch') || err.message.includes('NetworkError')) {
+                    formStatus.textContent = '🌐 Network error. Please check your internet connection and try again.';
+                } else {
+                    formStatus.textContent = `✗ ${err.message}. Please try again or email directly.`;
+                }
+
                 formStatus.style.display = 'block';
-            }
-            finally {
+                console.error('Form submission error:', err);
+            } finally {
                 button.textContent = originalText;
                 button.disabled = false;
             }
