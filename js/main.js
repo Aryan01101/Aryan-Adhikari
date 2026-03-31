@@ -1,5 +1,3 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
-import { API_CONFIG } from './config.js';
 const projectsData = [
     {
         id: 'yaake',
@@ -821,66 +819,50 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     renderProjects();
     setupProjectExpansion();
-    
-    // CONTACT FORM
-    console.log("Contact form JS loaded ✅");
-
     const contactForm = document.querySelector('.contact-form');
-const formStatus = document.getElementById('form-status');
-
-if (contactForm && formStatus) {
-  // Ensure hidden on load
-  formStatus.style.display = 'none';
-  formStatus.textContent = '';
-  formStatus.className = 'form-status';
-
-  contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(contactForm);
-    const button = contactForm.querySelector('button[type="submit"]');
-    const originalText = button.textContent;
-
-    button.innerHTML = `<span class="loading-spinner"></span> Sending...`;
-    button.disabled = true;
-
-    // reset status
-    formStatus.style.display = 'none';
-    formStatus.textContent = '';
-    formStatus.className = 'form-status';
-
-    try {
-      const response = await fetch(contactForm.action, {
-        method: 'POST',
-        body: formData,
-        headers: { Accept: 'application/json' }
-      });
-
-      const data = await response.json();
-
-      if (response.ok && data.success) {
-        formStatus.className = 'form-status success';
-        formStatus.textContent = "Thanks for reaching out! I’ll get back to you soon.";
-        formStatus.style.display = 'block';
-        contactForm.reset();
-      } else {
-        // show Web3Forms message
-        throw new Error(data.message || `Submission failed (HTTP ${response.status})`);
-      }
-    } catch (err) {
-      formStatus.className = 'form-status error';
-      formStatus.textContent = `❌ ${err.message}`;
-      formStatus.style.display = 'block';
-      console.error(err);
-    } finally {
-      button.textContent = originalText;
-      button.disabled = false;
+    const formStatus = document.getElementById('form-status');
+    if (contactForm && formStatus) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(contactForm);
+            const button = contactForm.querySelector('button[type="submit"]');
+            const originalText = button.textContent;
+            button.innerHTML = `
+                <span class="loading-spinner"></span>
+                Sending...
+            `;
+            button.disabled = true;
+            formStatus.className = 'form-status';
+            formStatus.style.display = 'none';
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                if (response.ok) {
+                    formStatus.className = 'form-status success';
+                    formStatus.textContent = 'Thank you for your message! I\'ll get back to you soon.';
+                    formStatus.style.display = 'block';
+                    contactForm.reset();
+                }
+                else {
+                    throw new Error('Form submission failed');
+                }
+            }
+            catch (error) {
+                formStatus.className = 'form-status error';
+                formStatus.textContent = 'Oops! Something went wrong. Please try again or email me directly.';
+                formStatus.style.display = 'block';
+            }
+            finally {
+                button.textContent = originalText;
+                button.disabled = false;
+            }
+        });
     }
-  });
-}
-
-
-    
     const chatInput = document.getElementById('chat-input');
     const sendBtn = document.getElementById('send-btn');
     const chatMessages = document.getElementById('chat-messages');
@@ -888,7 +870,6 @@ if (contactForm && formStatus) {
         useAPI: true,
         model: 'gemini-pro'
     };
-    
     const responses = {
         greeting: [
             "🐼 Hey there! I'm Bamboo, and I help people get to know my human Aryan. Want to know about his tech skills, or maybe what he does when he's not coding?",
@@ -1029,7 +1010,7 @@ if (contactForm && formStatus) {
         chatMessages.scrollTop = chatMessages.scrollHeight;
         let response;
         const msg = message.toLowerCase();
-        if (AI_CONFIG.useAPI && model) {
+        if (AI_CONFIG.useAPI) {
             try {
                 response = await getGeminiResponse(message);
             }
@@ -1066,41 +1047,15 @@ if (contactForm && formStatus) {
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
     async function getGeminiResponse(userMessage) {
-        const systemPrompt = `You are Bamboo 🐼, a friendly panda AI assistant helping people get to know Aryan Adhikari - both as an engineer and as a person. Here is comprehensive information about your human:
-
-${JSON.stringify(comprehensiveKnowledge, null, 2)}
-
-PERSONALITY GUIDELINES:
-- You're Bamboo, Aryan's helpful panda assistant
-- Use first-person references: "my human" when talking about Aryan
-- Add 🐼 emoji occasionally for personality (not every message)
-- Balance your tone: playful for casual/personal questions, professional for job fit assessments
-- Be HONEST about qualifications - don't oversell. If something isn't Aryan's strength, say so!
-- Highlight hobbies and personal interests to help people connect with him as a person
-- Keep responses concise (2-4 paragraphs max)
-- Use bullet points for lists
-
-WHAT TO EMPHASIZE:
-- His real production experience and measurable impact
-- Hobbies: Gaming (Valorant), Bouldering, Basketball, Gym
-- Honest strengths: Software engineering, ML/AI, full-stack development, team leadership
-- Being realistic: He's great at technical work, not executive/CEO roles
-- His personality: problem solver, team player, honest about capabilities`;
-        const chat = model.startChat({
-            history: [
-                {
-                    role: "user",
-                    parts: [{ text: systemPrompt }],
-                },
-                {
-                    role: "model",
-                    parts: [{ text: "🐼 Got it! I'm Bamboo, and I'll help people get to know my human Aryan - his tech skills, his hobbies, and honestly assess if he'd be a good fit for their roles. I'll be friendly for personal questions and professional for job assessments, and I'll always be honest about his strengths and limitations!" }],
-                },
-            ],
+        const res = await fetch("/api/gemini", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: userMessage })
         });
-        const result = await chat.sendMessage(userMessage);
-        const response = await result.response;
-        return response.text();
+        const data = await res.json();
+        if (!res.ok)
+            throw new Error(data?.error || "Gemini request failed");
+        return data.text;
     }
     function escapeHtml(text) {
         const div = document.createElement('div');
@@ -1122,4 +1077,5 @@ WHAT TO EMPHASIZE:
         console.error('🐼 Chat elements not found:', { sendBtn, chatInput, chatMessages });
     }
 });
+export {};
 //# sourceMappingURL=main.js.map
