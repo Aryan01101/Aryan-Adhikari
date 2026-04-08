@@ -1,4 +1,4 @@
 export const API_CONFIG = {
-    USE_GEMINI_API: false
+    GEMINI_API_KEY: ''
 };
 //# sourceMappingURL=config.js.map
