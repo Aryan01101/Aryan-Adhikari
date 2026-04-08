@@ -3,8 +3,7 @@
 // IMPORT GEMINI AI AND TYPES
 // ========================================
 
-
-
+import { getExperience, getSkills } from './supabaseClient.js';
 
 import type {
     Project,
@@ -25,8 +24,8 @@ const projectsData = [
     {
         id: 'yaake',
         title: 'YAAKE - AI-Powered Career Platform',
-        shortDescription: 'Comprehensive recruitment platform with AI-powered resume parsing, ATS scoring, mock interviews, and cover letter generation.',
-        fullDescription: `Comprehensive recruitment platform integrating Google Gemini AI for job seekers and recruiters. Features include:
+        shortDescription: 'Gemini-powered recruitment platform shipped from Figma to production in 8 weeks. 384 views in 14 days.',
+        fullDescription: `Comprehensive recruitment platform integrating Google Gemini AI for job seekers and recruiters. Shipped from Figma to production in 8 weeks. Features include:
 
 • AI-powered resume parsing and analysis
 • Automated ATS (Applicant Tracking System) scoring
@@ -38,8 +37,8 @@ const projectsData = [
 
 The platform received significant developer interest with 82 repository clones and 384 views within 14 days of launch.`,
         tech: ['React', 'Node.js', 'Express', 'MongoDB', 'Google Gemini AI', 'JWT', 'RBAC', 'RESTful APIs'],
-        timeline: 'August - October 2025',
-        impact: ['82 repository clones in 14 days', '384 repository views', 'Real-world AI in recruitment'],
+        timeline: 'August - October 2025 (8 weeks)',
+        impact: ['Figma to production in 8 weeks', '82 repository clones in 14 days', '384 repository views', 'Real-world AI in recruitment'],
         links: {
             github: '#', // Add actual GitHub URL when ready
             demo: null
@@ -318,11 +317,15 @@ const comprehensiveKnowledge = {
         frameworks: {
             frontend: ["React.js", "TailwindCSS", "Vanilla JavaScript"],
             backend: ["Node.js", "Express", "Spring Boot", "Django"],
-            ml: ["scikit-learn", "pandas", "NumPy", "matplotlib", "seaborn"]
+            ml: ["scikit-learn", "pandas", "NumPy", "matplotlib", "seaborn"],
+            ai: ["LangGraph", "Google Gemini API", "RAG (Retrieval-Augmented Generation)"]
         },
         databases: ["PostgreSQL", "MongoDB", "MySQL"],
-        tools: ["Git", "GitHub", "Maven", "Gradle", "Docker", "N8N", "Power BI"],
+        tools: ["Git", "GitHub", "Maven", "Gradle", "Docker", "N8N", "Power BI", "AWS (EC2, S3, Lambda)"],
         specializations: [
+            "System Architecture & Design",
+            "Retrieval-Augmented Generation (RAG)",
+            "LLM Integration & Orchestration (LangGraph)",
             "Machine Learning (K-means, Neural Networks, Isolation Forest, One-Class SVM)",
             "Microservices Architecture",
             "RESTful API Design",
@@ -334,109 +337,107 @@ const comprehensiveKnowledge = {
 
     experience: [
         {
-            company: "Jacaranda Flame Consulting",
-            role: "Software Engineer Intern (Team Lead)",
-            duration: "November 2024 - February 2025",
-            location: "Sydney, Australia (Hybrid)",
-            type: "Internship",
+            company: "Freelance | Self-Employed",
+            role: "AI & ML Consultant",
+            duration: "January 2025 - September 2025",
+            location: "Sydney, Australia",
+            type: "Consulting",
             achievements: [
-                "Led cross-functional team of 5 developing ML-based data validation system for HealthShare's Practitioner Database",
-                "Achieved 84% accuracy processing 100K+ healthcare records",
-                "Reduced manual validation workload by 65%",
-                "Orchestrated daily stand-ups using Agile/Scrum methodologies",
-                "Conducted weekly client meetings with HealthShare stakeholders",
-                "Implemented K-means, Isolation Forest, Neural Networks, and One-Class SVM",
-                "Built RESTful APIs for system integration and data access",
-                "Created automated data pipeline with comprehensive testing framework"
+                "Scoped and delivered an AI-powered bargaining system for a HORECA food distributor across 100+ SKUs, managing third-party engineering teams and automating buyer negotiations based on live market pricing to increase concurrent deal closures",
+                "Architected a Supply Chain and Demand Forecasting ML solution for a frozen food manufacturer, achieving 80%+ forecasting accuracy across 6 years of historical data, enabling proactive inventory planning and reducing supply chain risk"
             ],
-            technologies: ["Python", "scikit-learn", "NumPy", "pandas", "PostgreSQL", "Git", "Agile/Scrum", "RESTful APIs", "ML Algorithms"]
+            technologies: ["Machine Learning", "Python", "Supply Chain", "Demand Forecasting", "Product Management", "AI Systems"]
         },
         {
-            company: "Scape",
+            company: "Code Camp",
+            role: "Coding Instructor (STEM Education)",
+            duration: "April 2023 - Present",
+            location: "Sydney, Australia",
+            type: "Part-time",
+            achievements: [
+                "Taught drag-and-drop visual coding fundamentals (variables, loops, algorithms, game design) to 50+ students aged 5-13 across school holiday camps at Australia's largest kids coding provider",
+                "Adapted lesson delivery in real time across in-person and online sessions, maintaining engagement across mixed skill levels and supporting students from beginner to intermediate coding proficiency"
+            ],
+            technologies: ["Python", "Teaching", "Visual Coding", "Curriculum Design", "STEM Education"]
+        },
+        {
+            company: "Scape Australia",
             role: "Student Ambassador",
             duration: "August 2024 - September 2025",
             location: "Sydney, Australia",
             type: "Part-time",
             achievements: [
-                "Coordinated events for 250+ international student residents",
-                "Achieved 200% increase in event engagement",
-                "Created inclusive community atmosphere for diverse student population",
-                "Built strong community connections among international students"
+                "Drove a 50% increase in resident engagement through event planning and community-building initiatives for 250+ international residents at Australia's largest purpose-built student accommodation operator",
+                "Supported 250+ international residents with onboarding, local navigation, and issue resolution, serving as the primary point of contact across multiple residential floors"
             ],
             technologies: ["Event Coordination", "Community Building", "Leadership", "Cross-Cultural Communication"]
         },
         {
-            company: "CodeCamp Australia",
-            role: "Coding Instructor",
-            duration: "April 2023 - April 2024",
+            company: "Nail Snail (Practera)",
+            role: "Consultant (Data Analysis & Market Research)",
+            duration: "June 2025 - July 2025",
             location: "Sydney, Australia",
-            type: "Part-time",
+            type: "Consulting",
             achievements: [
-                "Taught programming fundamentals to 50+ students aged 7-13",
-                "Designed hands-on, project-based learning activities",
-                "Developed age-appropriate curriculum materials",
-                "Made programming accessible and fun for young learners",
-                "Fostered computational thinking skills in children"
+                "Collected and structured demographic datasets from ABS, WHO, and public market reports, enabling data-driven recommendations on customer segmentation and international market entry",
+                "Built data visualizations in Python (Matplotlib) including Australia's fertility rate trends (1950-2025) and population projections through 2071",
+                "Analysed competitor social media performance across Instagram and TikTok, benchmarking against industry leaders",
+                "Delivered final business report with actionable recommendations on digital channel strategy, customer segmentation, and international market entry"
             ],
-            technologies: ["Python", "Teaching", "Curriculum Design", "Pedagogy", "Educational Technology"]
+            technologies: ["Python", "Matplotlib", "Data Analysis", "Market Research", "Business Strategy"]
         },
         {
-            company: "Practera (Learn Grow Become)",
-            role: "IT System Analyst",
-            duration: "June 2023 - July 2023",
-            location: "Australia (Remote)",
+            company: "HealthShare (Jacaranda Flame Consulting)",
+            role: "Software Engineer Intern (Machine Learning & Data Engineering)",
+            duration: "November 2024 - February 2025",
+            location: "Sydney, Australia",
             type: "Internship",
             achievements: [
-                "Assisted 10+ Australian SMBs in integrating modern technology solutions",
-                "Improved operational efficiency by 30% across client portfolio",
-                "Developed custom automation solutions using Python, JavaScript, and SQL",
-                "Built inventory management systems for multiple clients",
-                "Created analytics dashboards for business intelligence"
+                "Implemented and evaluated multiple ML models including K-means clustering, Isolation Forest, Neural Networks, and One-Class SVM to automate healthcare data verification across 100K+ records at 84% accuracy, projected to save $400K annually",
+                "Conducted weekly client meetings and delivered product demonstrations to HealthShare stakeholders, translating technical findings into actionable recommendations",
+                "Orchestrated daily stand-ups, assigned tasks based on team strengths, and created comprehensive documentation for cross-team knowledge sharing",
+                "Developed a decision-making algorithm to recommend data actions (add/update/delete) based on ML analysis results"
             ],
-            technologies: ["Python", "JavaScript", "SQL", "Automation Solutions", "Business Analytics", "Inventory Systems"]
+            technologies: ["Python", "scikit-learn", "NumPy", "pandas", "PostgreSQL", "K-means", "Isolation Forest", "Neural Networks", "One-Class SVM", "ML Algorithms"]
         },
         {
-            company: "Practera (Mette Is Baking)",
-            role: "IT Business Consultant",
-            duration: "April 2023",
-            location: "Australia (Remote)",
-            type: "Internship",
-            achievements: [
-                "Provided comprehensive business assistance across operational fields",
-                "Delivered financial support analysis and recommendations",
-                "Implemented technology solutions to optimize business plans",
-                "Worked in diverse team with interdisciplinary collaboration",
-                "Delivered measurable improvements in business efficiency"
-            ],
-            technologies: ["Business Consulting", "Technology Integration", "Gantt Project Management", "Financial Analysis", "Strategic Planning"]
-        },
-        {
-            company: "Biotech Mentorship Program",
+            company: "University of Sydney",
             role: "Technical Mentor",
             duration: "September 2023",
             location: "Sydney, Australia",
             type: "Mentorship",
             achievements: [
-                "Mentored team of 6 high school students in computational biology research project",
-                "Guided project timeline and milestones",
-                "Provided technical expertise in programming and data analysis",
-                "Students secured top-3 placement in regional competition"
+                "Guided a team of 6 students in designing 'MNDetect,' a wearable EMG patch system with a companion app for early detection and monitoring of Motor Neuron Disease (MND/ALS)",
+                "Delivered technical guidance on EMG sensor placement, Bluetooth data transmission architecture, and companion app design, enabling the team to build a functional prototype",
+                "Team secured top-3 regional placement in University of Sydney innovation program"
             ],
-            technologies: ["Computational Biology", "Mentoring", "Python", "Data Analysis", "Research Methodology"]
+            technologies: ["EMG Systems", "Bluetooth", "IoT", "App Design", "Mentoring", "Biomedical Engineering"]
         },
         {
-            company: "Tata Consultancy Services",
-            role: "Data Visualisation Job Simulation",
+            company: "Learn Grow Become (Practera)",
+            role: "Information Technology System Analyst",
             duration: "June 2023 - July 2023",
-            location: "Virtual (Forage)",
-            type: "Virtual Experience",
+            location: "Australia (Remote)",
+            type: "Consulting",
             achievements: [
-                "Created visual representations and dashboards using Microsoft Power BI",
-                "Selected appropriate visualization types based on data characteristics",
-                "Communicated insights and analysis findings through visual storytelling",
-                "Translated complex data patterns into understandable business narratives"
+                "Consulted with Australian businesses on technology integration through government-supported edtech platform connecting university students with real industry projects",
+                "Assisted Australian businesses in integrating modern technology solutions to optimize operations",
+                "Provided tailored advice and resolved technical queries to support sustainable growth and digital transformation"
             ],
-            technologies: ["Microsoft Power BI", "Data Visualization", "Business Intelligence", "Data Storytelling"]
+            technologies: ["Technology Consulting", "Business Analysis", "Digital Transformation"]
+        },
+        {
+            company: "Mette is baking (Practera)",
+            role: "Information Technology Business Consultant",
+            duration: "June 2022 - July 2022",
+            location: "Australia (Remote)",
+            type: "Consulting",
+            achievements: [
+                "Delivered technology consulting as part of cross-disciplinary student team through Practera's Study Australia Industry Experience Program",
+                "Provided comprehensive business analysis across financial support and technology implementation",
+                "Collaborated with peers from diverse academic backgrounds to deliver tailored solutions optimizing client business plans"
+            ],
+            technologies: ["Business Consulting", "Technology Integration", "Financial Analysis", "Strategic Planning"]
         }
     ],
 
@@ -518,6 +519,20 @@ const comprehensiveKnowledge = {
             date: "Completed",
             credentialId: null,
             skills: ["Collaborative work", "Team dynamics"]
+        },
+        {
+            name: "Getting Started with Cloud Acquisition",
+            issuer: "Cloud Credibility",
+            date: "Completed",
+            credentialId: null,
+            skills: ["Cloud adoption strategies", "Cloud procurement", "Cloud acquisition best practices"]
+        },
+        {
+            name: "AWS Billing and Cost Management",
+            issuer: "Amazon Web Services",
+            date: "Completed",
+            credentialId: null,
+            skills: ["AWS cost optimization", "Cloud billing", "Cost management", "AWS pricing"]
         },
         {
             name: "AWS Cloud Practitioner",
@@ -767,7 +782,36 @@ let bambooController = null;
 // DOM CONTENT LOADED
 // ========================================
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+
+    // ========================================
+    // LOAD DATA FROM SUPABASE
+    // ========================================
+
+    console.log('🔄 Loading data from Supabase...');
+
+    try {
+        // Fetch experience and skills from Supabase
+        const [experienceData, skillsData] = await Promise.all([
+            getExperience(),
+            getSkills()
+        ]);
+
+        // Update comprehensiveKnowledge with Supabase data
+        if (experienceData && experienceData.length > 0) {
+            comprehensiveKnowledge.experience = experienceData;
+            console.log(`✅ Loaded ${experienceData.length} experience entries from Supabase`);
+        }
+
+        if (skillsData && Object.keys(skillsData).length > 0) {
+            // Convert skills data to format expected by the site
+            console.log(`✅ Loaded skills from Supabase:`, Object.keys(skillsData));
+        }
+
+    } catch (error) {
+        console.error('❌ Error loading data from Supabase:', error);
+        console.log('⚠️  Using fallback hardcoded data');
+    }
 
     // ========================================
     // INITIALIZE BAMBOO ANIMATION CONTROLLER
@@ -845,17 +889,53 @@ document.addEventListener('DOMContentLoaded', () => {
     // ========================================
 
     function renderProjects() {
+        // Try bookshelf first (current design)
+        const booksRow = document.getElementById('books-row');
+        if (booksRow) {
+            renderBookshelf(booksRow);
+            return;
+        }
+
+        // Fallback to grid if it exists
         const projectsGrid = document.querySelector('.projects-grid');
         if (!projectsGrid) return;
 
-        // Clear existing projects
         projectsGrid.innerHTML = '';
-
-        // Render all projects
         projectsData.forEach((project, index) => {
             const projectCard = createProjectCard(project, index);
             projectsGrid.appendChild(projectCard);
         });
+    }
+
+    function renderBookshelf(booksRow: HTMLElement) {
+        // Find bookends
+        const bookends = booksRow.querySelectorAll('.bookend');
+        const firstBookend = bookends[0];
+
+        // Clear existing books (keep bookends)
+        const existingBooks = booksRow.querySelectorAll('.book-spine');
+        existingBooks.forEach(book => book.remove());
+
+        // Insert books after first bookend
+        projectsData.forEach((project, index) => {
+            const bookSpine = document.createElement('div');
+            bookSpine.className = 'book-spine';
+            bookSpine.setAttribute('data-project-id', project.id);
+            bookSpine.setAttribute('data-index', index.toString());
+            bookSpine.style.setProperty('--book-color', getBookColor(index));
+
+            bookSpine.innerHTML = `<span class="book-title-spine">${project.title}</span>`;
+
+            // Insert after first bookend
+            if (firstBookend && firstBookend.nextSibling) {
+                booksRow.insertBefore(bookSpine, firstBookend.nextSibling);
+            }
+        });
+    }
+
+    function getBookColor(index: number): string {
+        const colors = ['#6366f1', '#10b981', '#f59e0b', '#a855f7', '#ef4444', '#3b82f6', '#8b5cf6', '#ec4899'];
+        return colors[index % colors.length];
     }
 
     function createProjectCard(project, index) {
@@ -965,9 +1045,188 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ========================================
+    // TIMELINE VISUALIZATION
+    // ========================================
+
+    function renderTimeline() {
+        const timelineSvg = document.getElementById('timeline-svg');
+        const timelineDetails = document.querySelector('.timeline-details') as HTMLElement;
+
+        if (!timelineSvg) return;
+
+        // Clear existing content
+        timelineSvg.innerHTML = '';
+
+        const svgNS = 'http://www.w3.org/2000/svg';
+        const experience = comprehensiveKnowledge.experience;
+
+        // Timeline configuration
+        const width = timelineSvg.clientWidth || 1000;
+        const height = 300;
+        const margin = { top: 40, right: 60, bottom: 40, left: 60 };
+        const plotWidth = width - margin.left - margin.right;
+        const plotHeight = height - margin.top - margin.bottom;
+
+        timelineSvg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+
+        // Parse dates and create timeline scale
+        const parseDate = (dateStr: string) => {
+            if (dateStr.includes('Present')) {
+                return new Date();
+            }
+            const parts = dateStr.split(' - ');
+            const endDate = parts[parts.length - 1].trim();
+            const monthYear = endDate.split(' ');
+            const months: {[key: string]: number} = {
+                'January': 0, 'February': 1, 'March': 2, 'April': 3, 'May': 4, 'June': 5,
+                'July': 6, 'August': 7, 'September': 8, 'October': 9, 'November': 10, 'December': 11
+            };
+            const month = months[monthYear[0]] || 0;
+            const year = parseInt(monthYear[1]);
+            return new Date(year, month);
+        };
+
+        const experienceDates = experience.map((exp, idx) => ({
+            ...exp,
+            date: parseDate(exp.duration),
+            index: idx
+        })).sort((a, b) => a.date.getTime() - b.date.getTime());
+
+        const minDate = new Date(2022, 0); // January 2022
+        const maxDate = new Date();
+        const timeSpan = maxDate.getTime() - minDate.getTime();
+
+        const xScale = (date: Date) => {
+            return margin.left + (date.getTime() - minDate.getTime()) / timeSpan * plotWidth;
+        };
+
+        // Color mapping by type
+        const colorMap: {[key: string]: string} = {
+            'Consulting': '#6366f1',
+            'Internship': '#22d3ee',
+            'Part-time': '#a78bfa',
+            'Mentorship': '#fbbf24'
+        };
+
+        // Draw main timeline axis
+        const axisY = height / 2;
+        const axis = document.createElementNS(svgNS, 'line');
+        axis.setAttribute('x1', margin.left.toString());
+        axis.setAttribute('y1', axisY.toString());
+        axis.setAttribute('x2', (width - margin.right).toString());
+        axis.setAttribute('y2', axisY.toString());
+        axis.setAttribute('class', 'timeline-axis');
+        timelineSvg.appendChild(axis);
+
+        // Draw year labels
+        for (let year = 2022; year <= 2025; year++) {
+            const x = xScale(new Date(year, 0));
+            const tick = document.createElementNS(svgNS, 'line');
+            tick.setAttribute('x1', x.toString());
+            tick.setAttribute('y1', (axisY - 5).toString());
+            tick.setAttribute('x2', x.toString());
+            tick.setAttribute('y2', (axisY + 5).toString());
+            tick.setAttribute('class', 'timeline-tick');
+            timelineSvg.appendChild(tick);
+
+            const label = document.createElementNS(svgNS, 'text');
+            label.setAttribute('x', x.toString());
+            label.setAttribute('y', (axisY + 25).toString());
+            label.setAttribute('text-anchor', 'middle');
+            label.setAttribute('class', 'timeline-label');
+            label.textContent = year.toString();
+            timelineSvg.appendChild(label);
+        }
+
+        // Draw experience points with branches
+        experienceDates.forEach((exp, idx) => {
+            const x = xScale(exp.date);
+            const y = axisY - (idx % 2 === 0 ? 40 : -40);
+            const color = colorMap[exp.type] || '#6366f1';
+
+            // Create branch group
+            const branchGroup = document.createElementNS(svgNS, 'g');
+            branchGroup.setAttribute('class', 'git-branch-group');
+            branchGroup.setAttribute('data-exp-index', exp.index.toString());
+            branchGroup.style.cursor = 'pointer';
+
+            // Draw branch line from axis to commit
+            const branch = document.createElementNS(svgNS, 'line');
+            branch.setAttribute('x1', x.toString());
+            branch.setAttribute('y1', axisY.toString());
+            branch.setAttribute('x2', x.toString());
+            branch.setAttribute('y2', y.toString());
+            branch.setAttribute('stroke', color);
+            branch.setAttribute('stroke-width', '2');
+            branch.setAttribute('class', 'git-branch');
+            branchGroup.appendChild(branch);
+
+            // Draw commit dot
+            const commit = document.createElementNS(svgNS, 'circle');
+            commit.setAttribute('cx', x.toString());
+            commit.setAttribute('cy', y.toString());
+            commit.setAttribute('r', '5');
+            commit.setAttribute('fill', color);
+            commit.setAttribute('class', 'git-commit');
+            branchGroup.appendChild(commit);
+
+            // Add hover interactivity
+            branchGroup.addEventListener('mouseenter', () => {
+                showExperienceDetails(exp, timelineDetails);
+            });
+
+            branchGroup.addEventListener('mouseleave', () => {
+                hideExperienceDetails(timelineDetails);
+            });
+
+            timelineSvg.appendChild(branchGroup);
+        });
+    }
+
+    function showExperienceDetails(exp: any, detailsEl: HTMLElement) {
+        const placeholder = detailsEl.querySelector('.timeline-details-placeholder') as HTMLElement;
+        if (placeholder) placeholder.style.display = 'none';
+
+        let contentDiv = detailsEl.querySelector('.timeline-details-content') as HTMLElement;
+        if (!contentDiv) {
+            contentDiv = document.createElement('div');
+            contentDiv.className = 'timeline-details-content';
+            detailsEl.appendChild(contentDiv);
+        }
+
+        contentDiv.innerHTML = `
+            <h3 class="details-title">${exp.role}</h3>
+            <p class="details-company">${exp.company}</p>
+            <p class="details-meta">${exp.duration} • ${exp.location}</p>
+            <ul class="details-achievements">
+                ${exp.achievements.slice(0, 3).map((achievement: string) =>
+                    `<li>${achievement}</li>`
+                ).join('')}
+            </ul>
+            <div class="details-tech">
+                ${exp.technologies.slice(0, 5).map((tech: string) =>
+                    `<span class="tech-tag">${tech}</span>`
+                ).join('')}
+            </div>
+        `;
+        contentDiv.style.display = 'block';
+    }
+
+    function hideExperienceDetails(detailsEl: HTMLElement) {
+        const contentDiv = detailsEl.querySelector('.timeline-details-content') as HTMLElement;
+        if (contentDiv) contentDiv.style.display = 'none';
+
+        const placeholder = detailsEl.querySelector('.timeline-details-placeholder') as HTMLElement;
+        if (placeholder) placeholder.style.display = 'block';
+    }
+
     // Initialize projects
     renderProjects();
     setupProjectExpansion();
+
+    // Render timeline visualization
+    renderTimeline();
 
     // ========================================
     // CONTACT FORM HANDLING
@@ -1310,5 +1569,36 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('🐼 Chat is ready!');
     } else {
         console.error('🐼 Chat elements not found:', { sendBtn, chatInput, chatMessages });
+    }
+
+    // ========================================
+    // INTERSECTION OBSERVER FOR ENTRANCE ANIMATIONS
+    // ========================================
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1 // Trigger when 10% of section is visible
+    };
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('section-visible');
+                // Optional: unobserve after animation completes to improve performance
+                // sectionObserver.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Observe all sections
+    document.querySelectorAll('section').forEach(section => {
+        sectionObserver.observe(section);
+    });
+
+    // Make first section (hero) visible immediately
+    const heroSection = document.querySelector('#home');
+    if (heroSection) {
+        heroSection.classList.add('section-visible');
     }
 });
