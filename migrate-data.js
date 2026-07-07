@@ -22,6 +22,53 @@ if (!supabaseUrl || !supabaseAnonKey) {
 
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
+
+async function migrateProjects() {
+    console.log('🚀 Migrating projects data...');
+    // Transform projects to match DB schema
+    const mappedProjects = projectsData.map((p, i) => ({
+        project_id: p.id,
+        title: p.title,
+        short_description: p.shortDescription,
+        full_description: p.fullDescription,
+        tech: p.tech,
+        timeline: p.timeline,
+        impact: p.impact,
+        github_link: p.links.github,
+        demo_link: p.links.demo,
+        status: p.status,
+        featured: p.featured,
+        display_order: i
+    }));
+
+    const { data, error } = await supabase.from('projects').insert(mappedProjects);
+    if (error) {
+        console.error('❌ Error migrating projects:', error);
+        throw error;
+    }
+    console.log(`✅ Migrated ${mappedProjects.length} projects`);
+}
+
+async function migrateCertifications() {
+    console.log('📜 Migrating certifications data...');
+    const mappedCerts = certificationsData.map((c, i) => ({
+        name: c.name,
+        issuer: c.issuer || 'Unknown',
+        date_completed: c.date,
+        credential_id: c.credentialId,
+        skills: c.skills,
+        in_progress: c.name.includes('In Progress') || c.date.includes('Expected'),
+        display_order: i
+    }));
+
+    const { data, error } = await supabase.from('certifications').insert(mappedCerts);
+    if (error) {
+        console.error('❌ Error migrating certifications:', error);
+        throw error;
+    }
+    console.log(`✅ Migrated ${mappedCerts.length} certifications`);
+}
+
 // ========================================
 // PORTFOLIO DATA (from LinkedIn)
 // ========================================
@@ -187,8 +234,262 @@ const skillsData = [
     { category: "Tools & Practices", skill_name: "Maven & Gradle", display_order: 7 }
 ];
 
-// Add certifications and projects data here...
-// (I'll truncate this for brevity, but you get the idea)
+const projectsData = [
+    {
+        id: 'yaake',
+        title: 'YAAKE - AI-Powered Career Platform',
+        shortDescription: 'Gemini-powered recruitment platform shipped from Figma to production in 8 weeks. 384 views in 14 days.',
+        fullDescription: `Comprehensive recruitment platform integrating Google Gemini AI for job seekers and recruiters. Shipped from Figma to production in 8 weeks. Features include:
+
+• AI-powered resume parsing and analysis
+• Automated ATS (Applicant Tracking System) scoring
+• Mock interview simulation with AI feedback
+• AI-generated cover letter creation
+• Role-based access control for users and recruiters
+• RESTful API with 10+ feature modules
+• JWT authentication and rate limiting
+
+The platform received significant developer interest with 82 repository clones and 384 views within 14 days of launch.`,
+        tech: ['React', 'Node.js', 'Express', 'MongoDB', 'Google Gemini AI', 'JWT', 'RBAC', 'RESTful APIs'],
+        timeline: 'August - October 2025 (8 weeks)',
+        impact: ['Figma to production in 8 weeks', '82 repository clones in 14 days', '384 repository views', 'Real-world AI in recruitment'],
+        links: {
+            github: '#', // Add actual GitHub URL when ready
+            demo: null
+        },
+        status: 'completed',
+        featured: true
+    },
+    {
+        id: 'oversave',
+        title: 'Over-save - Budget Tracking App',
+        shortDescription: 'Financial management platform with expense tracking, savings goals, gamification, and OAuth2 security.',
+        fullDescription: `Comprehensive financial management application with Spring Boot backend and PostgreSQL database. Features include:
+
+• Expense tracking and categorization
+• Savings goals with progress monitoring
+• Gamification system encouraging financial responsibility
+• Email notifications for financial events
+• 16 REST API endpoints for complete CRUD operations
+• OAuth2 implementation for secure authentication
+• Spring Security integration
+• Financial analytics and reporting dashboards
+• Complex database schema with 15+ interconnected tables`,
+        tech: ['Java', 'Spring Boot', 'PostgreSQL', 'OAuth2', 'Spring Security', 'Email Notifications', 'REST APIs'],
+        timeline: 'September - November 2025',
+        impact: ['Comprehensive financial tracking', 'Secure authentication', 'Gamification for savings'],
+        links: {
+            github: '#', // Add actual GitHub URL when ready
+            demo: null
+        },
+        status: 'completed',
+        featured: true
+    },
+    {
+        id: 'microservices-ecommerce',
+        title: 'Microservices E-Commerce Platform',
+        shortDescription: 'Enterprise-scale online store with 4 independent microservices, event-driven architecture, and complete order-to-delivery pipeline.',
+        fullDescription: `Fully-functional online store implementing microservices architecture for university course COMP5348 (Enterprise Scale Software Architecture). Features:
+
+**Architecture:**
+• 4 independent microservices (Store, Bank, Delivery, Email)
+• Database per service pattern (PostgreSQL)
+• Event-driven architecture with webhooks
+• Message queue-based processing
+• JWT authentication with Spring Security
+• Health check endpoints for monitoring
+
+**Services:**
+1. Store App (Port 8081): Order/inventory management, user authentication
+2. Bank Service (Port 8082): Payment processing, transaction handling
+3. Delivery Service (Port 8083): Shipment tracking, status simulation
+4. Email Service (Port 8084): Notification system
+
+**Features:**
+• Multi-item order placement with smart warehouse allocation
+• Real-time delivery tracking (5-stage progression)
+• Transaction fees and automatic refunds
+• Configurable delivery simulation and failure rates`,
+        tech: ['Java 17', 'Spring Boot', 'Gradle', 'PostgreSQL', 'Hibernate/JPA', 'Spring Security', 'JWT', 'Microservices', 'REST APIs', 'Event-Driven Architecture', 'Message Queues', 'Docker'],
+        timeline: 'University Project - 2025',
+        impact: ['4 independent microservices', 'Complete order-to-delivery pipeline', 'Enterprise architecture patterns'],
+        links: {
+            github: '#', // Add actual GitHub URL when ready
+            demo: null
+        },
+        status: 'completed',
+        featured: true
+    },
+    {
+        id: 'data-validation-ml',
+        title: 'Data Validation System with ML',
+        shortDescription: 'ML pipeline processing 100,000+ healthcare records with 84% accuracy. Reduced manual verification by 65% for HealthShare database.',
+        fullDescription: `Architected and led development of ML-based data validation system for HealthShare's Practitioner Database at Jacaranda Flame Consulting.
+
+**Leadership:**
+• Led cross-functional team of 5 members
+• Conducted daily stand-ups using Agile/Scrum
+• Managed weekly client meetings and demos
+• Delivered comprehensive technical documentation
+
+**Technical Implementation:**
+• Implemented multiple ML models: K-means clustering, Isolation Forest, Neural Networks, One-Class SVM
+• Achieved 84% accuracy in automated healthcare data verification
+• Processed 100,000+ healthcare records
+• Built RESTful APIs for system integration
+• Created automated data pipeline with testing framework
+• Reduced manual validation workload by 65%
+
+**Technologies:**
+• Python with scikit-learn, NumPy, pandas
+• PostgreSQL database
+• Git version control
+• Test-driven development approach`,
+        tech: ['Python', 'scikit-learn', 'NumPy', 'pandas', 'PostgreSQL', 'K-means', 'Isolation Forest', 'Neural Networks', 'One-Class SVM', 'RESTful APIs'],
+        timeline: 'November 2024 - February 2025',
+        impact: ['100K+ records processed', '84% accuracy achieved', '65% reduction in manual work', 'Led team of 5'],
+        links: {
+            github: '#', // Add actual GitHub URL when ready
+            demo: null
+        },
+        status: 'completed',
+        featured: true
+    },
+    {
+        id: 'bookhub',
+        title: 'BookHub - Book Review Platform',
+        shortDescription: 'Full-stack book review platform with Google Books API integration, real-time chat, and Google authentication.',
+        fullDescription: `Comprehensive book review platform integrating multiple external APIs. Features include:
+
+**API Integrations:**
+• Google Books API for search and book details
+• Google Login API for secure authentication
+• Daphne API for real-time chat functionality
+
+**Features:**
+• Book search with real-time suggestions
+• Comprehensive book information display
+• User rating system with dynamic updates
+• Review submission and viewing
+• Real-time chat for book discussions
+• OAuth integration for Google credentials
+• Community engagement features
+
+**Tech Stack:**
+• Frontend: React.js with responsive design
+• Backend: Node.js with Express + Django for chat
+• Database: MongoDB for NoSQL storage
+• External API integration for enhanced functionality`,
+        tech: ['React', 'Node.js', 'Express', 'Django', 'MongoDB', 'Google Books API', 'Google Login API', 'Daphne API', 'OAuth'],
+        timeline: 'University Project - 2024',
+        impact: ['Real-time chat', 'Google API integration', 'OAuth authentication'],
+        links: {
+            github: '#', // Add actual GitHub URL when ready
+            demo: null
+        },
+        status: 'completed',
+        featured: false
+    },
+    {
+        id: 'linkedleads',
+        title: 'LinkedLeads Automation',
+        shortDescription: 'Automated lead generation system processing 500+ daily job postings, reducing manual work by 95%.',
+        fullDescription: `Automated lead generation system for processing job postings from LinkedIn and other sources.
+
+**Automation Pipeline:**
+• Web scraping for data collection from multiple sources
+• Processing 500+ daily job postings automatically
+• Data transformation and standardization
+• Automated lead qualification and categorization
+• Integration with Google Sheets for data management
+
+**Impact:**
+• 95% reduction in manual processing time
+• Automated data collection and transformation
+• Scalable architecture for increased data volume
+• Identifies 50+ qualified IT opportunities weekly`,
+        tech: ['N8N', 'Python', 'Google Sheets API', 'Web Scraping', 'Automation'],
+        timeline: 'June - July 2024',
+        impact: ['500+ postings/day processed', '95% time reduction', '50+ opportunities/week identified'],
+        links: {
+            github: '#', // Add actual GitHub URL when ready
+            demo: null
+        },
+        status: 'completed',
+        featured: false
+    },
+    {
+        id: 'journal-system',
+        title: 'Journal Management System',
+        shortDescription: 'Privacy-focused desktop journal application with modular architecture and local data storage.',
+        fullDescription: `Desktop journal management system with emphasis on privacy and modularity.
+
+**Features:**
+• Secure journal entry creation and management
+• Privacy-focused design with local data storage
+• User-friendly interface for daily journaling
+• Modular architecture separating UI from backend
+
+**Development:**
+• Git version control with GitHub collaboration
+• Maven and Gradle for build automation
+• Clean code principles for maintainability
+• Designed for future feature integration`,
+        tech: ['Java', 'Maven', 'Gradle', 'Git', 'Modular Architecture'],
+        timeline: '2024',
+        impact: ['Privacy-first design', 'Modular architecture', 'Local data storage'],
+        links: {
+            github: '#', // Add actual GitHub URL when ready
+            demo: null
+        },
+        status: 'completed',
+        featured: false
+    },
+    {
+        id: 'housing-prices',
+        title: 'Housing Prices Visualization',
+        shortDescription: 'Data visualization project analyzing housing price trends with interactive dashboards.',
+        fullDescription: `Data visualization and analysis project for housing market trends.
+
+**Features:**
+• Statistical analysis of housing market data
+• Visual representation of price trends
+• Interactive dashboards for data exploration
+• Python-based data processing and visualization`,
+        tech: ['Python', 'pandas', 'matplotlib', 'seaborn', 'Data Visualization'],
+        timeline: 'In Development',
+        impact: ['Market trend analysis', 'Interactive visualizations'],
+        links: {
+            github: '#',
+            demo: null
+        },
+        status: 'in-development',
+        featured: false
+    },
+    {
+        id: 'crypto-prediction',
+        title: 'Crypto Price Prediction',
+        shortDescription: 'Machine learning model for cryptocurrency price prediction using time series analysis.',
+        fullDescription: `Machine learning project for cryptocurrency price prediction.
+
+**Technical Focus:**
+• Time series analysis for price prediction
+• Feature engineering from historical data
+• Model evaluation and optimization
+• Python-based ML development`,
+        tech: ['Python', 'scikit-learn', 'pandas', 'NumPy', 'Time Series Analysis'],
+        timeline: 'In Development',
+        impact: ['Price prediction model', 'Time series analysis'],
+        links: {
+            github: '#',
+            demo: null
+        },
+        status: 'in-development',
+        featured: false
+    }
+];
+
+const certificationsData = [ ];
 
 // ========================================
 // MIGRATION FUNCTIONS
@@ -246,8 +547,8 @@ async function main() {
         await clearAllData();
         await migrateExperience();
         await migrateSkills();
-        // await migrateProjects();
-        // await migrateCertifications();
+        await migrateProjects();
+        await migrateCertifications();
 
         console.log('\n✨ Migration completed successfully!');
         console.log('📊 You can now view your data in Supabase Table Editor');

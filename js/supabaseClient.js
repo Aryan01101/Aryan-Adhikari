@@ -1,11 +1,11 @@
-import { createClient } from '@supabase/supabase-js';
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
+import { API_CONFIG } from './config.js';
+const supabaseUrl = API_CONFIG.SUPABASE_URL || '';
+const supabaseAnonKey = API_CONFIG.SUPABASE_ANON_KEY || '';
 if (!supabaseUrl || !supabaseAnonKey) {
     console.warn('⚠️ Supabase credentials not found. Using fallback mode.');
     console.warn('To enable database features, add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to .env.local');
 }
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
 export async function getExperience() {
     const { data, error } = await supabase
         .from('experience')

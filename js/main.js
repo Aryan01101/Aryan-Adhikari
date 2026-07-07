@@ -1,5 +1,5 @@
-import { getExperience, getSkills } from './supabaseClient.js';
-const projectsData = [
+import { getExperience, getSkills, getProjects, getCertifications } from './supabaseClient.js';
+let projectsData = [
     {
         id: 'yaake',
         title: 'YAAKE - AI-Powered Career Platform',
@@ -685,21 +685,100 @@ let bambooController = null;
 document.addEventListener('DOMContentLoaded', async () => {
     console.log('🔄 Loading data from Supabase...');
     try {
-        const [experienceData, skillsData] = await Promise.all([
+        const [experienceData, skillsData, fetchedProjects, fetchedCerts] = await Promise.all([
             getExperience(),
-            getSkills()
+            getSkills(),
+            getProjects(),
+            getCertifications()
         ]);
         if (experienceData && experienceData.length > 0) {
             comprehensiveKnowledge.experience = experienceData;
             console.log(`✅ Loaded ${experienceData.length} experience entries from Supabase`);
+            renderTimeline();
         }
         if (skillsData && Object.keys(skillsData).length > 0) {
             console.log(`✅ Loaded skills from Supabase:`, Object.keys(skillsData));
+            renderSkills(skillsData);
+        }
+        if (fetchedProjects && fetchedProjects.length > 0) {
+            projectsData = fetchedProjects.map(p => ({
+                id: p.project_id,
+                title: p.title,
+                shortDescription: p.short_description,
+                fullDescription: p.full_description,
+                tech: p.tech,
+                timeline: p.timeline,
+                impact: p.impact,
+                links: { github: p.github_link, demo: p.demo_link },
+                status: p.status,
+                featured: p.featured
+            }));
+            comprehensiveKnowledge.projects = projectsData.filter(p => p.featured).map(p => ({
+                name: p.title,
+                description: p.shortDescription,
+                tech: p.tech,
+                impact: p.impact,
+                timeline: p.timeline
+            }));
+            console.log(`✅ Loaded ${projectsData.length} projects from Supabase`);
+            renderProjects();
+        }
+        if (fetchedCerts && fetchedCerts.length > 0) {
+            comprehensiveKnowledge.certifications = fetchedCerts.map(c => ({
+                name: c.name,
+                issuer: c.issuer,
+                date: c.date_completed,
+                credentialId: c.credential_id,
+                skills: c.skills
+            }));
+            console.log(`✅ Loaded ${fetchedCerts.length} certifications from Supabase`);
+            renderCertifications(fetchedCerts);
         }
     }
     catch (error) {
         console.error('❌ Error loading data from Supabase:', error);
         console.log('⚠️  Using fallback hardcoded data');
+    }
+    function renderSkills(skillsData) {
+        const container = document.getElementById('skills-container');
+        if (!container)
+            return;
+        container.innerHTML = '';
+        Object.entries(skillsData).forEach(([category, skills]) => {
+            const heading = document.createElement('h4');
+            heading.className = 'skills-category';
+            heading.textContent = category;
+            const skillContainer = document.createElement('div');
+            skillContainer.className = 'skills-container';
+            skills.forEach(skill => {
+                const badge = document.createElement('div');
+                badge.className = 'skill-badge';
+                badge.textContent = skill.skill_name;
+                skillContainer.appendChild(badge);
+            });
+            container.appendChild(heading);
+            container.appendChild(skillContainer);
+        });
+    }
+    function renderCertifications(certsData) {
+        const grid = document.getElementById('certifications-grid');
+        if (!grid)
+            return;
+        grid.innerHTML = '';
+        const colors = ['#6b7fb5', '#5da87e', '#c7956d', '#9b84b8', '#7ca8b5', '#b87d9b'];
+        certsData.forEach((cert, index) => {
+            const card = document.createElement('div');
+            card.className = 'cert-card';
+            const color = colors[index % colors.length];
+            card.innerHTML = `
+                <div class="cert-indicator" style="background: ${color};"></div>
+                <h3 class="cert-name">${cert.name}</h3>
+                <p class="cert-issuer">${cert.issuer}</p>
+                <p class="cert-date">${cert.date_completed}</p>
+                ${cert.credential_id ? `<p class="cert-id">${cert.credential_id}</p>` : ''}
+            `;
+            grid.appendChild(card);
+        });
     }
     bambooController = new BambooAnimationController();
     window.addEventListener('scroll', () => {
@@ -782,7 +861,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
     function getBookColor(index) {
-        const colors = ['#6366f1', '#10b981', '#f59e0b', '#a855f7', '#ef4444', '#3b82f6', '#8b5cf6', '#ec4899'];
+        const colors = ['#6b7fb5', '#5da87e', '#c7956d', '#9b84b8', '#c97070', '#7ca8b5', '#8b7fb8', '#b87d9b'];
         return colors[index % colors.length];
     }
     function createProjectCard(project, index) {
@@ -919,10 +998,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             return margin.left + (date.getTime() - minDate.getTime()) / timeSpan * plotWidth;
         };
         const colorMap = {
-            'Consulting': '#6366f1',
-            'Internship': '#22d3ee',
-            'Part-time': '#a78bfa',
-            'Mentorship': '#fbbf24'
+            'Consulting': '#6b7fb5',
+            'Internship': '#7ca8b5',
+            'Part-time': '#9b84b8',
+            'Mentorship': '#c7956d'
         };
         const axisY = height / 2;
         const axis = document.createElementNS(svgNS, 'line');
@@ -952,7 +1031,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         experienceDates.forEach((exp, idx) => {
             const x = xScale(exp.date);
             const y = axisY - (idx % 2 === 0 ? 40 : -40);
-            const color = colorMap[exp.type] || '#6366f1';
+            const color = colorMap[exp.type] || '#6b7fb5';
             const branchGroup = document.createElementNS(svgNS, 'g');
             branchGroup.setAttribute('class', 'git-branch-group');
             branchGroup.setAttribute('data-exp-index', exp.index.toString());
@@ -975,9 +1054,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             branchGroup.appendChild(commit);
             branchGroup.addEventListener('mouseenter', () => {
                 showExperienceDetails(exp, timelineDetails);
-            });
-            branchGroup.addEventListener('mouseleave', () => {
-                hideExperienceDetails(timelineDetails);
             });
             timelineSvg.appendChild(branchGroup);
         });

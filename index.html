@@ -31,7 +31,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/main.css">
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <link rel="stylesheet" href="css/main.css?v=2">
 </head>
 <body>
 
@@ -69,22 +72,22 @@
                     <!-- Stats Bar -->
                     <div class="hero-stats">
                         <div class="stat-item">
-                            <span class="stat-number">84%</span>
+                            <span class="stat-number animate-counter" data-target="84" data-suffix="%">0%</span>
                             <span class="stat-label">ML Accuracy</span>
                         </div>
                         <div class="stat-divider"></div>
                         <div class="stat-item">
-                            <span class="stat-number">100K+</span>
+                            <span class="stat-number animate-counter" data-target="100" data-suffix="K+">0K+</span>
                             <span class="stat-label">Records Processed</span>
                         </div>
                         <div class="stat-divider"></div>
                         <div class="stat-item">
-                            <span class="stat-number">Led 5</span>
+                            <span class="stat-number animate-counter" data-prefix="Led " data-target="5">Led 0</span>
                             <span class="stat-label">Developers</span>
                         </div>
                         <div class="stat-divider"></div>
                         <div class="stat-item">
-                            <span class="stat-number">WAM 74.4</span>
+                            <span class="stat-number animate-counter" data-prefix="WAM " data-target="74.4" data-decimals="1">WAM 0.0</span>
                             <span class="stat-label">Academic Record</span>
                         </div>
                     </div>
@@ -197,30 +200,30 @@
             <!-- Legend (Left Side - 40%) -->
             <div class="timeline-legend">
                 <div class="legend-item">
-                    <span class="legend-dot" style="background: #6366f1;"></span>
+                    <span class="legend-dot" style="background: #6b7fb5;"></span>
                     <span class="legend-label">Engineering</span>
                 </div>
                 <div class="legend-item">
-                    <span class="legend-dot" style="background: #10b981;"></span>
+                    <span class="legend-dot" style="background: #5da87e;"></span>
                     <span class="legend-label">Education</span>
                 </div>
                 <div class="legend-item">
-                    <span class="legend-dot" style="background: #f59e0b;"></span>
+                    <span class="legend-dot" style="background: #c7956d;"></span>
                     <span class="legend-label">Consulting</span>
                 </div>
                 <div class="legend-item">
-                    <span class="legend-dot" style="background: #a855f7;"></span>
+                    <span class="legend-dot" style="background: #9b84b8;"></span>
                     <span class="legend-label">Mentorship</span>
                 </div>
                 <div class="legend-item">
-                    <span class="legend-dot" style="background: #ef4444;"></span>
+                    <span class="legend-dot" style="background: #c97070;"></span>
                     <span class="legend-label">Community</span>
                 </div>
             </div>
 
             <!-- Details Panel (Right Side - 60%) -->
             <div class="timeline-details" id="timeline-details" role="region" aria-live="polite">
-                <p class="timeline-details-placeholder">Hover any branch to see details</p>
+                <p class="timeline-details-placeholder">Click any branch to see details</p>
                 <div class="timeline-details-content" id="timeline-details-content" style="display: none;">
                     <h3 class="details-title" id="details-title"></h3>
                     <p class="details-company" id="details-company"></p>
@@ -304,49 +307,8 @@
     <section id="certifications" class="certifications">
         <h2 class="section-title">Certifications</h2>
         <p class="section-subtitle">Professional certifications and continuous learning achievements</p>
-        <div class="certifications-grid">
-            <div class="cert-card">
-                <div class="cert-indicator" style="background: #6366f1;"></div>
-                <h3 class="cert-name">Java (Basic)</h3>
-                <p class="cert-issuer">HackerRank</p>
-                <p class="cert-date">December 2024</p>
-                <p class="cert-id">5A81C82ECD28</p>
-            </div>
-            <div class="cert-card">
-                <div class="cert-indicator" style="background: #10b981;"></div>
-                <h3 class="cert-name">Problem Solving (Basic)</h3>
-                <p class="cert-issuer">HackerRank</p>
-                <p class="cert-date">January 2023</p>
-                <p class="cert-id">720A2EE01064</p>
-            </div>
-            <div class="cert-card">
-                <div class="cert-indicator" style="background: #f59e0b;"></div>
-                <h3 class="cert-name">Python (Basic)</h3>
-                <p class="cert-issuer">HackerRank</p>
-                <p class="cert-date">July 2022</p>
-                <p class="cert-id">775757B1ED27</p>
-            </div>
-            <div class="cert-card">
-                <div class="cert-indicator" style="background: #a855f7;"></div>
-                <h3 class="cert-name">Python Data Structures</h3>
-                <p class="cert-issuer">University of Michigan</p>
-                <p class="cert-date">August 2022</p>
-                <p class="cert-id">VSHWGLAM4J4P</p>
-            </div>
-            <div class="cert-card">
-                <div class="cert-indicator" style="background: #3b82f6;"></div>
-                <h3 class="cert-name">Git & GitHub</h3>
-                <p class="cert-issuer">Google</p>
-                <p class="cert-date">August 2023</p>
-                <p class="cert-id">PW7EP5EYSZ9D</p>
-            </div>
-            <div class="cert-card">
-                <div class="cert-indicator" style="background: #ec4899;"></div>
-                <h3 class="cert-name">Data Visualisation</h3>
-                <p class="cert-issuer">Tata Consultancy Services</p>
-                <p class="cert-date">July 2023</p>
-                <p class="cert-id">jePS7E3H7bszZdQuq</p>
-            </div>
+        <div class="certifications-grid" id="certifications-grid">
+            <!-- Certifications will be rendered here dynamically -->
         </div>
     </section>
 
@@ -354,64 +316,8 @@
     <section id="skills" class="skills">
         <h2 class="section-title">Technical Skills</h2>
         <p class="section-subtitle">Technologies and tools I work with</p>
-        <div class="skills-content">
-
-            <h4 class="skills-category">Languages</h4>
-            <div class="skills-container">
-                <div class="skill-badge">Python</div>
-                <div class="skill-badge">JavaScript</div>
-                <div class="skill-badge">Java</div>
-                <div class="skill-badge">SQL</div>
-                <div class="skill-badge">HTML/CSS</div>
-            </div>
-
-            <h4 class="skills-category">Frontend</h4>
-            <div class="skills-container">
-                <div class="skill-badge">React</div>
-                <div class="skill-badge">TailwindCSS</div>
-                <div class="skill-badge">Responsive Design</div>
-                <div class="skill-badge">Vanilla JS</div>
-            </div>
-
-            <h4 class="skills-category">Backend</h4>
-            <div class="skills-container">
-                <div class="skill-badge">Node.js</div>
-                <div class="skill-badge">Express</div>
-                <div class="skill-badge">Spring Boot</div>
-                <div class="skill-badge">Django</div>
-                <div class="skill-badge">REST APIs</div>
-            </div>
-
-            <h4 class="skills-category">Databases</h4>
-            <div class="skills-container">
-                <div class="skill-badge">PostgreSQL</div>
-                <div class="skill-badge">MongoDB</div>
-                <div class="skill-badge">MySQL</div>
-            </div>
-
-            <h4 class="skills-category">ML/AI</h4>
-            <div class="skills-container">
-                <div class="skill-badge">LangGraph</div>
-                <div class="skill-badge">RAG</div>
-                <div class="skill-badge">Google Gemini API</div>
-                <div class="skill-badge">scikit-learn</div>
-                <div class="skill-badge">pandas & NumPy</div>
-                <div class="skill-badge">K-means Clustering</div>
-                <div class="skill-badge">Neural Networks</div>
-                <div class="skill-badge">Isolation Forest</div>
-            </div>
-
-            <h4 class="skills-category">Tools & Practices</h4>
-            <div class="skills-container">
-                <div class="skill-badge">System Architecture</div>
-                <div class="skill-badge">Git & GitHub</div>
-                <div class="skill-badge">Docker</div>
-                <div class="skill-badge">AWS</div>
-                <div class="skill-badge">Microservices</div>
-                <div class="skill-badge">OAuth2 & JWT</div>
-                <div class="skill-badge">Agile/Scrum</div>
-                <div class="skill-badge">Maven & Gradle</div>
-            </div>
+        <div class="skills-content" id="skills-container">
+            <!-- Skills will be rendered here dynamically -->
         </div>
     </section>
 

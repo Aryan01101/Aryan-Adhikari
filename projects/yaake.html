@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="YAAKE - AI-Powered Career Platform: Comprehensive recruitment platform with AI-powered resume parsing, ATS scoring, and mock interviews built by Aryan Adhikari">
+    <title>YAAKE - AI-Powered Career Platform | Aryan Adhikari</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/project-page.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">Aryan Adhikari</div>
+            <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="../index.html#home">Home</a></li>
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#projects">Projects</a></li>
+                <li><a href="../index.html#experience">Experience</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Project Hero -->
+    <section class="project-hero">
+        <div class="project-hero-content">
+            <a href="../index.html#projects" class="back-link">← Back to Projects</a>
+            <div class="project-category ml-ai">ML/AI</div>
+            <h1>YAAKE - AI-Powered Career Platform</h1>
+            <p class="project-hero-subtitle">
+                Comprehensive recruitment platform integrating Google Gemini AI for job seekers and recruiters,
+                featuring AI-powered resume parsing, ATS scoring, mock interviews, and cover letter generation.
+            </p>
+
+            <!-- Key Stats -->
+            <div class="project-stats">
+                <div class="stat">
+                    <span class="stat-number">82</span>
+                    <span class="stat-label">Repo Clones (14 days)</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">384</span>
+                    <span class="stat-label">Repository Views</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">Feature Modules</span>
+                </div>
+            </div>
+
+            <!-- Tech Stack -->
+            <div class="tech-stack-large">
+                <span>React</span>
+                <span>Node.js</span>
+                <span>Express</span>
+                <span>MongoDB</span>
+                <span>Google Gemini AI</span>
+                <span>JWT</span>
+                <span>RBAC</span>
+                <span>RESTful APIs</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Main Content -->
+    <main class="project-main">
+        <div class="project-container">
+            <!-- Problem Statement -->
+            <section class="project-section">
+                <h2>The Problem</h2>
+                <p>
+                    Job seekers face numerous challenges in the modern recruitment landscape: optimizing resumes for
+                    Applicant Tracking Systems (ATS), preparing for interviews, and crafting compelling cover letters.
+                    Meanwhile, recruiters struggle with efficiently screening large volumes of applications and identifying
+                    the best-fit candidates.
+                </p>
+                <p>
+                    Traditional career platforms offer limited guidance and lack intelligent, AI-powered assistance that
+                    can provide personalized feedback and automation at scale.
+                </p>
+            </section>
+
+            <!-- Solution -->
+            <section class="project-section">
+                <h2>The Solution</h2>
+                <p>
+                    YAAKE addresses these challenges by integrating Google Gemini AI to create a comprehensive recruitment
+                    platform that serves both job seekers and recruiters. The platform combines advanced natural language
+                    processing with practical recruitment workflows to deliver measurable value.
+                </p>
+            </section>
+
+            <!-- Key Features -->
+            <section class="project-section">
+                <h2>Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4>🤖 AI Resume Parsing</h4>
+                        <p>Automatically extract and analyze resume content using Google Gemini AI, identifying key skills, experience, and qualifications.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>📊 ATS Scoring</h4>
+                        <p>Evaluate resumes against job descriptions and provide actionable ATS optimization recommendations to improve visibility.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🎯 Mock Interviews</h4>
+                        <p>AI-powered interview simulation with real-time feedback on answers, helping candidates prepare effectively.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>✍️ Cover Letter Generation</h4>
+                        <p>Generate tailored, professional cover letters based on job requirements and candidate profile using AI.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🔐 RBAC & Security</h4>
+                        <p>Role-based access control separating user and recruiter permissions with JWT authentication and rate limiting.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>🚀 RESTful Architecture</h4>
+                        <p>10+ feature modules with clean API design, comprehensive error handling, and scalable architecture.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Technical Architecture -->
+            <section class="project-section">
+                <h2>Technical Architecture</h2>
+                <p>
+                    YAAKE follows a modular, three-tier architecture separating presentation, business logic, and data layers:
+                </p>
+                <h3>Frontend (React)</h3>
+                <ul>
+                    <li>Component-based architecture with React hooks for state management</li>
+                    <li>Responsive design adapting to desktop, tablet, and mobile viewports</li>
+                    <li>Real-time feedback during AI interactions using loading states</li>
+                    <li>Role-specific dashboards for job seekers vs. recruiters</li>
+                </ul>
+
+                <h3>Backend (Node.js + Express)</h3>
+                <ul>
+                    <li>RESTful API design with 10+ feature modules</li>
+                    <li>JWT-based authentication with token refresh mechanism</li>
+                    <li>Role-based access control (RBAC) middleware</li>
+                    <li>Rate limiting to prevent abuse and manage API costs</li>
+                    <li>Comprehensive error handling and logging</li>
+                </ul>
+
+                <h3>AI Integration (Google Gemini)</h3>
+                <ul>
+                    <li>Prompt engineering for resume parsing and analysis</li>
+                    <li>Context-aware mock interview question generation</li>
+                    <li>Natural language processing for cover letter customization</li>
+                    <li>ATS keyword extraction and matching algorithms</li>
+                </ul>
+
+                <h3>Database (MongoDB)</h3>
+                <ul>
+                    <li>User profiles with embedded resume data</li>
+                    <li>Job postings with detailed requirements</li>
+                    <li>Application tracking and history</li>
+                    <li>Interview sessions and feedback storage</li>
+                </ul>
+            </section>
+
+            <!-- Implementation Highlights -->
+            <section class="project-section">
+                <h2>Implementation Highlights</h2>
+                <p>
+                    Here's an example of the AI-powered resume parsing implementation:
+                </p>
+                <pre><code>// Resume parsing with Google Gemini AI
+const parseResume = async (resumeText) => {
+  const prompt = `Analyze the following resume and extract:
+  1. Contact information
+  2. Skills (technical and soft skills)
+  3. Work experience with dates
+  4. Education background
+  5. Key achievements
+
+  Resume: ${resumeText}
+
+  Return structured JSON format.`;
+
+  const result = await geminiModel.generateContent(prompt);
+  return JSON.parse(result.response.text());
+};</code></pre>
+
+                <p>
+                    The ATS scoring algorithm compares extracted skills and keywords against job requirements:
+                </p>
+                <pre><code>// ATS Score calculation
+const calculateATSScore = (resume, jobDescription) => {
+  const resumeKeywords = extractKeywords(resume);
+  const jobKeywords = extractKeywords(jobDescription);
+
+  const matchedKeywords = resumeKeywords.filter(
+    keyword => jobKeywords.includes(keyword)
+  );
+
+  const score = (matchedKeywords.length / jobKeywords.length) * 100;
+
+  return {
+    score: Math.round(score),
+    matched: matchedKeywords,
+    missing: jobKeywords.filter(k => !matchedKeywords.includes(k))
+  };
+};</code></pre>
+            </section>
+
+            <!-- Results & Impact -->
+            <section class="project-section">
+                <h2>Results & Impact</h2>
+                <ul class="impact-list">
+                    <li><strong>82 repository clones</strong> within 14 days of launch, demonstrating strong developer interest</li>
+                    <li><strong>384 repository views</strong> indicating significant community engagement</li>
+                    <li><strong>Real-world AI application</strong> in recruitment, showcasing practical use of Google Gemini AI</li>
+                    <li><strong>Comprehensive feature set</strong> with 10+ modules covering the entire recruitment workflow</li>
+                    <li><strong>Production-ready architecture</strong> with authentication, authorization, and rate limiting</li>
+                </ul>
+            </section>
+
+            <!-- Challenges & Lessons Learned -->
+            <section class="project-section">
+                <h2>Challenges & Lessons Learned</h2>
+                <h3>1. AI Prompt Engineering</h3>
+                <p>
+                    <strong>Challenge:</strong> Initial prompts produced inconsistent JSON structures from Gemini AI,
+                    causing parsing errors.
+                </p>
+                <p>
+                    <strong>Solution:</strong> Implemented structured prompts with explicit format specifications and
+                    added validation layers to handle edge cases.
+                </p>
+
+                <h3>2. API Rate Limiting</h3>
+                <p>
+                    <strong>Challenge:</strong> Gemini AI API costs could escalate quickly with high usage.
+                </p>
+                <p>
+                    <strong>Solution:</strong> Implemented request rate limiting per user, caching for frequently
+                    accessed results, and optimized prompt lengths to reduce token usage.
+                </p>
+
+                <h3>3. Authentication & Security</h3>
+                <p>
+                    <strong>Challenge:</strong> Balancing security with user experience, especially for role-based access.
+                </p>
+                <p>
+                    <strong>Solution:</strong> JWT with short expiration times combined with refresh tokens, plus
+                    middleware-based RBAC that's easy to extend for new roles.
+                </p>
+
+                <h3>4. Real-time Feedback</h3>
+                <p>
+                    <strong>Challenge:</strong> AI processing can take several seconds, creating poor UX without feedback.
+                </p>
+                <p>
+                    <strong>Solution:</strong> Implemented loading states, progress indicators, and optimistic UI updates
+                    to keep users engaged during processing.
+                </p>
+            </section>
+
+            <!-- Future Enhancements -->
+            <section class="project-section">
+                <h2>Future Enhancements</h2>
+                <ul>
+                    <li>Integration with LinkedIn and other job boards for automated application</li>
+                    <li>Video interview preparation using computer vision for body language analysis</li>
+                    <li>Recruiter matching algorithm using ML to connect candidates with relevant opportunities</li>
+                    <li>Advanced analytics dashboard showing application success rates and ATS performance over time</li>
+                    <li>Mobile app for on-the-go interview preparation</li>
+                </ul>
+            </section>
+
+            <!-- Links -->
+            <div class="project-links-section">
+                <a href="#" class="btn btn-primary">View on GitHub</a>
+                <a href="../index.html#projects" class="btn btn-secondary">← Back to Projects</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 2rem; color: var(--text-secondary); font-size: var(--text-sm);">
+        <p>&copy; 2024 Aryan Adhikari. All rights reserved.</p>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

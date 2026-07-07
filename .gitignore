@@ -1,10 +1,11 @@
-# API Keys and Configuration (ONLY src/config.ts with secrets)
+# API Keys and Configuration
 src/config.ts
 .env
 .env.local
 
-# IMPORTANT: js/config.js and js/main.js are NOT ignored
-# They need to be committed for GitHub Pages deployment
+# Generated config files contain API keys - should not be committed
+js/config.js
+js/config.js.map
 
 # macOS
 .DS_Store

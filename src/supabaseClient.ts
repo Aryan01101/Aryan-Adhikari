@@ -1,15 +1,23 @@
-import { createClient } from '@supabase/supabase-js';
+import { API_CONFIG } from './config.js';
 
-// Environment variables (set these in .env.local)
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || '';
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
+// Access Supabase from global window object (loaded via CDN)
+declare global {
+    interface Window {
+        supabase: any;
+    }
+}
+
+// Environment variables (from config generated at build time)
+const supabaseUrl = API_CONFIG.SUPABASE_URL || '';
+const supabaseAnonKey = API_CONFIG.SUPABASE_ANON_KEY || '';
 
 if (!supabaseUrl || !supabaseAnonKey) {
     console.warn('⚠️ Supabase credentials not found. Using fallback mode.');
     console.warn('To enable database features, add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to .env.local');
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Use the CDN-loaded Supabase client
+export const supabase = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
 
 // ========================================
 // DATABASE QUERY FUNCTIONS

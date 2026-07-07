@@ -3,7 +3,7 @@
 // IMPORT GEMINI AI AND TYPES
 // ========================================
 
-import { getExperience, getSkills } from './supabaseClient.js';
+import { getExperience, getSkills, getProjects, getCertifications } from './supabaseClient.js';
 
 import type {
     Project,
@@ -20,7 +20,7 @@ import type {
 // PROJECTS DATA STRUCTURE
 // ========================================
 
-const projectsData = [
+let projectsData = [
     {
         id: 'yaake',
         title: 'YAAKE - AI-Powered Career Platform',
@@ -791,26 +791,113 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.log('🔄 Loading data from Supabase...');
 
     try {
-        // Fetch experience and skills from Supabase
-        const [experienceData, skillsData] = await Promise.all([
+        // Fetch all data from Supabase
+        const [experienceData, skillsData, fetchedProjects, fetchedCerts] = await Promise.all([
             getExperience(),
-            getSkills()
+            getSkills(),
+            getProjects(),
+            getCertifications()
         ]);
 
-        // Update comprehensiveKnowledge with Supabase data
         if (experienceData && experienceData.length > 0) {
             comprehensiveKnowledge.experience = experienceData;
             console.log(`✅ Loaded ${experienceData.length} experience entries from Supabase`);
+            renderTimeline(); // Re-render timeline with Supabase data
         }
 
         if (skillsData && Object.keys(skillsData).length > 0) {
-            // Convert skills data to format expected by the site
             console.log(`✅ Loaded skills from Supabase:`, Object.keys(skillsData));
+            renderSkills(skillsData);
+        }
+
+        if (fetchedProjects && fetchedProjects.length > 0) {
+            projectsData = fetchedProjects.map(p => ({
+                id: p.project_id,
+                title: p.title,
+                shortDescription: p.short_description,
+                fullDescription: p.full_description,
+                tech: p.tech,
+                timeline: p.timeline,
+                impact: p.impact,
+                links: { github: p.github_link, demo: p.demo_link },
+                status: p.status,
+                featured: p.featured
+            }));
+            comprehensiveKnowledge.projects = projectsData.filter(p => p.featured).map(p => ({
+                name: p.title,
+                description: p.shortDescription,
+                tech: p.tech,
+                impact: p.impact,
+                timeline: p.timeline
+            }));
+            console.log(`✅ Loaded ${projectsData.length} projects from Supabase`);
+            renderProjects(); // Re-render projects with Supabase data
+        }
+
+        if (fetchedCerts && fetchedCerts.length > 0) {
+            comprehensiveKnowledge.certifications = fetchedCerts.map(c => ({
+                name: c.name,
+                issuer: c.issuer,
+                date: c.date_completed,
+                credentialId: c.credential_id,
+                skills: c.skills
+            }));
+            console.log(`✅ Loaded ${fetchedCerts.length} certifications from Supabase`);
+            renderCertifications(fetchedCerts);
         }
 
     } catch (error) {
         console.error('❌ Error loading data from Supabase:', error);
         console.log('⚠️  Using fallback hardcoded data');
+    }
+
+    function renderSkills(skillsData) {
+        const container = document.getElementById('skills-container');
+        if (!container) return;
+        container.innerHTML = '';
+        
+        Object.entries(skillsData).forEach(([category, skills]) => {
+            const heading = document.createElement('h4');
+            heading.className = 'skills-category';
+            heading.textContent = category;
+            
+            const skillContainer = document.createElement('div');
+            skillContainer.className = 'skills-container';
+            
+            skills.forEach(skill => {
+                const badge = document.createElement('div');
+                badge.className = 'skill-badge';
+                badge.textContent = skill.skill_name;
+                skillContainer.appendChild(badge);
+            });
+            
+            container.appendChild(heading);
+            container.appendChild(skillContainer);
+        });
+    }
+
+    function renderCertifications(certsData) {
+        const grid = document.getElementById('certifications-grid');
+        if (!grid) return;
+        grid.innerHTML = '';
+        
+        const colors = ['#6b7fb5', '#5da87e', '#c7956d', '#9b84b8', '#7ca8b5', '#b87d9b'];
+        
+        certsData.forEach((cert, index) => {
+            const card = document.createElement('div');
+            card.className = 'cert-card';
+            
+            const color = colors[index % colors.length];
+            
+            card.innerHTML = `
+                <div class="cert-indicator" style="background: ${color};"></div>
+                <h3 class="cert-name">${cert.name}</h3>
+                <p class="cert-issuer">${cert.issuer}</p>
+                <p class="cert-date">${cert.date_completed}</p>
+                ${cert.credential_id ? `<p class="cert-id">${cert.credential_id}</p>` : ''}
+            `;
+            grid.appendChild(card);
+        });
     }
 
     // ========================================
@@ -934,7 +1021,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     function getBookColor(index: number): string {
-        const colors = ['#6366f1', '#10b981', '#f59e0b', '#a855f7', '#ef4444', '#3b82f6', '#8b5cf6', '#ec4899'];
+        const colors = ['#6b7fb5', '#5da87e', '#c7956d', '#9b84b8', '#c97070', '#7ca8b5', '#8b7fb8', '#b87d9b'];
         return colors[index % colors.length];
     }
 
@@ -1103,10 +1190,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Color mapping by type
         const colorMap: {[key: string]: string} = {
-            'Consulting': '#6366f1',
-            'Internship': '#22d3ee',
-            'Part-time': '#a78bfa',
-            'Mentorship': '#fbbf24'
+            'Consulting': '#6b7fb5',
+            'Internship': '#7ca8b5',
+            'Part-time': '#9b84b8',
+            'Mentorship': '#c7956d'
         };
 
         // Draw main timeline axis
@@ -1143,7 +1230,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         experienceDates.forEach((exp, idx) => {
             const x = xScale(exp.date);
             const y = axisY - (idx % 2 === 0 ? 40 : -40);
-            const color = colorMap[exp.type] || '#6366f1';
+            const color = colorMap[exp.type] || '#6b7fb5';
 
             // Create branch group
             const branchGroup = document.createElementNS(svgNS, 'g');
@@ -1171,14 +1258,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             commit.setAttribute('class', 'git-commit');
             branchGroup.appendChild(commit);
 
-            // Add hover interactivity
+            // Add hover interactivity - details stay visible until another item is hovered
             branchGroup.addEventListener('mouseenter', () => {
                 showExperienceDetails(exp, timelineDetails);
             });
 
-            branchGroup.addEventListener('mouseleave', () => {
-                hideExperienceDetails(timelineDetails);
-            });
+            // Removed mouseleave handler - details remain visible for better UX
 
             timelineSvg.appendChild(branchGroup);
         });
