@@ -619,29 +619,37 @@ nav.scrolled {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-6);
+    justify-content: center;
     animation: fadeInUp 0.8s ease 0.5s both;
 }
 
-.profile-photo {
-    width: 280px;
-    height: 280px;
+.profile-container {
     position: relative;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.profile-photo img {
+.profile-photo {
     width: 100%;
-    height: 100%;
+    max-width: 350px;
+    height: auto;
+    aspect-ratio: 1 / 1;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid var(--accent-primary);
-    box-shadow: var(--shadow-soft);
+    object-position: center top;
+    border: 5px solid var(--accent-primary);
+    box-shadow: 0 12px 40px rgba(125, 211, 192, 0.25),
+                0 4px 12px rgba(0, 0, 0, 0.1);
     transition: transform var(--transition-slow), box-shadow var(--transition-slow);
 }
 
-.profile-photo img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 24px 72px var(--shadow-soft);
+.profile-photo:hover {
+    transform: scale(1.02);
+    box-shadow: 0 16px 48px rgba(125, 211, 192, 0.3),
+                0 8px 16px rgba(0, 0, 0, 0.12);
 }
 
 .profile-placeholder {
@@ -3208,22 +3216,15 @@ footer {
         justify-content: center;
     }
 
+    .profile-container {
+        max-width: 280px;
+    }
+
     .profile-photo {
-        width: 200px;
-        height: 200px;
+        max-width: 250px;
     }
 
-    /* Workspace Illustration Mobile */
-    .workspace-scene {
-        max-width: 100%;
-        height: 400px;
-        padding: var(--space-4);
-    }
-
-    .workspace-shelf {
-        padding: var(--space-2);
-    }
-
+    /* Workspace Illustration Mobile - Legacy (no longer used) */
     .workspace-shelf-left {
         width: 100px;
         left: var(--space-4);
