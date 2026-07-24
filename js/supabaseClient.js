@@ -1,12 +1,16 @@
 import { API_CONFIG } from './config.js';
 const supabaseUrl = API_CONFIG.SUPABASE_URL || '';
 const supabaseAnonKey = API_CONFIG.SUPABASE_ANON_KEY || '';
-if (!supabaseUrl || !supabaseAnonKey) {
+export const supabase = (!supabaseUrl || !supabaseAnonKey)
+    ? null
+    : window.supabase.createClient(supabaseUrl, supabaseAnonKey);
+if (!supabase) {
     console.warn('⚠️ Supabase credentials not found. Using fallback mode.');
     console.warn('To enable database features, add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to .env.local');
 }
-export const supabase = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
 export async function getExperience() {
+    if (!supabase)
+        return [];
     const { data, error } = await supabase
         .from('experience')
         .select('*')
@@ -18,6 +22,8 @@ export async function getExperience() {
     return data || [];
 }
 export async function getProjects(featuredOnly = false) {
+    if (!supabase)
+        return [];
     let query = supabase
         .from('projects')
         .select('*')
@@ -33,6 +39,8 @@ export async function getProjects(featuredOnly = false) {
     return data || [];
 }
 export async function getSkills() {
+    if (!supabase)
+        return {};
     const { data, error } = await supabase
         .from('skills')
         .select('*')
@@ -52,6 +60,8 @@ export async function getSkills() {
     return grouped;
 }
 export async function getCertifications() {
+    if (!supabase)
+        return [];
     const { data, error } = await supabase
         .from('certifications')
         .select('*')

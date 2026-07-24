@@ -11,13 +11,15 @@ declare global {
 const supabaseUrl = API_CONFIG.SUPABASE_URL || '';
 const supabaseAnonKey = API_CONFIG.SUPABASE_ANON_KEY || '';
 
-if (!supabaseUrl || !supabaseAnonKey) {
+// Use the CDN-loaded Supabase client only if credentials are available
+export const supabase = (!supabaseUrl || !supabaseAnonKey)
+    ? null
+    : window.supabase.createClient(supabaseUrl, supabaseAnonKey);
+
+if (!supabase) {
     console.warn('⚠️ Supabase credentials not found. Using fallback mode.');
     console.warn('To enable database features, add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to .env.local');
 }
-
-// Use the CDN-loaded Supabase client
-export const supabase = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
 
 // ========================================
 // DATABASE QUERY FUNCTIONS
@@ -73,6 +75,8 @@ export interface Certification {
  * Fetch all experience entries, ordered by display_order
  */
 export async function getExperience(): Promise<Experience[]> {
+    if (!supabase) return [];
+
     const { data, error } = await supabase
         .from('experience')
         .select('*')
@@ -90,6 +94,8 @@ export async function getExperience(): Promise<Experience[]> {
  * Fetch all projects, ordered by display_order
  */
 export async function getProjects(featuredOnly = false): Promise<Project[]> {
+    if (!supabase) return [];
+
     let query = supabase
         .from('projects')
         .select('*')
@@ -99,7 +105,7 @@ export async function getProjects(featuredOnly = false): Promise<Project[]> {
         query = query.eq('featured', true);
     }
 
-    const { data, error } = await query;
+    const { data, error} = await query;
 
     if (error) {
         console.error('Error fetching projects:', error);
@@ -113,6 +119,8 @@ export async function getProjects(featuredOnly = false): Promise<Project[]> {
  * Fetch all skills, grouped by category
  */
 export async function getSkills(): Promise<Record<string, Skill[]>> {
+    if (!supabase) return {};
+
     const { data, error } = await supabase
         .from('skills')
         .select('*')
@@ -140,6 +148,8 @@ export async function getSkills(): Promise<Record<string, Skill[]>> {
  * Fetch all certifications, ordered by display_order
  */
 export async function getCertifications(): Promise<Certification[]> {
+    if (!supabase) return [];
+
     const { data, error } = await supabase
         .from('certifications')
         .select('*')

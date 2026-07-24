@@ -253,6 +253,73 @@ The platform received significant developer interest with 82 repository clones a
         featured: false
     }
 ];
+const fallbackSkills = {
+    "AI/ML": [
+        "LangGraph", "Ollama", "Google Gemini API", "Anthropic Claude API",
+        "scikit-learn", "KMeans Clustering", "Isolation Forest", "Neural Networks",
+        "ETL pipelines", "pandas", "NumPy"
+    ],
+    "Languages": [
+        "Python", "JavaScript", "TypeScript", "Java", "SQL", "C", "HTML/CSS"
+    ],
+    "Frontend": [
+        "React", "TailwindCSS", "Figma", "UI/UX Design"
+    ],
+    "Backend": [
+        "Node.js", "Express", "FastAPI", "Spring Boot", "REST APIs",
+        "PostgreSQL", "MongoDB", "sqlite-vec"
+    ],
+    "Platforms/Infrastructure": [
+        "Git/GitHub", "Docker", "AWS (EC2, S3, Lambda, RDS)", "GCP Cloud Run",
+        "Vercel", "Supabase", "Electron", "N8N", "Twilio",
+        "Microsoft 365 / Power Automate / SharePoint", "Agile/Scrum"
+    ]
+};
+const fallbackCertifications = [
+    {
+        name: "Java (Basic)",
+        issuer: "HackerRank",
+        icon: "☕",
+        color: "#00EA64",
+        date: null,
+        credentialId: null
+    },
+    {
+        name: "Problem Solving (Basic)",
+        issuer: "HackerRank",
+        icon: "🧩",
+        color: "#00EA64",
+        date: null,
+        credentialId: null
+    },
+    {
+        name: "Python (Basic)",
+        issuer: "HackerRank",
+        icon: "🐍",
+        color: "#00EA64",
+        date: null,
+        credentialId: null
+    },
+    {
+        name: "Intro to Git and GitHub",
+        issuer: "Google",
+        icon: "🔧",
+        color: "#4285F4",
+        date: null,
+        credentialId: null
+    },
+    {
+        name: "PTE Academic",
+        issuer: "Pearson",
+        icon: "🎓",
+        color: "#FF6B00",
+        score: "Overall 90",
+        details: "Listening 90, Reading 76, Speaking 90, Writing 87",
+        validity: "Valid to Jan 2028",
+        date: null,
+        credentialId: null
+    }
+];
 const comprehensiveKnowledge = {
     personal: {
         name: "Aryan Adhikari",
@@ -700,6 +767,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.log(`✅ Loaded skills from Supabase:`, Object.keys(skillsData));
             renderSkills(skillsData);
         }
+        else {
+            console.log('⚠️  No skills from Supabase, using fallback skills data');
+            renderSkills(fallbackSkills);
+        }
         if (fetchedProjects && fetchedProjects.length > 0) {
             projectsData = fetchedProjects.map(p => ({
                 id: p.project_id,
@@ -721,8 +792,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                 timeline: p.timeline
             }));
             console.log(`✅ Loaded ${projectsData.length} projects from Supabase`);
-            renderProjects();
         }
+        else {
+            console.log(`⚠️  No projects from Supabase, using ${projectsData.length} hardcoded projects`);
+        }
+        renderProjects();
         if (fetchedCerts && fetchedCerts.length > 0) {
             comprehensiveKnowledge.certifications = fetchedCerts.map(c => ({
                 name: c.name,
@@ -734,52 +808,148 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.log(`✅ Loaded ${fetchedCerts.length} certifications from Supabase`);
             renderCertifications(fetchedCerts);
         }
+        else {
+            console.log('⚠️  No certifications from Supabase, using fallback certifications data');
+            renderCertifications(fallbackCertifications);
+        }
     }
     catch (error) {
         console.error('❌ Error loading data from Supabase:', error);
         console.log('⚠️  Using fallback hardcoded data');
+        renderProjects();
     }
     function renderSkills(skillsData) {
         const container = document.getElementById('skills-container');
         if (!container)
             return;
         container.innerHTML = '';
+        const categoryMeta = {
+            'AI/ML': { icon: '🤖', size: 'large' },
+            'Languages': { icon: '💻', size: 'large' },
+            'Frontend': { icon: '🎨', size: 'medium' },
+            'Backend': { icon: '⚙️', size: 'medium' },
+            'Platforms/Infrastructure': { icon: '☁️', size: 'medium' }
+        };
         Object.entries(skillsData).forEach(([category, skills]) => {
-            const heading = document.createElement('h4');
-            heading.className = 'skills-category';
-            heading.textContent = category;
-            const skillContainer = document.createElement('div');
-            skillContainer.className = 'skills-container';
-            skills.forEach(skill => {
-                const badge = document.createElement('div');
-                badge.className = 'skill-badge';
-                badge.textContent = skill.skill_name;
-                skillContainer.appendChild(badge);
-            });
-            container.appendChild(heading);
-            container.appendChild(skillContainer);
+            const categoryDiv = document.createElement('div');
+            const meta = categoryMeta[category] || { icon: '📦', size: 'medium' };
+            categoryDiv.className = `skill-category-card skill-category-${meta.size}`;
+            const skillNames = Array.isArray(skills)
+                ? skills.map(s => typeof s === 'string' ? s : s.skill_name)
+                : [];
+            categoryDiv.innerHTML = `
+                <div class="skill-card-header">
+                    <span class="skill-category-icon">${meta.icon}</span>
+                    <h4 class="skill-category-name">${category}</h4>
+                </div>
+                <div class="skill-tags">
+                    ${skillNames.map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
+                </div>
+            `;
+            container.appendChild(categoryDiv);
         });
     }
     function renderCertifications(certsData) {
-        const grid = document.getElementById('certifications-grid');
-        if (!grid)
+        const list = document.getElementById('certifications-list');
+        if (!list)
             return;
-        grid.innerHTML = '';
-        const colors = ['#6b7fb5', '#5da87e', '#c7956d', '#9b84b8', '#7ca8b5', '#b87d9b'];
-        certsData.forEach((cert, index) => {
-            const card = document.createElement('div');
-            card.className = 'cert-card';
-            const color = colors[index % colors.length];
-            card.innerHTML = `
-                <div class="cert-indicator" style="background: ${color};"></div>
-                <h3 class="cert-name">${cert.name}</h3>
-                <p class="cert-issuer">${cert.issuer}</p>
-                <p class="cert-date">${cert.date_completed}</p>
-                ${cert.credential_id ? `<p class="cert-id">${cert.credential_id}</p>` : ''}
+        list.innerHTML = '';
+        certsData.forEach((cert) => {
+            const badge = document.createElement('div');
+            badge.className = 'certification-badge';
+            const tooltipContent = [];
+            if (cert.score)
+                tooltipContent.push(cert.score);
+            if (cert.details)
+                tooltipContent.push(cert.details);
+            if (cert.validity)
+                tooltipContent.push(cert.validity);
+            const tooltip = tooltipContent.length > 0
+                ? `<div class="cert-tooltip">${tooltipContent.join(' • ')}</div>`
+                : '';
+            badge.innerHTML = `
+                <span class="cert-badge-icon">${cert.icon || '🏆'}</span>
+                <div class="cert-badge-content">
+                    <span class="cert-badge-name">${cert.name}</span>
+                    <span class="cert-badge-issuer">${cert.issuer}</span>
+                </div>
+                ${tooltip}
             `;
-            grid.appendChild(card);
+            list.appendChild(badge);
         });
     }
+    async function fetchGitHubCommits() {
+        try {
+            const username = 'Aryan01101';
+            const response = await fetch(`https://api.github.com/users/${username}`);
+            if (!response.ok) {
+                console.warn('GitHub API rate limit or error, using fallback');
+                return 500;
+            }
+            const data = await response.json();
+            const estimatedCommits = data.public_repos * 50;
+            return estimatedCommits;
+        }
+        catch (error) {
+            console.error('Error fetching GitHub data:', error);
+            return 500;
+        }
+    }
+    function initVisitorCount() {
+        const visitorElement = document.getElementById('visitor-count');
+        if (!visitorElement)
+            return;
+        let totalVisitors = parseInt(localStorage.getItem('portfolio-visitor-count') || '1000');
+        const lastVisit = sessionStorage.getItem('portfolio-last-visit');
+        if (!lastVisit) {
+            totalVisitors += 1;
+            localStorage.setItem('portfolio-visitor-count', totalVisitors.toString());
+            sessionStorage.setItem('portfolio-last-visit', new Date().toISOString());
+        }
+        visitorElement.textContent = totalVisitors + '+';
+        visitorElement.setAttribute('data-target', totalVisitors.toString());
+    }
+    async function initDynamicStats() {
+        const projectsCountElement = document.getElementById('projects-count');
+        if (projectsCountElement) {
+            const projectCount = projectsData.length;
+            projectsCountElement.textContent = projectCount.toString();
+            projectsCountElement.setAttribute('data-target', projectCount.toString());
+        }
+        const githubCommitsElement = document.getElementById('github-commits');
+        if (githubCommitsElement) {
+            const commits = await fetchGitHubCommits();
+            githubCommitsElement.textContent = commits + '+';
+            githubCommitsElement.setAttribute('data-target', commits.toString());
+        }
+        initVisitorCount();
+        animateCounters();
+    }
+    function animateCounters() {
+        const counters = document.querySelectorAll('.animate-counter');
+        counters.forEach(counter => {
+            const target = parseInt(counter.getAttribute('data-target') || '0');
+            const prefix = counter.getAttribute('data-prefix') || '';
+            const suffix = counter.getAttribute('data-suffix') || '';
+            const decimals = parseInt(counter.getAttribute('data-decimals') || '0');
+            let current = 0;
+            const increment = target / 50;
+            const duration = 2000;
+            const stepTime = duration / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                const displayValue = decimals > 0
+                    ? current.toFixed(decimals)
+                    : Math.floor(current);
+                counter.textContent = prefix + displayValue + suffix;
+            }, stepTime);
+        });
+    }
+    initDynamicStats();
     bambooController = new BambooAnimationController();
     window.addEventListener('scroll', () => {
         const navbar = document.getElementById('navbar');
@@ -791,15 +961,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-    const navLinks = document.getElementById('nav-links');
+    const navLinksContainer = document.getElementById('nav-links');
     mobileMenuToggle.addEventListener('click', () => {
-        mobileMenuToggle.classList.toggle('active');
-        navLinks.classList.toggle('active');
+        const isActive = mobileMenuToggle.classList.toggle('active');
+        navLinksContainer.classList.toggle('active');
+        mobileMenuToggle.setAttribute('aria-expanded', isActive.toString());
     });
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
             mobileMenuToggle.classList.remove('active');
-            navLinks.classList.remove('active');
+            navLinksContainer.classList.remove('active');
+            mobileMenuToggle.setAttribute('aria-expanded', 'false');
         });
     });
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -817,26 +989,48 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     });
+    const sections = document.querySelectorAll('section[id]');
+    const navLinkElements = document.querySelectorAll('.nav-links a');
+    function updateActiveNav() {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (window.scrollY >= sectionTop - 100) {
+                current = section.getAttribute('id');
+            }
+        });
+        navLinkElements.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    }
+    window.addEventListener('scroll', updateActiveNav);
+    updateActiveNav();
     const particlesContainer = document.getElementById('particles');
-    const isMobile = window.innerWidth <= 768;
-    const particleCount = isMobile ? 20 : 50;
-    for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.animationDelay = Math.random() * 20 + 's';
-        particle.style.animationDuration = (Math.random() * 20 + 10) + 's';
-        particlesContainer.appendChild(particle);
+    if (particlesContainer) {
+        const isMobile = window.innerWidth <= 768;
+        const particleCount = isMobile ? 20 : 50;
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (Math.random() * 20 + 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
     }
     function renderProjects() {
-        const booksRow = document.getElementById('books-row');
-        if (booksRow) {
-            renderBookshelf(booksRow);
+        const projectsGrid = document.getElementById('projects-grid');
+        if (!projectsGrid) {
+            const booksRow = document.getElementById('books-row');
+            if (booksRow) {
+                renderBookshelf(booksRow);
+            }
             return;
         }
-        const projectsGrid = document.querySelector('.projects-grid');
-        if (!projectsGrid)
-            return;
         projectsGrid.innerHTML = '';
         projectsData.forEach((project, index) => {
             const projectCard = createProjectCard(project, index);
@@ -990,7 +1184,97 @@ document.addEventListener('DOMContentLoaded', async () => {
             closeProjectModal();
         }
     });
+    function getProjectIcon(tech) {
+        const techLower = tech.map(t => t.toLowerCase()).join(' ');
+        if (techLower.includes('scikit') || techLower.includes('neural') ||
+            techLower.includes('machine learning') || techLower.includes('k-means') ||
+            techLower.includes('isolation forest') || techLower.includes('gemini')) {
+            return `<svg class="project-icon-svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="2" fill="currentColor"/>
+                <circle cx="6" cy="6" r="1.5" fill="currentColor"/>
+                <circle cx="18" cy="6" r="1.5" fill="currentColor"/>
+                <circle cx="6" cy="18" r="1.5" fill="currentColor"/>
+                <circle cx="18" cy="18" r="1.5" fill="currentColor"/>
+                <line x1="12" y1="12" x2="6" y2="6"/>
+                <line x1="12" y1="12" x2="18" y2="6"/>
+                <line x1="12" y1="12" x2="6" y2="18"/>
+                <line x1="12" y1="12" x2="18" y2="18"/>
+            </svg>`;
+        }
+        if (techLower.includes('pandas') || techLower.includes('matplotlib') ||
+            techLower.includes('data visualization') || techLower.includes('seaborn')) {
+            return `<svg class="project-icon-svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="4" y1="20" x2="4" y2="10"/>
+                <line x1="9" y1="20" x2="9" y2="4"/>
+                <line x1="14" y1="20" x2="14" y2="12"/>
+                <line x1="19" y1="20" x2="19" y2="7"/>
+                <circle cx="4" cy="10" r="1.5" fill="currentColor"/>
+                <circle cx="9" cy="4" r="1.5" fill="currentColor"/>
+                <circle cx="14" cy="12" r="1.5" fill="currentColor"/>
+                <circle cx="19" cy="7" r="1.5" fill="currentColor"/>
+            </svg>`;
+        }
+        if (techLower.includes('spring boot') || techLower.includes('microservices') ||
+            techLower.includes('postgresql') || (techLower.includes('java') && techLower.includes('rest'))) {
+            return `<svg class="project-icon-svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="8" rx="2"/>
+                <rect x="2" y="14" width="20" height="8" rx="2"/>
+                <line x1="6" y1="6" x2="6.01" y2="6"/>
+                <line x1="6" y1="18" x2="6.01" y2="18"/>
+            </svg>`;
+        }
+        if (techLower.includes('n8n') || techLower.includes('automation') ||
+            techLower.includes('scraping')) {
+            return `<svg class="project-icon-svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M12 1v6m0 6v6m10.66-10.66l-4.24 4.24m-8.48 0L1.34 3.34M23 12h-6M7 12H1m18.66 10.66l-4.24-4.24m-8.48 0L1.34 20.66"/>
+            </svg>`;
+        }
+        if (techLower.includes('react') || techLower.includes('node') ||
+            techLower.includes('django') || techLower.includes('express')) {
+            return `<svg class="project-icon-svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                <line x1="2" y1="7" x2="22" y2="7"/>
+                <circle cx="6" cy="5" r="0.5" fill="currentColor"/>
+                <circle cx="8" cy="5" r="0.5" fill="currentColor"/>
+                <circle cx="10" cy="5" r="0.5" fill="currentColor"/>
+                <path d="M8 11 L 10 13 L 14 9" stroke-width="2"/>
+                <line x1="2" y1="21" x2="22" y2="21"/>
+            </svg>`;
+        }
+        return `<svg class="project-icon-svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"/>
+            <polyline points="8 6 2 12 8 18"/>
+        </svg>`;
+    }
     function createProjectCard(project, index) {
+        const card = document.createElement('article');
+        card.className = 'project-card';
+        card.setAttribute('data-project-id', project.id);
+        card.setAttribute('aria-labelledby', `project-name-${index}`);
+        const projectLink = project.links?.demo || project.links?.github || '#';
+        const projectIcon = getProjectIcon(project.tech);
+        card.innerHTML = `
+            <div class="project-card-header">
+                <div class="project-icon" role="img" aria-label="Project icon">${projectIcon}</div>
+                <a href="${projectLink}" class="project-link" target="_blank" rel="noopener noreferrer" aria-label="Open ${project.title} project in new tab">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                </a>
+            </div>
+            <h3 id="project-name-${index}" class="project-name">${project.title}</h3>
+            <p class="project-subtitle">${project.subtitle || project.category || ''}</p>
+            <p class="project-description">${project.shortDescription}</p>
+            <div class="project-tags" role="list" aria-label="Technologies used">
+                ${project.tech.slice(0, 4).map(tech => `<span class="project-tag" role="listitem">${tech}</span>`).join('')}
+            </div>
+        `;
+        return card;
+    }
+    function createProjectCardOld(project, index) {
         const card = document.createElement('div');
         card.className = 'project-card';
         card.setAttribute('data-project-id', project.id);
@@ -1091,9 +1375,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         timelineSvg.innerHTML = '';
         const svgNS = 'http://www.w3.org/2000/svg';
         const experience = comprehensiveKnowledge.experience;
-        const width = timelineSvg.clientWidth || 1000;
-        const height = 300;
-        const margin = { top: 40, right: 60, bottom: 40, left: 60 };
+        const isMobile = window.innerWidth < 768;
+        const width = timelineSvg.clientWidth || Math.min(1000, window.innerWidth - 32);
+        const height = isMobile ? 400 : 300;
+        const margin = isMobile
+            ? { top: 20, right: 20, bottom: 30, left: 20 }
+            : { top: 40, right: 60, bottom: 40, left: 60 };
         const plotWidth = width - margin.left - margin.right;
         const plotHeight = height - margin.top - margin.bottom;
         timelineSvg.setAttribute('viewBox', `0 0 ${width} ${height}`);
@@ -1218,9 +1505,36 @@ document.addEventListener('DOMContentLoaded', async () => {
     renderProjects();
     setupProjectExpansion();
     renderTimeline();
+    document.addEventListener('click', (e) => {
+        const target = e.target;
+        const detailsContainer = document.querySelector('.timeline-details');
+        if (detailsContainer && !target.closest('.git-branch-group') && !target.closest('.timeline-details')) {
+            hideExperienceDetails(detailsContainer);
+        }
+    });
     const contactForm = document.querySelector('.contact-form');
     const formStatus = document.getElementById('form-status');
     if (contactForm && formStatus) {
+        contactForm.querySelectorAll('input[required], textarea[required]').forEach(field => {
+            field.addEventListener('blur', () => {
+                const errorEl = document.getElementById(`${field.id.replace('contact-', '')}-error`);
+                if (!field.validity.valid) {
+                    errorEl.textContent = field.validationMessage;
+                    field.setAttribute('aria-invalid', 'true');
+                }
+                else {
+                    errorEl.textContent = '';
+                    field.removeAttribute('aria-invalid');
+                }
+            });
+            field.addEventListener('input', () => {
+                if (field.validity.valid) {
+                    const errorEl = document.getElementById(`${field.id.replace('contact-', '')}-error`);
+                    errorEl.textContent = '';
+                    field.removeAttribute('aria-invalid');
+                }
+            });
+        });
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const formData = new FormData(contactForm);
@@ -1470,6 +1784,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                 sendMessage();
             }
         });
+        chatInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                chatInput.value = '';
+                chatInput.blur();
+            }
+        });
         console.log('🐼 Chat is ready!');
     }
     else {
@@ -1494,5 +1814,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (heroSection) {
         heroSection.classList.add('section-visible');
     }
+    initStickyCardStacks();
 });
+function initStickyCardStacks() {
+    const stickySections = Array.from(document.querySelectorAll('.sticky-section'));
+    if (stickySections.length === 0) {
+        console.log('⚠️ No sticky sections found');
+        return;
+    }
+    console.log(`✅ Sticky stack initialized for ${stickySections.length} sections (hardcover push effect)`);
+}
 //# sourceMappingURL=main.js.map

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Minimalist location pin</title>
+  <desc id="desc">A simple mint-colored map pin icon.</desc>
+  <path fill="#7DD3C0" d="M32 4C20.4 4 11 13.4 11 25c0 15.8 18.4 32.8 19.2 33.5a2.7 2.7 0 0 0 3.6 0C34.6 57.8 53 40.8 53 25 53 13.4 43.6 4 32 4Zm0 30a9 9 0 1 1 0-18 9 9 0 0 1 0 18Z"/>
+</svg>

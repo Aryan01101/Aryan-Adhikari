@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">Minimalist envelope</title>
+  <desc id="desc">A simple mint-colored envelope icon matching the minimalist design system.</desc>
+  <defs>
+    <mask id="envelope-seams" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="64">
+      <rect width="64" height="64" fill="white"/>
+      <path d="M9 18.5 29.8 34.1a3.6 3.6 0 0 0 4.4 0L55 18.5" fill="none" stroke="black" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="m9 47 15.6-14.2M55 47 39.4 32.8" fill="none" stroke="black" stroke-width="3.2" stroke-linecap="round"/>
+    </mask>
+  </defs>
+  <path fill="#7DD3C0" mask="url(#envelope-seams)" d="M11 13h42a6 6 0 0 1 6 6v26a6 6 0 0 1-6 6H11a6 6 0 0 1-6-6V19a6 6 0 0 1 6-6Z"/>
+</svg>

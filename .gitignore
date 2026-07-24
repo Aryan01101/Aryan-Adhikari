@@ -29,3 +29,14 @@ package-lock.json
 # Build outputs (public/ will be used for Vercel, not GitHub Pages)
 dist/
 build/
+public/
+
+# Development artifacts and screenshots
+*.png
+*.md
+!README.md
+.agents/
+.claude/
+.playwright-mcp/
+animation-plans/
+skills-lock.json
