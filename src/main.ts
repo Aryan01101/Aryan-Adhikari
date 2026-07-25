@@ -1,9 +1,7 @@
 // @ts-nocheck
 // ========================================
-// IMPORT GEMINI AI AND TYPES
+// IMPORT TYPES
 // ========================================
-
-import { getExperience, getSkills, getProjects, getCertifications } from './supabaseClient.js';
 
 import type {
     Project,
@@ -297,7 +295,7 @@ const fallbackSkills = {
     ],
     "Platforms/Infrastructure": [
         "Git/GitHub", "Docker", "AWS (EC2, S3, Lambda, RDS)", "GCP Cloud Run",
-        "Vercel", "Supabase", "Electron", "N8N", "Twilio",
+        "Vercel", "Electron", "N8N", "Twilio",
         "Microsoft 365 / Power Automate / SharePoint", "Agile/Scrum"
     ]
 };
@@ -862,82 +860,16 @@ let bambooController = null;
 document.addEventListener('DOMContentLoaded', async () => {
 
     // ========================================
-    // LOAD DATA FROM SUPABASE
+    // RENDER DATA
     // ========================================
 
-    console.log('🔄 Loading data from Supabase...');
+    console.log('✅ Using hardcoded data');
 
-    try {
-        // Fetch all data from Supabase
-        const [experienceData, skillsData, fetchedProjects, fetchedCerts] = await Promise.all([
-            getExperience(),
-            getSkills(),
-            getProjects(),
-            getCertifications()
-        ]);
-
-        if (experienceData && experienceData.length > 0) {
-            comprehensiveKnowledge.experience = experienceData;
-            console.log(`✅ Loaded ${experienceData.length} experience entries from Supabase`);
-            renderTimeline(); // Re-render timeline with Supabase data
-        }
-
-        if (skillsData && Object.keys(skillsData).length > 0) {
-            console.log(`✅ Loaded skills from Supabase:`, Object.keys(skillsData));
-            renderSkills(skillsData);
-        } else {
-            console.log('⚠️  No skills from Supabase, using fallback skills data');
-            renderSkills(fallbackSkills);
-        }
-
-        if (fetchedProjects && fetchedProjects.length > 0) {
-            projectsData = fetchedProjects.map(p => ({
-                id: p.project_id,
-                title: p.title,
-                shortDescription: p.short_description,
-                fullDescription: p.full_description,
-                tech: p.tech,
-                timeline: p.timeline,
-                impact: p.impact,
-                links: { github: p.github_link, demo: p.demo_link },
-                status: p.status,
-                featured: p.featured
-            }));
-            comprehensiveKnowledge.projects = projectsData.filter(p => p.featured).map(p => ({
-                name: p.title,
-                description: p.shortDescription,
-                tech: p.tech,
-                impact: p.impact,
-                timeline: p.timeline
-            }));
-            console.log(`✅ Loaded ${projectsData.length} projects from Supabase`);
-        } else {
-            console.log(`⚠️  No projects from Supabase, using ${projectsData.length} hardcoded projects`);
-        }
-        // Always render projects (either Supabase or hardcoded fallback)
-        renderProjects();
-
-        if (fetchedCerts && fetchedCerts.length > 0) {
-            comprehensiveKnowledge.certifications = fetchedCerts.map(c => ({
-                name: c.name,
-                issuer: c.issuer,
-                date: c.date_completed,
-                credentialId: c.credential_id,
-                skills: c.skills
-            }));
-            console.log(`✅ Loaded ${fetchedCerts.length} certifications from Supabase`);
-            renderCertifications(fetchedCerts);
-        } else {
-            console.log('⚠️  No certifications from Supabase, using fallback certifications data');
-            renderCertifications(fallbackCertifications);
-        }
-
-    } catch (error) {
-        console.error('❌ Error loading data from Supabase:', error);
-        console.log('⚠️  Using fallback hardcoded data');
-        // Ensure projects render even if Supabase fails
-        renderProjects();
-    }
+    // Render all sections
+    renderSkills(fallbackSkills);
+    renderProjects();
+    renderCertifications(fallbackCertifications);
+    renderTimeline();
 
     function renderSkills(skillsData) {
         const container = document.getElementById('skills-container');
@@ -958,10 +890,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             const meta = categoryMeta[category] || { icon: '📦', size: 'medium' };
             categoryDiv.className = `skill-category-card skill-category-${meta.size}`;
 
-            // Handle both array of strings and array of objects (Supabase format)
-            const skillNames = Array.isArray(skills)
-                ? skills.map(s => typeof s === 'string' ? s : s.skill_name)
-                : [];
+            // Handle array of strings
+            const skillNames = Array.isArray(skills) ? skills : [];
 
             categoryDiv.innerHTML = `
                 <div class="skill-card-header">
