@@ -38,7 +38,7 @@ The platform received significant developer interest with 82 repository clones a
         timeline: 'August - October 2025 (8 weeks)',
         impact: ['Figma to production in 8 weeks', '82 repository clones in 14 days', '384 repository views', 'Real-world AI in recruitment'],
         links: {
-            github: '#', // Add actual GitHub URL when ready
+            github: 'https://github.com/Aryan01101/YAAKE',
             demo: null
         },
         status: 'completed',
@@ -63,7 +63,7 @@ The platform received significant developer interest with 82 repository clones a
         timeline: 'September - November 2025',
         impact: ['Comprehensive financial tracking', 'Secure authentication', 'Gamification for savings'],
         links: {
-            github: '#', // Add actual GitHub URL when ready
+            github: 'https://github.com/Aryan01101/OVER-SAVE',
             demo: null
         },
         status: 'completed',
@@ -98,7 +98,7 @@ The platform received significant developer interest with 82 repository clones a
         timeline: 'University Project - 2025',
         impact: ['4 independent microservices', 'Complete order-to-delivery pipeline', 'Enterprise architecture patterns'],
         links: {
-            github: '#', // Add actual GitHub URL when ready
+            github: 'https://github.com/Aryan01101/SEA',
             demo: null
         },
         status: 'completed',
@@ -223,7 +223,116 @@ The platform received significant developer interest with 82 repository clones a
         timeline: '2024',
         impact: ['Privacy-first design', 'Modular architecture', 'Local data storage'],
         links: {
-            github: '#', // Add actual GitHub URL when ready
+            github: 'https://github.com/Aryan01101/Journal-Management-System',
+            demo: null
+        },
+        status: 'completed',
+        featured: false
+    },
+    {
+        id: 'lumina',
+        title: 'Lumina - Privacy-First AI Desktop Companion',
+        shortDescription: 'Local-first AI companion with RAG memory, interruption intelligence, and 100% privacy. No cloud, one SQLite file.',
+        fullDescription: `Privacy-first AI desktop companion that learns from your work patterns, remembers conversations, and asks the right question at the right moment—without sending data to the cloud.
+
+**Core Features:**
+• Memory That Persists - RAG pipeline with sqlite-vec vector embeddings and cross-encoder reranking
+• Interruption Intelligence - 5-gate system respects deep work, gaming, and video calls
+• Privacy-First Architecture - 100% local, no cloud, one SQLite file
+• Context-Aware Chat - Every response grounded in your history with NLI-based groundedness scores
+• Activity Monitoring - 8 activity states (DEEP_WORK, BROWSING, STUDY, GAMING, etc.)
+• Journal & Mood Tracking - Quick capture with character prompts, emoji-based mood check-ins
+• Agent System - LangGraph-powered decision making with gate-based reasoning
+
+**Technical Highlights:**
+• Electron desktop app with React + TypeScript
+• Local LLM via Ollama (llama3.1:8b)
+• sqlite-vec for semantic memory search
+• Cross-encoder reranking for 85%+ precision
+• <250ms p50 retrieval latency
+• Comprehensive IPC security validation
+• Langfuse distributed tracing integration`,
+        tech: ['Electron', 'React', 'TypeScript', 'Ollama', 'LangGraph', 'sqlite-vec', 'SQLite', 'Tailwind CSS', 'RAG', 'Vector Embeddings', 'NLI'],
+        timeline: 'November 2025 - January 2026',
+        impact: ['100% local AI processing', '5-gate interruption system', 'RAG with reranking', 'Production-grade Electron security'],
+        links: {
+            github: 'https://github.com/Aryan01101/Lumina',
+            demo: null
+        },
+        status: 'completed',
+        featured: true
+    },
+    {
+        id: 'screenbridge',
+        title: 'ScreenBridge - Privacy-First Desktop Automation SDK',
+        shortDescription: 'Open-source SDK enabling LLMs to see and control desktop apps while keeping screenshots local. Privacy buffer + SentinelLayer protection.',
+        fullDescription: `Privacy-first middleware that gives any LLM eyes and hands on your desktop. Open-source SDK that enables Large Language Models to see and interact with desktop applications while keeping raw screenshots entirely local.
+
+**Core Features:**
+• Privacy Buffer - Raw screenshots never leave your machine, only structured JSON summaries
+• SentinelLayer - Automatic detection of sensitive contexts (financial, healthcare, auth screens)
+• LLM-Agnostic - Works with Claude, GPT-4, Gemini, and local models (Ollama)
+• Element-Based Actions - Robust, resolution-independent desktop control
+• Agentic Loop - Multi-step autonomous task execution with built-in safety guardrails
+
+**Architecture (6 Core Modules):**
+1. ScreenReader - Screenshot capture and local storage
+2. SentinelLayer - Privacy and safety guardian
+3. LLMBridge - LLM communication and agentic loop
+4. ActionExecutor - Desktop action execution
+5. ElementTreeBuilder - UI element hierarchy construction
+6. StorageManager - Disk space and retention management
+
+**Privacy & Security:**
+• Only structured JSON sent to LLMs, never raw screenshots
+• Automatic halting on sensitive screens (banking, auth, healthcare, etc.)
+• Local screenshot storage with configurable retention
+• Full audit logs for debugging`,
+        tech: ['Python', 'Ollama', 'Anthropic Claude API', 'OpenAI API', 'mss', 'atomacos', 'Agentic AI', 'Desktop Automation', 'Privacy Engineering'],
+        timeline: 'December 2025 - January 2026',
+        impact: ['Privacy-first desktop automation', 'LLM-agnostic architecture', 'SentinelLayer protection', 'Open-source SDK'],
+        links: {
+            github: 'https://github.com/Aryan01101/ScreenBridge',
+            demo: null
+        },
+        status: 'completed',
+        featured: true
+    },
+    {
+        id: 'lens',
+        title: 'Lens - Prescription Refill Approval System',
+        shortDescription: 'Real-time prescription refill approval queue with TypeScript backend and PostgreSQL database.',
+        fullDescription: `Real-time prescription refill approval queue system for healthcare providers.
+
+**Features:**
+• Real-time queue management for prescription refill requests
+• TypeScript backend with PostgreSQL database
+• Efficient approval workflow for healthcare providers
+• Database procedures for complex operations`,
+        tech: ['TypeScript', 'PostgreSQL', 'PLpgSQL', 'Real-time Systems'],
+        timeline: '2025',
+        impact: ['Real-time queue processing', 'Healthcare workflow automation'],
+        links: {
+            github: 'https://github.com/Aryan01101/Lens',
+            demo: null
+        },
+        status: 'completed',
+        featured: false
+    },
+    {
+        id: 'nudge',
+        title: 'Nudge',
+        shortDescription: 'TypeScript-based application with modern web technologies.',
+        fullDescription: `TypeScript application built with modern web development practices.
+
+**Technical Stack:**
+• TypeScript for type-safe development
+• Modern web technologies and best practices`,
+        tech: ['TypeScript', 'JavaScript', 'CSS'],
+        timeline: '2025',
+        impact: ['Type-safe development', 'Modern web architecture'],
+        links: {
+            github: 'https://github.com/Aryan01101/Nudge',
             demo: null
         },
         status: 'completed',
