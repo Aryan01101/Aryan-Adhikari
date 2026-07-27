@@ -131,7 +131,7 @@ The platform received significant developer interest with 82 repository clones a
 • Test-driven development approach`,
         tech: ['Python', 'scikit-learn', 'NumPy', 'pandas', 'PostgreSQL', 'K-means', 'Isolation Forest', 'Neural Networks', 'One-Class SVM', 'RESTful APIs'],
         timeline: 'November 2024 - February 2025',
-        impact: ['100K+ records processed', '84% accuracy achieved', '65% reduction in manual work', 'Led team of 5'],
+        impact: ['100K+ records processed', '84% accuracy achieved', '65% reduction in manual work', 'Projected $400K annual savings'],
         links: {
             github: '#', // Add actual GitHub URL when ready
             demo: null
@@ -469,7 +469,6 @@ const comprehensiveKnowledge = {
         role: "Software Engineer",
         education: "Bachelor of Engineering Honours (Software) - University of Sydney",
         graduation: "November 2025",
-        experience_years: "2+",
         eihwam: "68.88",
         location: "Sydney, Australia"
     },
@@ -521,6 +520,42 @@ const comprehensiveKnowledge = {
 
     experience: [
         {
+            company: "Freelance / Independent Contractor",
+            role: "Software Engineer (Contract)",
+            duration: "July 2026 - Present",
+            location: "Sydney, Australia",
+            type: "Contract",
+            achievements: [
+                "Authored a product requirements document with defined success criteria for an early-stage venture, providing direct architecture and product decision support to the founder during the scoping phase"
+            ],
+            technologies: ["Product Requirements", "Technical Advisory", "Architecture Design"]
+        },
+        {
+            company: "Webvine",
+            role: "Web Engineer Intern",
+            duration: "June 2026 - Present",
+            location: "Sydney, Australia",
+            type: "Internship",
+            achievements: [
+                "Microsoft 365 and SharePoint consultancy delivering workflow automation for enterprise clients",
+                "Completed scoped tickets end to end and wrote and ran User Acceptance Testing for a pilot agentic email triage system built on Microsoft 365 Copilot Workflows and Power Automate, feeding results back into workflow and prompt refinements",
+                "Built Teams-based Adaptive Card approval flows for human-in-the-loop review, with SharePoint policy grounding and full audit logging"
+            ],
+            technologies: ["Microsoft 365", "Power Automate", "SharePoint", "Copilot Workflows", "Adaptive Cards", "User Acceptance Testing"]
+        },
+        {
+            company: "STRIVE",
+            role: "Software Engineer (Part-Time)",
+            duration: "April 2026 - Present",
+            location: "Sydney, Australia",
+            type: "Part-time",
+            achievements: [
+                "Primary developer and architecture decision-maker on a two-person engineering team, building an all-in-one student portal spanning residency, visa, housing, and campus events, end to end on Next.js, TypeScript, and Supabase, deployed live on Vercel",
+                "Built visa state-nomination and skill-based queue logic, an interactive pathway-mapping and score-optimiser feature using React Flow, and a queue intelligence dashboard for application tracking"
+            ],
+            technologies: ["Next.js", "TypeScript", "Supabase", "React Flow", "Vercel", "Full-Stack Development"]
+        },
+        {
             company: "Freelance | Self-Employed",
             role: "AI & ML Consultant",
             duration: "January 2025 - September 2025",
@@ -551,7 +586,7 @@ const comprehensiveKnowledge = {
             location: "Sydney, Australia",
             type: "Part-time",
             achievements: [
-                "Drove a 50% increase in resident engagement through event planning and community-building initiatives for 250+ international residents at Australia's largest purpose-built student accommodation operator",
+                "Drove a 60% increase in resident engagement through event planning and community-building initiatives for 250+ international residents at Australia's largest purpose-built student accommodation operator",
                 "Supported 250+ international residents with onboarding, local navigation, and issue resolution, serving as the primary point of contact across multiple residential floors"
             ],
             technologies: ["Event Coordination", "Community Building", "Leadership", "Cross-Cultural Communication"]
@@ -577,9 +612,9 @@ const comprehensiveKnowledge = {
             location: "Sydney, Australia",
             type: "Internship",
             achievements: [
-                "Implemented and evaluated multiple ML models including K-means clustering, Isolation Forest, Neural Networks, and One-Class SVM to automate healthcare data verification across 100K+ records at 84% accuracy, projected to save $400K annually",
-                "Conducted weekly client meetings and delivered product demonstrations to HealthShare stakeholders, translating technical findings into actionable recommendations",
-                "Orchestrated daily stand-ups, assigned tasks based on team strengths, and created comprehensive documentation for cross-team knowledge sharing",
+                "Built an ML validation system for 100,000+ healthcare records using KMeans Clustering, Isolation Forest, and Neural Networks, achieving 84% accuracy and cutting manual validation workload by ~65%. Projected ~$400K in annual labour savings if productionised",
+                "Presented findings directly to the CEO, CTO, and senior leadership team, translating technical results into actionable business recommendations",
+                "Conducted weekly stakeholder meetings and delivered product demonstrations to HealthShare leadership",
                 "Developed a decision-making algorithm to recommend data actions (add/update/delete) based on ML analysis results"
             ],
             technologies: ["Python", "scikit-learn", "NumPy", "pandas", "PostgreSQL", "K-means", "Isolation Forest", "Neural Networks", "One-Class SVM", "ML Algorithms"]
@@ -2041,7 +2076,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (matchedRole) {
                 return assessJobFit(matchedRole);
             } else if (/(software|developer|engineer|tech|programming)/.test(msg)) {
-                return `🐼 Absolutely! My human would be an excellent fit for software engineering roles. He's got ${comprehensiveKnowledge.personal.experience_years} years of real experience:\n\n• Leading teams (managed 5 developers at Jacaranda Flame)\n• Building ML-powered solutions (84% accuracy, 100K+ records)\n• Full-stack development (React, Node.js, Spring Boot)\n• Microservices architecture\n• Enterprise-scale applications\n\nHe's delivered real impact - like 65% reduction in manual work and big cost savings. But I'll be honest: he's best at hands-on technical work and team leadership, not executive/CEO stuff!`;
+                return `🐼 Absolutely! My human would be an excellent fit for software engineering roles. He's got real hands-on experience:\n\n• Building ML-powered solutions (84% accuracy, 100K+ records)\n• Full-stack development (React, Node.js, Spring Boot, Next.js, TypeScript)\n• Microservices architecture\n• Enterprise-scale applications\n• Currently working at STRIVE and Webvine\n\nHe's delivered real impact - like 65% reduction in manual work and ~$400K in projected annual savings. Great at hands-on technical work and stakeholder communication!`;
             }
         }
 
@@ -2080,20 +2115,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Experience questions
         if (/(experience|background|worked|job|employment|work history)/.test(msg)) {
             if (/(lead|leadership|team|manage|management)/.test(msg)) {
-                const leadership = comprehensiveKnowledge.experience[0];
-                return `🐼 My human's got real leadership chops!\n\n**${leadership.role} at ${leadership.company}**\n• Led a team of 5 developers\n• Ran daily stand-ups (Agile/Scrum)\n• Handled weekly client meetings\n• Hit 84% ML accuracy on 100K+ records\n• Cut manual work by 65%\n\nPlus he taught 50+ kids Python at CodeCamp and ran events for 250+ students as Scape Ambassador (200% more engagement!). He knows how to lead AND mentor.`;
+                return `🐼 My human's got solid leadership and collaboration experience!\n\n**Current roles:**\n• **STRIVE**: Primary developer and architecture decision-maker on two-person engineering team\n• **Webvine**: Built enterprise workflow automation systems\n• **HealthShare**: Presented findings directly to CEO, CTO, and senior leadership\n\nPlus he taught 50+ kids Python at CodeCamp and ran events for 250+ students as Scape Ambassador (60% engagement increase!). He's great at stakeholder communication, mentoring, and collaborative development.`;
             } else {
                 const exp = comprehensiveKnowledge.experience.slice(0, 3);
                 const expList = exp.map(e =>
                     `• **${e.role}** at ${e.company} (${e.duration})\n  ${e.achievements[0]}`
                 ).join('\n\n');
-                return `🐼 My human's got ${comprehensiveKnowledge.personal.experience_years} years of solid experience:\n\n${expList}\n\nHe loves building ML solutions, full-stack apps, and leading technical teams!`;
+                return `🐼 My human's got diverse hands-on experience:\n\n${expList}\n\nHe loves building ML solutions, full-stack apps, and solving real-world problems!`;
             }
         }
 
         // Leadership questions
         if (/(lead|team|management|manage|mentor|teaching)/.test(msg)) {
-            return `🐼 Oh yes! Aryan's led teams and mentored tons of people:\n\n• **Team Lead** at Jacaranda Flame: Managed 5 devs, built ML system with 84% accuracy\n• **Coding Instructor** at CodeCamp: Taught 50+ kids Python\n• **Student Ambassador** at Scape: Organized events for 250+ students (doubled engagement!)\n• **Technical Mentor**: Helped 6 high schoolers get top-3 in a competition\n\nHe's great with Agile/Scrum, talking to clients, and keeping everyone on track.`;
+            return `🐼 Oh yes! Aryan's got solid leadership and mentorship experience:\n\n• **STRIVE**: Primary developer & architecture decision-maker on two-person engineering team\n• **HealthShare**: Presented findings to CEO, CTO, and senior leadership; conducted weekly stakeholder meetings\n• **Coding Instructor** at CodeCamp: Taught 50+ kids Python\n• **Student Ambassador** at Scape: Organized events for 250+ students (60% engagement increase!)\n• **Technical Mentor**: Helped 6 students get top-3 in a competition\n\nHe's great with stakeholder communication, Agile workflows, mentoring, and collaborative development.`;
         }
 
         // Availability/location questions
@@ -2108,11 +2142,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Assess job fit for specific roles - Balanced tone (professional but friendly)
     function assessJobFit(role) {
         const fitResponses = {
-            "software engineer": `🐼 **Excellent fit!** My human has ${comprehensiveKnowledge.personal.experience_years} years of solid software engineering experience:\n\n• Led a team of 5 at Jacaranda Flame Consulting\n• Built 9+ production apps (YAAKE, Over-save, Microservices platform)\n• Achieved 84% ML accuracy on 100K+ healthcare records\n• Reduced manual workload by 65%\n• Strong with React, Node.js, Spring Boot, Python\n• Experienced in Agile/Scrum, client communication, technical leadership\n\nHe'd be a great fit for software engineering roles!`,
+            "software engineer": `🐼 **Excellent fit!** My human has solid software engineering experience:\n\n• Currently working at STRIVE (Next.js, TypeScript, Supabase) and Webvine (Microsoft 365, Power Automate)\n• Built 9+ production apps (YAAKE, Over-save, Microservices platform)\n• Achieved 84% ML accuracy on 100K+ healthcare records\n• Reduced manual workload by 65%, projected ~$400K annual savings\n• Strong with React, Node.js, Spring Boot, Python, Next.js, TypeScript\n• Experienced in Agile workflows, stakeholder communication, architecture decisions\n\nHe'd be a great fit for software engineering roles!`,
 
-            "full stack": `🐼 **Excellent fit!** Aryan's got the full-stack experience:\n\n**Frontend:** React.js, HTML/CSS, JavaScript\n**Backend:** Node.js, Express, Spring Boot, Django\n**Databases:** PostgreSQL, MongoDB, MySQL\n\n**Real projects:** YAAKE (React/Node/MongoDB), BookHub (React/Node/Django), Over-save (Spring Boot/PostgreSQL)\n\nHe's built systems for 1000+ users with OAuth2, JWT, and microservices. The whole package!`,
+            "full stack": `🐼 **Excellent fit!** Aryan's got the full-stack experience:\n\n**Frontend:** React.js, Next.js, TypeScript, HTML/CSS, JavaScript\n**Backend:** Node.js, Express, Spring Boot, Django, Supabase\n**Databases:** PostgreSQL, MongoDB, MySQL, Supabase\n\n**Real projects:** STRIVE (Next.js/TypeScript/Supabase), YAAKE (React/Node/MongoDB), BookHub (React/Node/Django), Over-save (Spring Boot/PostgreSQL)\n\nHe's built systems for 1000+ users with OAuth2, JWT, and microservices. The whole package!`,
 
-            "ml engineer": `🐼 **Strong fit!** My human has real production ML experience:\n\n• Built ML pipeline processing 100K+ healthcare records (84% accuracy)\n• Implemented K-means, Neural Networks, Isolation Forest, One-Class SVM\n• Research: K-means optimization (23% faster!), fairness-aware ML\n• Created YAAKE with Google Gemini AI\n• Expert in scikit-learn, pandas, NumPy\n• Led ML team at Jacaranda Flame\n\nHe'd do great in ML engineering roles!`,
+            "ml engineer": `🐼 **Strong fit!** My human has real production ML experience:\n\n• Built ML pipeline processing 100K+ healthcare records (84% accuracy)\n• Implemented K-means, Neural Networks, Isolation Forest, One-Class SVM\n• Research: K-means optimization (23% faster!), fairness-aware ML\n• Created YAAKE with Google Gemini AI\n• Expert in scikit-learn, pandas, NumPy\n• Presented ML findings to CEO, CTO, and senior leadership at HealthShare\n\nHe'd do great in ML engineering roles!`,
 
             "ai engineer": `🐼 **Strong fit!** Aryan's got practical AI chops:\n\n• YAAKE: AI recruitment platform (resume parsing, ATS scoring, mock interviews)\n• ML Data Validation: 84% accuracy with multiple algorithms\n• Research in fairness-aware ML\n• Google Gemini AI integration\n• Experience with neural networks, clustering, anomaly detection\n\nPerfect for AI engineering positions!`,
 
@@ -2131,7 +2165,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             "automation engineer": `🐼 **Strong fit!** My human's great at automation:\n\n• LinkedLeads: 95% time saved, 500+ postings/day automated\n• N8N workflow automation\n• Python scripting and web scraping\n• Data transformation pipelines\n• API integration\n• 30% efficiency boost at Practera\n\nHe'd be excellent for automation engineering!`
         };
 
-        return fitResponses[role] || `🐼 My human could potentially fit ${role} roles - he's got ${comprehensiveKnowledge.personal.experience_years} years in software engineering and ML. His main strengths are building ML solutions, full-stack apps, and leading technical teams. Want me to be more specific about how his skills match this role?`;
+        return fitResponses[role] || `🐼 My human could potentially fit ${role} roles - he's got solid experience in software engineering and ML. His main strengths are building ML solutions, full-stack apps, and technical architecture. Want me to be more specific about how his skills match this role?`;
     }
 
     // Send message function (rule-based for now, AI API integration ready)
