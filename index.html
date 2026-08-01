@@ -53,7 +53,6 @@
             </button>
             <ul class="nav-links" id="nav-links">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#ai-assistant">AI Assistant</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#education">Education</a></li>
                 <li><a href="#experience">Experience</a></li>
@@ -70,18 +69,8 @@
                 <div class="hero-text">
                     <div class="hero-greeting">Hi, I'm</div>
                     <h1 class="hero-name">Aryan Adhikari</h1>
-                    <p class="hero-title"><strong>Software Engineer</strong> <span style="display: inline-flex; align-items: center; gap: 0.5rem; margin-left: 0.75rem; color: #42D9C8; font-size: 0.9rem; font-weight: 500;"><span style="display: inline-block; width: 8px; height: 8px; background: #42D9C8; border-radius: 50%; animation: pulse 2s ease-in-out infinite;"></span>Available for new work</span></p>
-                    <p class="hero-description">I build ML-powered systems and full-stack applications. Recent work includes an AI recruitment platform shipped in 8 weeks, ML data validation at 84% accuracy for 100K+ healthcare records, and microservices architectures for enterprise systems. Based in Sydney with full Australian work rights.</p>
-                    <p class="hero-contact">
-                        <span class="contact-location">
-                            <img src="img/minimalist-location-pin-mint.svg" alt="" class="contact-icon" width="16" height="16" aria-hidden="true">
-                            Sydney, AU
-                        </span> ·
-                        <span class="contact-email">
-                            <img src="img/minimalist-envelope-mint.svg" alt="" class="contact-icon" width="16" height="16" aria-hidden="true">
-                            aadhikari678@outlook.com
-                        </span>
-                    </p>
+                    <p class="hero-title"><strong>Software Engineer</strong></p>
+                    <p class="hero-description">I build things with code and AI. Based in Sydney, love experimenting with ML—learned some from courses, mostly from breaking things and fixing them.</p>
 
                     <!-- Inline Credentials -->
                     <div class="hero-credentials">
@@ -90,7 +79,11 @@
                         </span>
                         <span class="credential-dot">·</span>
                         <span class="credential-item">
-                            <strong id="github-commits" data-target="500">500</strong>+ commits
+                            <strong id="github-commits" data-target="175">175</strong>+ commits
+                        </span>
+                        <span class="credential-dot">·</span>
+                        <span class="credential-item">
+                            <strong id="certifications-count" data-target="5">5</strong> certifications
                         </span>
                         <span class="credential-dot">·</span>
                         <span class="credential-item">
@@ -146,58 +139,6 @@
         </div>
     </section>
 
-    <!-- AI Assistant Section -->
-    <section id="ai-assistant" class="ai-section">
-        <h2 class="section-title">Meet Bamboo - My AI Assistant 🐼</h2>
-        <p class="section-subtitle">Chat with Bamboo to learn about my experience, skills, and get to know me better!</p>
-
-        <!-- Side-by-side layout wrapper -->
-        <div class="bamboo-chat-wrapper">
-            <!-- Bamboo Character Container (Left Side) -->
-            <div class="bamboo-character-container">
-                <div id="bamboo-character" class="bamboo-character">
-                    <!-- Lottie animation or static image will be loaded here -->
-                    <div id="bamboo-animation-wrapper" class="bamboo-animation-wrapper" role="img" aria-label="Bamboo the panda mascot">
-                        <!-- Fallback panda emoji if no images loaded -->
-                        <span class="bamboo-fallback" aria-hidden="true">🐼</span>
-                    </div>
-                </div>
-                <div class="bamboo-info">
-                    <h4 class="bamboo-name">Bamboo</h4>
-                    <p class="bamboo-tagline">AI Assistant</p>
-                </div>
-                <div class="bamboo-status" id="bamboo-status">
-                    <span class="status-text">Ready to chat!</span>
-                </div>
-            </div>
-
-            <!-- Chat Container (Right Side) -->
-            <div class="chat-container">
-            <div class="chat-header">
-                <h3>Bamboo 🐼 - Your Friendly Guide</h3>
-                <p>Ask about Aryan's work, hobbies, or if he'd be a good fit for your team</p>
-            </div>
-            <div class="chat-messages" id="chat-messages" role="log" aria-live="polite" aria-atomic="false" aria-relevant="additions">
-                <div class="message assistant">
-                    <p>🐼 Hey there! I'm Bamboo, Aryan's AI assistant panda! My human loves building cool tech stuff, and I'm here to help you get to know him - both as an engineer and as a person. You can ask me things like:</p>
-                    <ul class="suggestion-list">
-                        <li>"What does Aryan do for fun?"</li>
-                        <li>"Is he a good fit for a software engineering role?"</li>
-                        <li>"Tell me about his projects"</li>
-                        <li>"What are his hobbies outside of coding?"</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="chat-input-container">
-                <input type="text" id="chat-input" class="chat-input" placeholder="Ask Bamboo anything about Aryan..." maxlength="500" aria-label="Chat message input, press Enter to send, Escape to clear" aria-describedby="chat-hint">
-                <button id="send-btn" class="send-btn" aria-label="Send message">Send</button>
-                <span id="chat-hint" class="visually-hidden">Press Enter to send message, Escape to clear input</span>
-            </div>
-            </div>
-        </div>
-    </section>
-
-    
     <!-- Experience Section -->
     <section id="experience" class="experience">
         <div class="experience-header">
@@ -207,18 +148,13 @@
 
         <div class="timeline-container">
             <!-- Freelance Contract -->
-            <div class="timeline-item timeline-left">
+            <div class="timeline-item timeline-left" data-experience-id="freelance-contract">
                 <div class="timeline-content">
                     <div class="timeline-company">
                         <h3>Freelance / Independent Contractor</h3>
                         <span class="timeline-dates">Jul 2026 - Present</span>
                     </div>
                     <h4 class="timeline-role">Software Engineer (Contract)</h4>
-                    <p class="timeline-description">Authored a product requirements document with defined success criteria for an early-stage venture, providing direct architecture and product decision support to the founder during the scoping phase.</p>
-                    <div class="timeline-tags">
-                        <span class="tag">Product Requirements</span>
-                        <span class="tag">Technical Advisory</span>
-                    </div>
                 </div>
                 <div class="timeline-dot">
                     <span>💼</span>
@@ -226,19 +162,13 @@
             </div>
 
             <!-- Webvine -->
-            <div class="timeline-item timeline-right">
+            <div class="timeline-item timeline-right" data-experience-id="webvine">
                 <div class="timeline-content">
                     <div class="timeline-company">
                         <h3>Webvine</h3>
                         <span class="timeline-dates">Jun 2026 - Present</span>
                     </div>
                     <h4 class="timeline-role">Web Engineer Intern</h4>
-                    <p class="timeline-description">Microsoft 365 and SharePoint consultancy delivering workflow automation for enterprise clients. Completed scoped tickets end to end and wrote and ran User Acceptance Testing for a pilot agentic email triage system built on Microsoft 365 Copilot Workflows and Power Automate, feeding results back into workflow and prompt refinements. Built Teams-based Adaptive Card approval flows for human-in-the-loop review, with SharePoint policy grounding and full audit logging.</p>
-                    <div class="timeline-tags">
-                        <span class="tag">Microsoft 365</span>
-                        <span class="tag">Power Automate</span>
-                        <span class="tag">SharePoint</span>
-                    </div>
                 </div>
                 <div class="timeline-dot">
                     <span>💼</span>
@@ -246,20 +176,13 @@
             </div>
 
             <!-- STRIVE -->
-            <div class="timeline-item timeline-left">
+            <div class="timeline-item timeline-left" data-experience-id="strive">
                 <div class="timeline-content">
                     <div class="timeline-company">
                         <h3>STRIVE</h3>
                         <span class="timeline-dates">Apr 2026 - Present</span>
                     </div>
                     <h4 class="timeline-role">Software Engineer (Part-Time)</h4>
-                    <p class="timeline-description">Primary developer and architecture decision-maker on a two-person engineering team, building an all-in-one student portal spanning residency, visa, housing, and campus events, end to end on Next.js, TypeScript, and Supabase, deployed live on Vercel. Built visa state-nomination and skill-based queue logic, an interactive pathway-mapping and score-optimiser feature using React Flow, and a queue intelligence dashboard for application tracking.</p>
-                    <div class="timeline-tags">
-                        <span class="tag">Next.js</span>
-                        <span class="tag">TypeScript</span>
-                        <span class="tag">Supabase</span>
-                        <span class="tag">React Flow</span>
-                    </div>
                 </div>
                 <div class="timeline-dot">
                     <span>💼</span>
@@ -267,19 +190,13 @@
             </div>
 
             <!-- Nail Snail Consultant -->
-            <div class="timeline-item timeline-right">
+            <div class="timeline-item timeline-right" data-experience-id="nail-snail">
                 <div class="timeline-content">
                     <div class="timeline-company">
                         <h3>Nail Snail (Practera)</h3>
                         <span class="timeline-dates">Jun 2025 - Jul 2025</span>
                     </div>
                     <h4 class="timeline-role">Consultant (Data Analysis & Market Research)</h4>
-                    <p class="timeline-description">Built Python visualizations for demographic trends and market analysis. Delivered actionable recommendations on customer segmentation and international expansion.</p>
-                    <div class="timeline-tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">Matplotlib</span>
-                        <span class="tag">Market Research</span>
-                    </div>
                 </div>
                 <div class="timeline-dot">
                     <span>💼</span>
@@ -287,19 +204,13 @@
             </div>
 
             <!-- Freelance AI & ML Consultant -->
-            <div class="timeline-item timeline-left">
+            <div class="timeline-item timeline-left" data-experience-id="freelance-ai-ml">
                 <div class="timeline-content">
                     <div class="timeline-company">
                         <h3>Freelance | Self-Employed</h3>
                         <span class="timeline-dates">Jan 2025 - Sep 2025</span>
                     </div>
                     <h4 class="timeline-role">AI & ML Consultant</h4>
-                    <p class="timeline-description">Delivered AI-powered bargaining system for HORECA distributor (100+ SKUs) and Supply Chain ML solution achieving 80%+ forecasting accuracy across 6 years of data.</p>
-                    <div class="timeline-tags">
-                        <span class="tag">Machine Learning</span>
-                        <span class="tag">Python</span>
-                        <span class="tag">Demand Forecasting</span>
-                    </div>
                 </div>
                 <div class="timeline-dot">
                     <span>💼</span>
@@ -307,20 +218,13 @@
             </div>
 
             <!-- HealthShare Intern -->
-            <div class="timeline-item timeline-right">
+            <div class="timeline-item timeline-right" data-experience-id="healthshare">
                 <div class="timeline-content">
                     <div class="timeline-company">
                         <h3>HealthShare (Jacaranda Flame Consulting)</h3>
                         <span class="timeline-dates">Nov 2024 - Feb 2025</span>
                     </div>
                     <h4 class="timeline-role">Software Engineer Intern (ML & Data Engineering)</h4>
-                    <p class="timeline-description">Built an ML validation system for 100,000+ healthcare records using KMeans Clustering, Isolation Forest, and Neural Networks, achieving 84% accuracy and cutting manual validation workload by ~65%. Projected ~$400K in annual labour savings if productionised. Presented findings directly to the CEO, CTO, and senior leadership team.</p>
-                    <div class="timeline-tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">scikit-learn</span>
-                        <span class="tag">PostgreSQL</span>
-                        <span class="tag">Stakeholder Communication</span>
-                    </div>
                 </div>
                 <div class="timeline-dot">
                     <span>💼</span>
@@ -328,19 +232,13 @@
             </div>
 
             <!-- Scape Australia -->
-            <div class="timeline-item timeline-left">
+            <div class="timeline-item timeline-left" data-experience-id="scape">
                 <div class="timeline-content">
                     <div class="timeline-company">
                         <h3>Scape Australia</h3>
                         <span class="timeline-dates">Aug 2024 - Sep 2025</span>
                     </div>
                     <h4 class="timeline-role">Student Ambassador</h4>
-                    <p class="timeline-description">Drove a 60% increase in resident engagement for 250+ international students through event planning and community building.</p>
-                    <div class="timeline-tags">
-                        <span class="tag">Event Coordination</span>
-                        <span class="tag">Community Building</span>
-                        <span class="tag">Leadership</span>
-                    </div>
                 </div>
                 <div class="timeline-dot">
                     <span>💼</span>
@@ -348,19 +246,13 @@
             </div>
 
             <!-- University of Sydney Mentor -->
-            <div class="timeline-item timeline-right">
+            <div class="timeline-item timeline-right" data-experience-id="usyd-mentor">
                 <div class="timeline-content">
                     <div class="timeline-company">
                         <h3>University of Sydney</h3>
                         <span class="timeline-dates">Sep 2023</span>
                     </div>
                     <h4 class="timeline-role">Technical Mentor</h4>
-                    <p class="timeline-description">Guided team of 6 building MNDetect, an EMG wearable for Motor Neuron Disease detection. Team secured top-3 regional placement in innovation program.</p>
-                    <div class="timeline-tags">
-                        <span class="tag">IoT</span>
-                        <span class="tag">Bluetooth</span>
-                        <span class="tag">Mentoring</span>
-                    </div>
                 </div>
                 <div class="timeline-dot">
                     <span>💼</span>
@@ -368,18 +260,13 @@
             </div>
 
             <!-- Learn Grow Become -->
-            <div class="timeline-item timeline-left">
+            <div class="timeline-item timeline-left" data-experience-id="learn-grow-become">
                 <div class="timeline-content">
                     <div class="timeline-company">
                         <h3>Learn Grow Become (Practera)</h3>
                         <span class="timeline-dates">Jun 2023 - Jul 2023</span>
                     </div>
                     <h4 class="timeline-role">Information Technology System Analyst</h4>
-                    <p class="timeline-description">Consulted with Australian businesses on technology integration through government-supported edtech platform.</p>
-                    <div class="timeline-tags">
-                        <span class="tag">Technology Consulting</span>
-                        <span class="tag">Business Analysis</span>
-                    </div>
                 </div>
                 <div class="timeline-dot">
                     <span>💼</span>
@@ -387,19 +274,13 @@
             </div>
 
             <!-- Code Camp -->
-            <div class="timeline-item timeline-right">
+            <div class="timeline-item timeline-right" data-experience-id="code-camp">
                 <div class="timeline-content">
                     <div class="timeline-company">
                         <h3>Code Camp</h3>
                         <span class="timeline-dates">Apr 2023 - Present</span>
                     </div>
                     <h4 class="timeline-role">Coding Instructor (STEM Education)</h4>
-                    <p class="timeline-description">Teaching visual coding fundamentals to 50+ students aged 5-13 at Australia's largest kids coding provider. Real-time lesson adaptation across skill levels and formats.</p>
-                    <div class="timeline-tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">Teaching</span>
-                        <span class="tag">Curriculum Design</span>
-                    </div>
                 </div>
                 <div class="timeline-dot">
                     <span>💼</span>
@@ -407,18 +288,13 @@
             </div>
 
             <!-- Mette is baking -->
-            <div class="timeline-item timeline-left">
+            <div class="timeline-item timeline-left" data-experience-id="mette-baking">
                 <div class="timeline-content">
                     <div class="timeline-company">
                         <h3>Mette is baking (Practera)</h3>
                         <span class="timeline-dates">Jun 2022 - Jul 2022</span>
                     </div>
                     <h4 class="timeline-role">Information Technology Business Consultant</h4>
-                    <p class="timeline-description">Cross-disciplinary student team delivering business analysis and technology implementation recommendations.</p>
-                    <div class="timeline-tags">
-                        <span class="tag">Business Consulting</span>
-                        <span class="tag">Strategic Planning</span>
-                    </div>
                 </div>
                 <div class="timeline-dot">
                     <span>💼</span>
@@ -565,6 +441,83 @@
             </div>
         </div>
     </section>
+
+    <!-- Project Details Slide-out Panel -->
+    <div id="project-panel-overlay" class="project-panel-overlay" aria-hidden="true">
+        <div id="project-panel" class="project-panel" role="dialog" aria-labelledby="panel-title" aria-modal="true">
+            <div class="project-panel-header">
+                <h2 id="panel-title" class="project-panel-title"></h2>
+                <button id="project-panel-close" class="project-panel-close" aria-label="Close project details">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="project-panel-content" id="project-panel-content">
+                <!-- Content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Experience Panel Overlay -->
+    <div id="experience-panel-overlay" class="project-panel-overlay" aria-hidden="true">
+        <div id="experience-panel" class="project-panel" role="dialog" aria-labelledby="experience-panel-title" aria-modal="true">
+            <div class="project-panel-header">
+                <h2 id="experience-panel-title" class="project-panel-title"></h2>
+                <button id="experience-panel-close" class="project-panel-close" aria-label="Close experience details">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="project-panel-content" id="experience-panel-content">
+                <!-- Content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Bamboo Chat -->
+    <div id="bamboo-float-container" class="bamboo-float-container">
+        <!-- Floating Chat Button -->
+        <button id="bamboo-float-btn" class="bamboo-float-btn" aria-label="Chat with Bamboo AI Assistant" aria-expanded="false" aria-controls="bamboo-chat-window">
+            <div class="bamboo-float-icon">
+                <span class="bamboo-emoji" aria-hidden="true">🐼</span>
+            </div>
+        </button>
+
+        <!-- Floating Chat Window -->
+        <div id="bamboo-chat-window" class="bamboo-chat-window" aria-hidden="true">
+            <div class="bamboo-chat-header">
+                <div class="bamboo-chat-title">
+                    <span class="bamboo-emoji-small">🐼</span>
+                    <h3>Bamboo</h3>
+                </div>
+                <button id="bamboo-close-btn" class="bamboo-close-btn" aria-label="Close chat">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="bamboo-chat-messages" id="chat-messages" role="log" aria-live="polite" aria-atomic="false" aria-relevant="additions">
+                <div class="message assistant">
+                    <p>🐼 Hey there! I'm Bamboo, Aryan's AI assistant. Ask me anything about his work, skills, or if he'd be a good fit for your team!</p>
+                    <ul class="suggestion-list">
+                        <li>"What does Aryan do for fun?"</li>
+                        <li>"Tell me about his projects"</li>
+                        <li>"Is he a good fit for a software engineering role?"</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bamboo-chat-input-container">
+                <input type="text" id="chat-input" class="bamboo-chat-input" placeholder="Ask Bamboo anything..." maxlength="500" aria-label="Chat message input, press Enter to send">
+                <button id="send-btn" class="bamboo-send-btn" aria-label="Send message">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer>

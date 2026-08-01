@@ -36,7 +36,7 @@ let projectsData = [
 The platform received significant developer interest with 82 repository clones and 384 views within 14 days of launch.`,
         tech: ['React', 'Node.js', 'Express', 'MongoDB', 'Google Gemini AI', 'JWT', 'RBAC', 'RESTful APIs'],
         timeline: 'August - October 2025 (8 weeks)',
-        impact: ['Figma to production in 8 weeks', '82 repository clones in 14 days', '384 repository views', 'Real-world AI in recruitment'],
+        impact: ['82 repository clones in 14 days', '384 repository views', '10+ integrated AI feature modules'],
         links: {
             github: 'https://github.com/Aryan01101/YAAKE',
             demo: null
@@ -61,7 +61,7 @@ The platform received significant developer interest with 82 repository clones a
 • Complex database schema with 15+ interconnected tables`,
         tech: ['Java', 'Spring Boot', 'PostgreSQL', 'OAuth2', 'Spring Security', 'Email Notifications', 'REST APIs'],
         timeline: 'September - November 2025',
-        impact: ['Comprehensive financial tracking', 'Secure authentication', 'Gamification for savings'],
+        impact: ['16 REST API endpoints for complete CRUD operations', '15+ interconnected database tables', 'OAuth2 + Spring Security integration'],
         links: {
             github: 'https://github.com/Aryan01101/OVER-SAVE',
             demo: null
@@ -166,7 +166,7 @@ The platform received significant developer interest with 82 repository clones a
 • External API integration for enhanced functionality`,
         tech: ['React', 'Node.js', 'Express', 'Django', 'MongoDB', 'Google Books API', 'Google Login API', 'Daphne API', 'OAuth'],
         timeline: 'University Project - 2024',
-        impact: ['Real-time chat', 'Google API integration', 'OAuth authentication'],
+        impact: ['Dual-framework architecture (Express + Django)', 'Multi-API integration (Google Books, Login, Daphne)', 'Dynamic rating system with real-time updates'],
         links: {
             github: '#', // Add actual GitHub URL when ready
             demo: null
@@ -311,7 +311,7 @@ The platform received significant developer interest with 82 repository clones a
 • Database procedures for complex operations`,
         tech: ['TypeScript', 'PostgreSQL', 'PLpgSQL', 'Real-time Systems'],
         timeline: '2025',
-        impact: ['Real-time queue processing', 'Healthcare workflow automation'],
+        impact: ['TypeScript backend with PostgreSQL integration', 'PLpgSQL procedures for complex operations'],
         links: {
             github: 'https://github.com/Aryan01101/Lens',
             demo: null
@@ -379,6 +379,122 @@ The platform received significant developer interest with 82 repository clones a
         },
         status: 'in-development',
         featured: false
+    }
+];
+
+// ========================================
+// EXPERIENCE DATA
+// ========================================
+
+interface ExperienceItem {
+    id: string;
+    company: string;
+    role: string;
+    dates: string;
+    description: string;
+    tags: string[];
+    side: 'left' | 'right';
+}
+
+const experiences: ExperienceItem[] = [
+    {
+        id: 'freelance-contract',
+        company: 'Freelance / Independent Contractor',
+        role: 'Software Engineer (Contract)',
+        dates: 'Jul 2026 - Present',
+        description: 'Authored a product requirements document with defined success criteria for an early-stage venture, providing direct architecture and product decision support to the founder during the scoping phase.',
+        tags: ['Product Requirements', 'Technical Advisory'],
+        side: 'left'
+    },
+    {
+        id: 'webvine',
+        company: 'Webvine',
+        role: 'Web Engineer Intern',
+        dates: 'Jun 2026 - Present',
+        description: 'Microsoft 365 and SharePoint consultancy delivering workflow automation for enterprise clients. Completed scoped tickets end to end and wrote and ran User Acceptance Testing for a pilot agentic email triage system built on Microsoft 365 Copilot Workflows and Power Automate, feeding results back into workflow and prompt refinements. Built Teams-based Adaptive Card approval flows for human-in-the-loop review, with SharePoint policy grounding and full audit logging.',
+        tags: ['Microsoft 365', 'Power Automate', 'SharePoint'],
+        side: 'right'
+    },
+    {
+        id: 'strive',
+        company: 'STRIVE',
+        role: 'Software Engineer (Part-Time)',
+        dates: 'Apr 2026 - Present',
+        description: 'Primary developer and architecture decision-maker on a two-person engineering team, building an all-in-one student portal spanning residency, visa, housing, and campus events, end to end on Next.js, TypeScript, and Supabase, deployed live on Vercel. Built visa state-nomination and skill-based queue logic, an interactive pathway-mapping and score-optimiser feature using React Flow, and a queue intelligence dashboard for application tracking.',
+        tags: ['Next.js', 'TypeScript', 'Supabase', 'React Flow'],
+        side: 'left'
+    },
+    {
+        id: 'nail-snail',
+        company: 'Nail Snail (Practera)',
+        role: 'Consultant (Data Analysis & Market Research)',
+        dates: 'Jun 2025 - Jul 2025',
+        description: 'Built Python visualizations for demographic trends and market analysis. Delivered actionable recommendations on customer segmentation and international expansion.',
+        tags: ['Python', 'Matplotlib', 'Market Research'],
+        side: 'right'
+    },
+    {
+        id: 'freelance-ai-ml',
+        company: 'Freelance | Self-Employed',
+        role: 'AI & ML Consultant',
+        dates: 'Jan 2025 - Sep 2025',
+        description: 'Delivered AI-powered bargaining system for HORECA distributor (100+ SKUs) and Supply Chain ML solution achieving 80%+ forecasting accuracy across 6 years of data.',
+        tags: ['Machine Learning', 'Python', 'Demand Forecasting'],
+        side: 'left'
+    },
+    {
+        id: 'healthshare',
+        company: 'HealthShare (Jacaranda Flame Consulting)',
+        role: 'Software Engineer Intern (ML & Data Engineering)',
+        dates: 'Nov 2024 - Feb 2025',
+        description: 'Built an ML validation system for 100,000+ healthcare records using KMeans Clustering, Isolation Forest, and Neural Networks, achieving 84% accuracy and cutting manual validation workload by ~65%. Projected ~$400K in annual labour savings if productionised. Presented findings directly to the CEO, CTO, and senior leadership team.',
+        tags: ['Python', 'scikit-learn', 'PostgreSQL', 'Stakeholder Communication'],
+        side: 'right'
+    },
+    {
+        id: 'scape',
+        company: 'Scape Australia',
+        role: 'Student Ambassador',
+        dates: 'Aug 2024 - Sep 2025',
+        description: 'Drove a 60% increase in resident engagement for 250+ international students through event planning and community building.',
+        tags: ['Event Coordination', 'Community Building', 'Leadership'],
+        side: 'left'
+    },
+    {
+        id: 'usyd-mentor',
+        company: 'University of Sydney',
+        role: 'Technical Mentor',
+        dates: 'Sep 2023',
+        description: 'Guided team of 6 building MNDetect, an EMG wearable for Motor Neuron Disease detection. Team secured top-3 regional placement in innovation program.',
+        tags: ['IoT', 'Bluetooth', 'Mentoring'],
+        side: 'right'
+    },
+    {
+        id: 'learn-grow-become',
+        company: 'Learn Grow Become (Practera)',
+        role: 'Information Technology System Analyst',
+        dates: 'Jun 2023 - Jul 2023',
+        description: 'Consulted with Australian businesses on technology integration through government-supported edtech platform.',
+        tags: ['Technology Consulting', 'Business Analysis'],
+        side: 'left'
+    },
+    {
+        id: 'code-camp',
+        company: 'Code Camp',
+        role: 'Coding Instructor (STEM Education)',
+        dates: 'Apr 2023 - Present',
+        description: 'Teaching visual coding fundamentals to 50+ students aged 5-13 at Australia\'s largest kids coding provider. Real-time lesson adaptation across skill levels and formats.',
+        tags: ['Python', 'Teaching', 'Curriculum Design'],
+        side: 'right'
+    },
+    {
+        id: 'mette-baking',
+        company: 'Mette is baking (Practera)',
+        role: 'Information Technology Business Consultant',
+        dates: 'Jun 2022 - Jul 2022',
+        description: 'Cross-disciplinary student team delivering business analysis and technology implementation recommendations.',
+        tags: ['Business Consulting', 'Strategic Planning'],
+        side: 'left'
     }
 ];
 
@@ -1148,7 +1264,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const githubCommitsElement = document.getElementById('github-commits');
         if (githubCommitsElement) {
             const commits = await fetchGitHubCommits();
-            githubCommitsElement.textContent = commits + '+';
+            githubCommitsElement.textContent = commits.toString();
             githubCommitsElement.setAttribute('data-target', commits.toString());
         }
 
@@ -2318,6 +2434,278 @@ Example: For "associate SE role requiring ticket completion and testing" → Hig
         return div.innerHTML;
     }
 
+    // ========================================
+    // FLOATING BAMBOO CHAT INTERACTIONS
+    // ========================================
+
+    const bambooFloatBtn = document.getElementById('bamboo-float-btn');
+    const bambooCloseBtn = document.getElementById('bamboo-close-btn');
+    const bambooChatWindow = document.getElementById('bamboo-chat-window');
+
+    // Toggle chat window
+    if (bambooFloatBtn && bambooChatWindow) {
+        bambooFloatBtn.addEventListener('click', () => {
+            const isHidden = bambooChatWindow.getAttribute('aria-hidden') === 'true';
+            bambooChatWindow.setAttribute('aria-hidden', String(!isHidden));
+            bambooFloatBtn.setAttribute('aria-expanded', String(isHidden));
+
+            if (isHidden) {
+                // Focus chat input when opening
+                setTimeout(() => chatInput?.focus(), 300);
+            }
+        });
+    }
+
+    // Close chat window
+    if (bambooCloseBtn && bambooChatWindow) {
+        bambooCloseBtn.addEventListener('click', () => {
+            bambooChatWindow.setAttribute('aria-hidden', 'true');
+            bambooFloatBtn?.setAttribute('aria-expanded', 'false');
+        });
+    }
+
+    // ========================================
+    // PROJECT SLIDE-OUT PANEL INTERACTIONS
+    // ========================================
+
+    const projectPanelOverlay = document.getElementById('project-panel-overlay');
+    const projectPanel = document.getElementById('project-panel');
+    const projectPanelClose = document.getElementById('project-panel-close');
+    const projectPanelTitle = document.getElementById('panel-title');
+    const projectPanelContent = document.getElementById('project-panel-content');
+
+    function openProjectPanel(projectId: string) {
+        const project = projectsData.find(p => p.id === projectId);
+        if (!project || !projectPanelOverlay || !projectPanelTitle || !projectPanelContent) return;
+
+        // Update panel content
+        projectPanelTitle.textContent = project.title;
+
+        // Build detailed content
+        const techTags = project.tech.map(t => `<span class="tag">${t}</span>`).join('');
+        const impactItems = project.impact.map(i => `<li>${i}</li>`).join('');
+
+        let linksHtml = '';
+        if (project.links.github) {
+            linksHtml += `<a href="${project.links.github}" target="_blank" rel="noopener noreferrer" class="project-link">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+                GitHub
+            </a>`;
+        }
+        if (project.links.demo) {
+            linksHtml += `<a href="${project.links.demo}" target="_blank" rel="noopener noreferrer" class="project-link">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm1 16.057v-3.057h2.994c-.059 1.143-.212 2.24-.456 3.279-.823-.12-1.674-.188-2.538-.222zm1.957 2.162c-.499 1.33-1.159 2.497-1.957 3.456v-3.62c.666.028 1.319.081 1.957.164zm-1.957-7.219v-3.015c.868-.034 1.721-.103 2.548-.224.238 1.027.389 2.111.446 3.239h-2.994zm0-5.014v-3.661c.806.969 1.471 2.15 1.971 3.496-.642.084-1.3.137-1.971.165zm2.703-3.267c1.237.496 2.354 1.228 3.29 2.146-.642.234-1.311.442-2.019.607-.344-.992-.775-1.91-1.271-2.753zm-7.241 13.56c-.244-1.039-.398-2.136-.456-3.279h2.994v3.057c-.865.034-1.714.102-2.538.222zm2.538 1.776v3.62c-.798-.959-1.458-2.126-1.957-3.456.638-.083 1.291-.136 1.957-.164zm-2.994-7.055c.057-1.128.207-2.212.446-3.239.827.121 1.68.19 2.548.224v3.015h-2.994zm1.024-5.179c.5-1.346 1.165-2.527 1.97-3.496v3.661c-.671-.028-1.329-.081-1.97-.165zm-2.005-.35c-.708-.165-1.377-.373-2.018-.607.937-.918 2.053-1.65 3.29-2.146-.496.844-.927 1.762-1.272 2.753zm-.549 1.918c-.264 1.151-.434 2.36-.492 3.611h-3.933c.165-1.658.739-3.197 1.617-4.518.88.361 1.816.67 2.808.907zm.009 9.262c-.988.236-1.92.542-2.797.9-.89-1.328-1.471-2.879-1.637-4.551h3.934c.058 1.265.231 2.488.5 3.651zm.553 1.917c.342.976.768 1.881 1.257 2.712-1.223-.49-2.326-1.211-3.256-2.115.636-.229 1.299-.435 1.999-.597zm9.924 0c.7.163 1.362.367 1.999.597-.931.903-2.034 1.625-3.257 2.116.489-.832.915-1.737 1.258-2.713zm.553-1.917c.27-1.163.442-2.386.501-3.651h3.934c-.167 1.672-.748 3.223-1.638 4.551-.877-.358-1.81-.664-2.797-.9zm.501-5.651c-.058-1.251-.229-2.46-.492-3.611.992-.237 1.929-.546 2.809-.907.877 1.321 1.451 2.86 1.616 4.518h-3.933z"/>
+                </svg>
+                Live Demo
+            </a>`;
+        }
+
+        projectPanelContent.innerHTML = `
+            <div class="project-panel-section">
+                <h3>Overview</h3>
+                <p>${project.fullDescription}</p>
+            </div>
+
+            <div class="project-panel-section">
+                <h3>Technologies</h3>
+                <div class="project-tech-tags">
+                    ${techTags}
+                </div>
+            </div>
+
+            <div class="project-panel-section">
+                <h3>Timeline</h3>
+                <p>${project.timeline}</p>
+            </div>
+
+            <div class="project-panel-section">
+                <h3>Impact & Achievements</h3>
+                <ul class="project-impact-list">
+                    ${impactItems}
+                </ul>
+            </div>
+
+            ${linksHtml ? `
+                <div class="project-panel-section">
+                    <h3>Links</h3>
+                    <div class="project-links">
+                        ${linksHtml}
+                    </div>
+                </div>
+            ` : ''}
+        `;
+
+        // Show panel
+        projectPanelOverlay.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeProjectPanel() {
+        if (projectPanelOverlay) {
+            projectPanelOverlay.setAttribute('aria-hidden', 'true');
+        }
+    }
+
+    // Close panel on close button click
+    if (projectPanelClose) {
+        projectPanelClose.addEventListener('click', closeProjectPanel);
+    }
+
+    // Close panel on overlay click
+    if (projectPanelOverlay) {
+        projectPanelOverlay.addEventListener('click', (e) => {
+            if (e.target === projectPanelOverlay) {
+                closeProjectPanel();
+            }
+        });
+    }
+
+    // Add click handlers to all project cards
+    document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        const projectCard = target.closest('.project-card');
+        if (projectCard) {
+            const projectId = projectCard.getAttribute('data-project-id');
+            if (projectId) {
+                openProjectPanel(projectId);
+            }
+        }
+    });
+
+    // ========================================
+    // EXPERIENCE PANEL INTERACTIONS
+    // ========================================
+
+    const experiencePanelOverlay = document.getElementById('experience-panel-overlay');
+    const experiencePanel = document.getElementById('experience-panel');
+    const experiencePanelClose = document.getElementById('experience-panel-close');
+    const experiencePanelTitle = document.getElementById('experience-panel-title');
+    const experiencePanelContent = document.getElementById('experience-panel-content');
+
+    function openExperiencePanel(experienceId: string) {
+        const experience = experiences.find(e => e.id === experienceId);
+        if (!experience || !experiencePanelOverlay || !experiencePanelTitle || !experiencePanelContent) return;
+
+        // Update panel content
+        experiencePanelTitle.textContent = experience.company;
+
+        // Build detailed content
+        const tagTags = experience.tags.map(t => `<span class="tag">${t}</span>`).join('');
+
+        experiencePanelContent.innerHTML = `
+            <div class="project-panel-section">
+                <h3>Role</h3>
+                <p><strong>${experience.role}</strong></p>
+                <p>${experience.dates}</p>
+            </div>
+
+            <div class="project-panel-section">
+                <h3>Description</h3>
+                <p>${experience.description}</p>
+            </div>
+
+            <div class="project-panel-section">
+                <h3>Technologies & Skills</h3>
+                <div class="project-tech-tags">
+                    ${tagTags}
+                </div>
+            </div>
+        `;
+
+        // Show panel
+        experiencePanelOverlay.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeExperiencePanel() {
+        if (experiencePanelOverlay) {
+            experiencePanelOverlay.setAttribute('aria-hidden', 'true');
+        }
+    }
+
+    // Close panel on close button click
+    if (experiencePanelClose) {
+        experiencePanelClose.addEventListener('click', closeExperiencePanel);
+    }
+
+    // Close panel on overlay click
+    if (experiencePanelOverlay) {
+        experiencePanelOverlay.addEventListener('click', (e) => {
+            if (e.target === experiencePanelOverlay) {
+                closeExperiencePanel();
+            }
+        });
+    }
+
+    // Add click handlers to all timeline items
+    document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        const timelineItem = target.closest('.timeline-item[data-experience-id]');
+        if (timelineItem) {
+            const experienceId = timelineItem.getAttribute('data-experience-id');
+            if (experienceId) {
+                openExperiencePanel(experienceId);
+            }
+        }
+    });
+
+    // ========================================
+    // KEYBOARD ACCESSIBILITY
+    // ========================================
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            // Close project panel if open
+            if (projectPanelOverlay?.getAttribute('aria-hidden') === 'false') {
+                closeProjectPanel();
+            }
+            // Close experience panel if open
+            if (experiencePanelOverlay?.getAttribute('aria-hidden') === 'false') {
+                closeExperiencePanel();
+            }
+            // Close chat if open
+            if (bambooChatWindow?.getAttribute('aria-hidden') === 'false') {
+                bambooChatWindow.setAttribute('aria-hidden', 'true');
+                bambooFloatBtn?.setAttribute('aria-expanded', 'false');
+            }
+        }
+    });
+
+    // ========================================
+    // UPDATE CERTIFICATIONS COUNTER
+    // ========================================
+
+    const certificationsCounter = document.getElementById('certifications-count');
+    if (certificationsCounter) {
+        const target = parseInt(certificationsCounter.getAttribute('data-target') || '5');
+        let current = 0;
+        const duration = 1500;
+        const increment = target / (duration / 16);
+
+        const updateCounter = () => {
+            current += increment;
+            if (current < target) {
+                certificationsCounter.textContent = Math.floor(current).toString();
+                requestAnimationFrame(updateCounter);
+            } else {
+                certificationsCounter.textContent = target.toString();
+            }
+        };
+
+        // Start animation when element is in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    updateCounter();
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+
+        observer.observe(certificationsCounter);
+    }
+
     // Event listeners for chat
     if (sendBtn && chatInput) {
         console.log('🐼 Chat elements found, attaching event listeners');
@@ -2331,7 +2719,7 @@ Example: For "associate SE role requiring ticket completion and testing" → Hig
 
         // Add Escape key handler to clear input
         chatInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
+            if (e.key === 'Escape' && bambooChatWindow?.getAttribute('aria-hidden') === 'false') {
                 chatInput.value = '';
                 chatInput.blur();
             }
